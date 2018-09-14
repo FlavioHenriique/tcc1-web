@@ -5,6 +5,80 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-       tcc 1
-    </body>
+        <h3>Buscar gastos em um intervalo de tempo</h3>
+        Anos<br>
+        <select id="ano1">
+            <option selected="true" disabled="disabled">Selecione um ano</option>    
+            <option>2018</option>
+            <option>2017</option>
+            <option>2016</option>
+        </select> 
+        <select id="ano2">
+            <option selected="true" disabled="disabled">Selecione um ano</option>    
+            <option>2018</option>
+            <option>2017</option>
+            <option>2016</option>
+        </select> 
+        <button id="btAnos">Gerar gráfico</button>
+        <br><br>
+        <div id="container" style="height: 400px"></div>
+
+
+        <script src="code/highcharts.js"></script>
+        <script src="code/highcharts-3d.js"></script>
+        <script src="code/modules/exporting.js"></script>
+        <script src="code/modules/export-data.js"></script>
+
+        <script>
+
+            btAnos.onclick = function () {
+                let json;
+                let client = new XMLHttpRequest();
+                let url = 'http://localhost:8080/tcc1-web/api/intervalo' +
+                        '/anos/' + ano1.value + "/" + ano2.value;
+
+                client.open('GET', url, false);
+                client.send(null);
+                console.log(client.status);
+                if (client.status == 200) {
+                     json = JSON.parse(client.responseText);
+                }
+
+
+
+                Highcharts.chart('container', {
+                    chart: {
+                        type: 'pie',
+                        options3d: {
+                            enabled: true,
+                            alpha: 45,
+                            beta: 0
+                        }
+                    },
+                    title: {
+                        text: 'Browser market shares at a specific website, 2014'
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}: <b>{point.y} R$</b>'
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            depth: 35,
+                            dataLabels: {
+                                enabled: true,
+                                format: '{point.name}'
+                            }
+                        }
+                    },
+                    series: [{
+                            type: 'pie',
+                            name: json.name,
+                            data: json.data
+                        }]
+                });
+            }
+        </script>
+    </body> 
 </html>

@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,25 +23,32 @@ public class QueryEmpenhosJDBC {
         conn = Conexao.getConnection();
     }
 
-    public BigDecimal buscaPorAno(int ano1, int ano2) {
-        String sql = "Select sum(e.valor) as total "
-                + "from empenho e, data d "
-                + "where e.coddata = d.codigo AND d.ano BETWEEN ? AND ?;";
+    public List<Object[]> buscaPorAno(int ano1, int ano2) {
+
+        List<Object[]> lista = new ArrayList<>();
+
+        String sql = "select a.nomefuncao, sum(e.valor) as total "
+                + "from acao a, empenho e, data d "
+                + "where e.codacao = a.codigoacao "
+                + "and e.coddata = d.codigo "
+                + "and d.ano between ? and ? "
+                + "group by a.nomefuncao";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, ano1);
             stmt.setInt(2, ano2);
             ResultSet rs = stmt.executeQuery();
-            if(rs.next()){
-                return rs.getBigDecimal("total");
-            }
+            while (rs.next()) {
+                Object[] array = {rs.getString("nomefuncao"),
+                    rs.getBigDecimal("total")};
 
+                lista.add(array);
+            }
+            return lista;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return new BigDecimal(0);
+        return lista;
     }
-    
-    
 
 }
