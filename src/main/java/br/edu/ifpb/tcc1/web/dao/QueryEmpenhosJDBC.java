@@ -51,4 +51,31 @@ public class QueryEmpenhosJDBC {
         return lista;
     }
 
+    public List<Object[]> buscaPorSemestre(int semestre) {
+
+        List<Object[]> lista = new ArrayList<>();
+
+        String sql = "select a.nomefuncao, sum(e.valor) as total "
+                + "from acao a, empenho e, data d "
+                + "where e.codacao = a.codigoacao "
+                + "and e.coddata = d.codigo "
+                + "and d.semestre = ? "
+                + "group by a.nomefuncao";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, semestre);
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Object[] array = {rs.getString("nomefuncao"),
+                    rs.getBigDecimal("total")};
+                lista.add(array);
+            }
+            return lista;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return lista;
+    }
+
 }

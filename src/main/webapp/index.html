@@ -3,33 +3,82 @@
     <head>
         <title>TCC1 - Web</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="bulma-0.7.1/css/bulma.min.css"/>
     </head>
-    <body>
-        <h3>Buscar gastos em um intervalo de tempo</h3>
-        Anos<br>
-        <select id="ano1">
-            <option selected="true" disabled="disabled">Selecione um ano</option>    
-            <option>2018</option>
-            <option>2017</option>
-            <option>2016</option>
-        </select> 
-        <select id="ano2">
-            <option selected="true" disabled="disabled">Selecione um ano</option>    
-            <option>2018</option>
-            <option>2017</option>
-            <option>2016</option>
-        </select> 
-        <button id="btAnos">Gerar gráfico</button>
+    <body style="background-color: #f2f2f2;"><br>
+        <div class="container has-text-centered ">
+            <h2 class="title">Buscar gastos em um intervalo de tempo</h2>
+            Anos<br>
+            <div class="select">
+                <select id="ano1">
+                    <option selected="true" disabled="disabled">Selecione um ano</option>    
+                    <option>2018</option>
+                    <option>2017</option>
+                    <option>2016</option>
+                </select> 
+            </div>
+
+            <div class="select">
+                <select id="ano2">
+                    <option selected="true" disabled="disabled">Selecione um ano</option>    
+                    <option>2018</option>
+                    <option>2017</option>
+                    <option>2016</option>
+                </select> 
+            </div>
+
+            <button id="btAnos" class="button is-success" >Gerar gráfico</button>
+            <br>Semestre<br>
+            <div class="select">
+                <select id="anoSemestre">
+                    <option selected disabled="disabled">Selecione um ano</option>    
+                    <option>2018</option>
+                    <option>2017</option>
+                    <option>2016</option>
+                </select>
+            </div>
+
+            <div class="select">
+                <select id="semestre">
+                    <option selected disabled="disabled" value="">Selecione o semestre</option>    
+                    <option value="1">1º</option>
+                    <option value="2">2º</option>
+                </select>    
+            </div>
+
+            <button id="btSemestre" class="button is-success">Gerar gráfico</button> 
+        </div>
+
         <br><br>
-        <div id="container" style="height: 400px"></div>
+        <div id="container" style="height: 400px" class="box"></div>
 
 
         <script src="code/highcharts.js"></script>
         <script src="code/highcharts-3d.js"></script>
         <script src="code/modules/exporting.js"></script>
         <script src="code/modules/export-data.js"></script>
-
+        <script src="js/graficos.js"></script>
         <script>
+
+            let client = new XMLHttpRequest();
+
+            btSemestre.onclick = function () {
+                let semestres;
+                let url = 'http://localhost:8080/tcc1-web/api/intervalo' +
+                        '/semestre/' + document.getElementById('semestre').value
+                        + anoSemestre.value;
+
+                console.log(url);
+                client.open('GET', url, false);
+                client.send(null);
+                console.log(client.status);
+                if (client.status == 200) {
+                    semestre = JSON.parse(client.responseText);
+
+                }
+
+                intervalos(semestre);
+            }
 
             btAnos.onclick = function () {
                 let json;
@@ -41,43 +90,11 @@
                 client.send(null);
                 console.log(client.status);
                 if (client.status == 200) {
-                     json = JSON.parse(client.responseText);
+                    json = JSON.parse(client.responseText);
+                    console.log(JSON.stringify(json));
                 }
 
-
-
-                Highcharts.chart('container', {
-                    chart: {
-                        type: 'pie',
-                        options3d: {
-                            enabled: true,
-                            alpha: 45,
-                            beta: 0
-                        }
-                    },
-                    title: {
-                        text: 'Browser market shares at a specific website, 2014'
-                    },
-                    tooltip: {
-                        pointFormat: '{series.name}: <b>{point.y} R$</b>'
-                    },
-                    plotOptions: {
-                        pie: {
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            depth: 35,
-                            dataLabels: {
-                                enabled: true,
-                                format: '{point.name}'
-                            }
-                        }
-                    },
-                    series: [{
-                            type: 'pie',
-                            name: json.name,
-                            data: json.data
-                        }]
-                });
+                intervalos(json);
             }
         </script>
     </body> 

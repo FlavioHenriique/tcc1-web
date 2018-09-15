@@ -7,8 +7,18 @@ public class GraficoPizza {
     private final String type = "pie";
     private String name;
     private List<Object[]> data;
+    private String title;
 
-    public GraficoPizza() {
+    public GraficoPizza(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getName() {
