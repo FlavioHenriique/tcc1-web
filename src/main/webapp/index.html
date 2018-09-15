@@ -1,191 +1,86 @@
-<!DOCTYPE html>
 <html>
 
 <head>
     <title>TCC1 - Web</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="bulma-0.7.1/css/bulma.min.css" />
+    <link rel="stylesheet" href="css/app.css" />
 </head>
 
-<body style="background-color: #f2f2f2;"><br>
+<body>
     <div class="container has-text-centered ">
-        <h2 class="title is-2">Buscar gastos em um intervalo de tempo</h2>
-        <h3 class="title is-5">Selecione o intervalo de tempo desejado:</h3>
+        <h2 class="title is-2">Verifique como seu dinheiro está sendo gasto!</h2>
+        <h3 class="title is-5">Selecione o tipo de consulta desejada:</h3>
+
+
         <div class="columns">
-            <div class="column"></div>
-            <div class="column"></div>
             <div class="column">
-                <button class="button is-primary is-large" onclick="abrirmodal(getElementById('modalAno'))">Anos</button>
-            </div>
-            <div class="column">
-                <button class="button is-primary is-large" onclick="abrirmodal(getElementById('modalSemestre'))">Semestres</button>
-            </div>
-            <div class="column">
-                <button class="button is-primary is-large" onclick="abrirmodal(getElementById('modalMes'))">Meses</button>
-            </div>
-            <div class="column"></div>
-            <div class="column"></div>
-        </div>
-        <br>
-    </div>
+                <div class="card">
+                    <header class="card-header">
+                        <p class="card-header-title">
+                            Busca por intervalos de tempo
+                        </p>
 
-    <div class="modal" id="modalAno">
-        <div class="modal-background"></div>
-        <div class="modal-card">
-            <header class="modal-card-head">
-                <p class="modal-card-title">Gastos entre anos</p>
-                <button class="delete" aria-label="close" onclick="fecharmodal(getElementById('modalAno'))"> </button>
-            </header>
-            <section class="modal-card-body">
-                <div class="field">
-                    <label class="label">Primeiro ano</label>
-                    <div class="select is-fullwidth">
-                        <select id="ano1">
-                            <option selected="true" disabled="disabled">Selecione um ano</option>
-                            <option>2018</option>
-                            <option>2017</option>
-                            <option>2016</option>
-                        </select>
+                    </header>
+                    <div class="card-content">
+                        <div class="content">
+                            Verifique os gastos realizados durante um intervalo de tempo determinado, que pode ser anos, semestres ou meses.
+                            <br><br>
+                            <a href="intervalos.html "><button class="button is-primary is-fullwidth">
+                                    Valor gasto em um intervalo de tempo</button></a>
+                        </div>
                     </div>
-                    <br><br>
-                    <label class="label">Segundo ano</label>
-                    <div class="select is-fullwidth">
-                        <select id="ano2">
-                            <option selected="true" disabled="disabled">Selecione um ano</option>
-                            <option>2018</option>
-                            <option>2017</option>
-                            <option>2016</option>
-                        </select>
-                    </div>
-                    <br><br>
-                    <button id="btAnos" class="button is-success is-fullwidth">Gerar gráfico</button>
-                </div>
-            </section>
-            <footer class="modal-card-foot">
+                    <footer class="card-footer">
 
-            </footer>
+                    </footer>
+                </div>
+            </div>
+            <div class="column">
+                    <div class="card">
+                            <header class="card-header">
+                                <p class="card-header-title">
+                                    Busca por intervalos de tempo
+                                </p>
+        
+                            </header>
+                            <div class="card-content">
+                                <div class="content">
+                                    ...
+                                    <br><br>
+                                    <a href="intervalos.html "><button class="button is-primary is-fullwidth">
+                                            ...</button></a>
+                                </div>
+                            </div>
+                            <footer class="card-footer">
+        
+                            </footer>
+                        </div>
+            </div>
+            <div class="column">
+                    <div class="card">
+                            <header class="card-header">
+                                <p class="card-header-title">
+                                    outro requisito
+                                </p>
+        
+                            </header>
+                            <div class="card-content">
+                                <div class="content">
+                                    ...
+                                    <br><br>
+                                    <a href="intervalos.html "><button class="button is-primary is-fullwidth">
+                                            ...</button></a>
+                                </div>
+                            </div>
+                            <footer class="card-footer">
+        
+                            </footer>
+                        </div>
+            </div>
         </div>
 
     </div>
-    </div>
-    <div class="modal" id="modalMes">
-        <div class="modal-background"></div>
-        <div class="modal-card">
-            <header class="modal-card-head">
-                <p class="modal-card-title">Gastos entre meses</p>
-                <button class="delete" aria-label="close" onclick="fecharmodal(getElementById('modalMes'))"> </button>
-            </header>
-            <section class="modal-card-body">
-                Mês
-                <br>
-                <div select class="select">
-                    <select id="anoMes1">
-                        <option selected disabled="disabled" value="">Selecione o ano</option>
-                        <option>2018</option>
-                        <option>2017</option>
-                        <option>2016</option>
-                    </select>
-                </div>
-                <div class="select">
-                    <select id="mes1">
-                        <option selected disabled="disabled" value="">Selecione o mês</option>
-                        <option>Janeiro</option>
-                        <option>Fevereiro</option>
-                        <option>Março</option>
-                        <option>Abril</option>
-                        <option>Maio</option>
-                        <option>Junho</option>
-                        <option>Julho</option>
-                        <option>Agosto</option>
-                        <option>Setembro</option>
-                        <option>Outubro</option>
-                        <option>Novembro</option>
-                        <option>Dezembro</option>
-                    </select>
-                </div>
-                <div select class="select">
-                    <select id="anoMes1">
-                        <option selected disabled="disabled" value="">Selecione o ano</option>
-                        <option>2018</option>
-                        <option>2017</option>
-                        <option>2016</option>
-                    </select>
-                </div>
-                <div class="select">
-                    <select id="mes1">
-                        <option selected disabled="disabled" value="">Selecione o mês</option>
-                        <option>Janeiro</option>
-                        <option>Fevereiro</option>
-                        <option>Março</option>
-                        <option>Abril</option>
-                        <option>Maio</option>
-                        <option>Junho</option>
-                        <option>Julho</option>
-                        <option>Agosto</option>
-                        <option>Setembro</option>
-                        <option>Outubro</option>
-                        <option>Novembro</option>
-                        <option>Dezembro</option>
-                    </select>
-                </div>
-            </section>
-            <footer class="modal-card-foot">
 
-            </footer>
-        </div>
-
-    </div>
-    <div class="modal" id="modalSemestre">
-        <div class="modal-background"></div>
-        <div class="modal-card">
-            <header class="modal-card-head">
-                <p class="modal-card-title">Gastos entre semestres</p>
-                <button class="delete" aria-label="close" onclick="fecharmodal(getElementById('modalSemestre'))"> </button>
-            </header>
-            <section class="modal-card-body">
-                Semestre<br>
-                <div class="select">
-                    <select id="anoSemestre">
-                        <option selected disabled="disabled">Selecione um ano</option>
-                        <option>2018</option>
-                        <option>2017</option>
-                        <option>2016</option>
-                    </select>
-                </div>
-
-                <div class="select">
-                    <select id="semestre">
-                        <option selected disabled="disabled" value="">Selecione o semestre</option>
-                        <option value="1">1º</option>
-                        <option value="2">2º</option>
-                    </select>
-                </div>
-
-                <button id="btSemestre" class="button is-success">Gerar gráfico</button>
-            </section>
-            <footer class="modal-card-foot">
-
-            </footer>
-        </div>
-    </div>
-    <div id="container" style="height: 400px" class="box"></div>
-
-
-    <script src="code/highcharts.js"></script>
-    <script src="code/highcharts-3d.js"></script>
-    <script src="code/modules/exporting.js"></script>
-    <script src="code/modules/export-data.js"></script>
-    <script src="js/graficos.js"></script>
-    <script>
-        function abrirmodal(modal) {
-            modal.classList.add("is-active");
-        }
-        function fecharmodal(modal) {
-            modal.classList.remove("is-active");
-        }
-    </script>
-    <script src="js/intervalos.js"></script>
-    
 </body>
 
 </html>
