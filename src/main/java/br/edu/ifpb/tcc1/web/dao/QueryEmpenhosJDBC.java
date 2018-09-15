@@ -27,12 +27,12 @@ public class QueryEmpenhosJDBC {
 
         List<Object[]> lista = new ArrayList<>();
 
-        String sql = "select a.nomefuncao, sum(e.valor) as total "
-                + "from acao a, empenho e, data d "
-                + "where e.codacao = a.codigoacao "
-                + "and e.coddata = d.codigo "
-                + "and d.ano between ? and ? "
-                + "group by a.nomefuncao";
+        String sql = "SELECT a.nomefuncao, sum(e.valor) as total "
+                + "FROM acao a, empenho e, data d "
+                + "WHERE e.codacao = a.codigoacao "
+                + "AND e.coddata = d.codigo "
+                + "AND d.ano between ? AND ? "
+                + "GROUP BY a.nomefuncao";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, ano1);
@@ -55,12 +55,12 @@ public class QueryEmpenhosJDBC {
 
         List<Object[]> lista = new ArrayList<>();
 
-        String sql = "select a.nomefuncao, sum(e.valor) as total "
-                + "from acao a, empenho e, data d "
-                + "where e.codacao = a.codigoacao "
-                + "and e.coddata = d.codigo "
-                + "and d.semestre = ? "
-                + "group by a.nomefuncao";
+        String sql = "SELECT a.nomefuncao, sum(e.valor) as total "
+                + "FROM acao a, empenho e, data d "
+                + "WHERE e.codacao = a.codigoacao "
+                + "AND e.coddata = d.codigo "
+                + "AND d.semestre = ? "
+                + "GROUP BY a.nomefuncao";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, semestre);
@@ -78,4 +78,32 @@ public class QueryEmpenhosJDBC {
         return lista;
     }
 
+    public List<Object[]> buscaPorMes(int mes1, int mes2) {
+
+        List<Object[]> lista = new ArrayList<>();
+
+        String sql = "SELECT a.nomefuncao, sum(e.valor) as total "
+                + "FROM acao a, empenho e, data d "
+                + "WHERE e.codacao = a.codigoacao "
+                + "AND e.coddata = d.codigo "
+                + "AND d.codigo BETWEEN ? AND ? "
+                + "GROUP BY a.nomefuncao";
+
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, mes1);
+            stmt.setInt(2, mes2);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Object[] array = {rs.getString("nomefuncao"),
+                    rs.getBigDecimal("total")};
+
+                lista.add(array);
+            }
+            return lista;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return lista;
+    }
 }

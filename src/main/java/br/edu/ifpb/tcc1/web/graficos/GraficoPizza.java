@@ -8,6 +8,7 @@ public class GraficoPizza {
     private String name;
     private List<Object[]> data;
     private String title;
+    
 
     public GraficoPizza(String title) {
         this.title = title;
