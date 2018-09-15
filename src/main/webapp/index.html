@@ -1,101 +1,191 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>TCC1 - Web</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="bulma-0.7.1/css/bulma.min.css"/>
-    </head>
-    <body style="background-color: #f2f2f2;"><br>
-        <div class="container has-text-centered ">
-            <h2 class="title">Buscar gastos em um intervalo de tempo</h2>
-            Anos<br>
-            <div class="select">
-                <select id="ano1">
-                    <option selected="true" disabled="disabled">Selecione um ano</option>    
-                    <option>2018</option>
-                    <option>2017</option>
-                    <option>2016</option>
-                </select> 
-            </div>
 
-            <div class="select">
-                <select id="ano2">
-                    <option selected="true" disabled="disabled">Selecione um ano</option>    
-                    <option>2018</option>
-                    <option>2017</option>
-                    <option>2016</option>
-                </select> 
-            </div>
+<head>
+    <title>TCC1 - Web</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="bulma-0.7.1/css/bulma.min.css" />
+</head>
 
-            <button id="btAnos" class="button is-success" >Gerar gráfico</button>
-            <br>Semestre<br>
-            <div class="select">
-                <select id="anoSemestre">
-                    <option selected disabled="disabled">Selecione um ano</option>    
-                    <option>2018</option>
-                    <option>2017</option>
-                    <option>2016</option>
-                </select>
+<body style="background-color: #f2f2f2;"><br>
+    <div class="container has-text-centered ">
+        <h2 class="title is-2">Buscar gastos em um intervalo de tempo</h2>
+        <h3 class="title is-5">Selecione o intervalo de tempo desejado:</h3>
+        <div class="columns">
+            <div class="column"></div>
+            <div class="column"></div>
+            <div class="column">
+                <button class="button is-primary is-large" onclick="abrirmodal(getElementById('modalAno'))">Anos</button>
             </div>
-
-            <div class="select">
-                <select id="semestre">
-                    <option selected disabled="disabled" value="">Selecione o semestre</option>    
-                    <option value="1">1º</option>
-                    <option value="2">2º</option>
-                </select>    
+            <div class="column">
+                <button class="button is-primary is-large" onclick="abrirmodal(getElementById('modalSemestre'))">Semestres</button>
             </div>
+            <div class="column">
+                <button class="button is-primary is-large" onclick="abrirmodal(getElementById('modalMes'))">Meses</button>
+            </div>
+            <div class="column"></div>
+            <div class="column"></div>
+        </div>
+        <br>
+    </div>
 
-            <button id="btSemestre" class="button is-success">Gerar gráfico</button> 
+    <div class="modal" id="modalAno">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Gastos entre anos</p>
+                <button class="delete" aria-label="close" onclick="fecharmodal(getElementById('modalAno'))"> </button>
+            </header>
+            <section class="modal-card-body">
+                <div class="field">
+                    <label class="label">Primeiro ano</label>
+                    <div class="select is-fullwidth">
+                        <select id="ano1">
+                            <option selected="true" disabled="disabled">Selecione um ano</option>
+                            <option>2018</option>
+                            <option>2017</option>
+                            <option>2016</option>
+                        </select>
+                    </div>
+                    <br><br>
+                    <label class="label">Segundo ano</label>
+                    <div class="select is-fullwidth">
+                        <select id="ano2">
+                            <option selected="true" disabled="disabled">Selecione um ano</option>
+                            <option>2018</option>
+                            <option>2017</option>
+                            <option>2016</option>
+                        </select>
+                    </div>
+                    <br><br>
+                    <button id="btAnos" class="button is-success is-fullwidth">Gerar gráfico</button>
+                </div>
+            </section>
+            <footer class="modal-card-foot">
+
+            </footer>
         </div>
 
-        <br><br>
-        <div id="container" style="height: 400px" class="box"></div>
+    </div>
+    </div>
+    <div class="modal" id="modalMes">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Gastos entre meses</p>
+                <button class="delete" aria-label="close" onclick="fecharmodal(getElementById('modalMes'))"> </button>
+            </header>
+            <section class="modal-card-body">
+                Mês
+                <br>
+                <div select class="select">
+                    <select id="anoMes1">
+                        <option selected disabled="disabled" value="">Selecione o ano</option>
+                        <option>2018</option>
+                        <option>2017</option>
+                        <option>2016</option>
+                    </select>
+                </div>
+                <div class="select">
+                    <select id="mes1">
+                        <option selected disabled="disabled" value="">Selecione o mês</option>
+                        <option>Janeiro</option>
+                        <option>Fevereiro</option>
+                        <option>Março</option>
+                        <option>Abril</option>
+                        <option>Maio</option>
+                        <option>Junho</option>
+                        <option>Julho</option>
+                        <option>Agosto</option>
+                        <option>Setembro</option>
+                        <option>Outubro</option>
+                        <option>Novembro</option>
+                        <option>Dezembro</option>
+                    </select>
+                </div>
+                <div select class="select">
+                    <select id="anoMes1">
+                        <option selected disabled="disabled" value="">Selecione o ano</option>
+                        <option>2018</option>
+                        <option>2017</option>
+                        <option>2016</option>
+                    </select>
+                </div>
+                <div class="select">
+                    <select id="mes1">
+                        <option selected disabled="disabled" value="">Selecione o mês</option>
+                        <option>Janeiro</option>
+                        <option>Fevereiro</option>
+                        <option>Março</option>
+                        <option>Abril</option>
+                        <option>Maio</option>
+                        <option>Junho</option>
+                        <option>Julho</option>
+                        <option>Agosto</option>
+                        <option>Setembro</option>
+                        <option>Outubro</option>
+                        <option>Novembro</option>
+                        <option>Dezembro</option>
+                    </select>
+                </div>
+            </section>
+            <footer class="modal-card-foot">
+
+            </footer>
+        </div>
+
+    </div>
+    <div class="modal" id="modalSemestre">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Gastos entre semestres</p>
+                <button class="delete" aria-label="close" onclick="fecharmodal(getElementById('modalSemestre'))"> </button>
+            </header>
+            <section class="modal-card-body">
+                Semestre<br>
+                <div class="select">
+                    <select id="anoSemestre">
+                        <option selected disabled="disabled">Selecione um ano</option>
+                        <option>2018</option>
+                        <option>2017</option>
+                        <option>2016</option>
+                    </select>
+                </div>
+
+                <div class="select">
+                    <select id="semestre">
+                        <option selected disabled="disabled" value="">Selecione o semestre</option>
+                        <option value="1">1º</option>
+                        <option value="2">2º</option>
+                    </select>
+                </div>
+
+                <button id="btSemestre" class="button is-success">Gerar gráfico</button>
+            </section>
+            <footer class="modal-card-foot">
+
+            </footer>
+        </div>
+    </div>
+    <div id="container" style="height: 400px" class="box"></div>
 
 
-        <script src="code/highcharts.js"></script>
-        <script src="code/highcharts-3d.js"></script>
-        <script src="code/modules/exporting.js"></script>
-        <script src="code/modules/export-data.js"></script>
-        <script src="js/graficos.js"></script>
-        <script>
+    <script src="code/highcharts.js"></script>
+    <script src="code/highcharts-3d.js"></script>
+    <script src="code/modules/exporting.js"></script>
+    <script src="code/modules/export-data.js"></script>
+    <script src="js/graficos.js"></script>
+    <script>
+        function abrirmodal(modal) {
+            modal.classList.add("is-active");
+        }
+        function fecharmodal(modal) {
+            modal.classList.remove("is-active");
+        }
+    </script>
+    <script src="js/intervalos.js"></script>
+    
+</body>
 
-            let client = new XMLHttpRequest();
-
-            btSemestre.onclick = function () {
-                let semestres;
-                let url = 'http://localhost:8080/tcc1-web/api/intervalo' +
-                        '/semestre/' + document.getElementById('semestre').value
-                        + anoSemestre.value;
-
-                console.log(url);
-                client.open('GET', url, false);
-                client.send(null);
-                console.log(client.status);
-                if (client.status == 200) {
-                    semestre = JSON.parse(client.responseText);
-
-                }
-
-                intervalos(semestre);
-            }
-
-            btAnos.onclick = function () {
-                let json;
-                let client = new XMLHttpRequest();
-                let url = 'http://localhost:8080/tcc1-web/api/intervalo' +
-                        '/anos/' + ano1.value + "/" + ano2.value;
-
-                client.open('GET', url, false);
-                client.send(null);
-                console.log(client.status);
-                if (client.status == 200) {
-                    json = JSON.parse(client.responseText);
-                    console.log(JSON.stringify(json));
-                }
-
-                intervalos(json);
-            }
-        </script>
-    </body> 
 </html>
