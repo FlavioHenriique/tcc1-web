@@ -78,17 +78,8 @@
             </header>
             <section class="modal-card-body">
                 
-                <br>
-                <label class="label">Primeiro ano</label>
-                <div select class="is-fullwidth select">
-                    <select id="anoMes1">
-                        <option selected disabled="disabled" value="">Selecione o ano</option>
-                        <option>2018</option>
-                        <option>2017</option>
-                        <option>2016</option>
-                    </select>
-                </div>
-                <br><br>
+                
+                
                 <label class="label">Primeiro mês</label>
                 <div class="select is-fullwidth">
                     <select id="mes1">
@@ -108,9 +99,9 @@
                     </select>
                 </div>
                 <br><br>
-                <label class="label">Segundo ano</label>
-                <div select class="select is-fullwidth">
-                    <select id="anoMes2">
+                <label class="label">Primeiro ano</label>
+                <div select class="is-fullwidth select">
+                    <select id="anoMes1">
                         <option selected disabled="disabled" value="">Selecione o ano</option>
                         <option>2018</option>
                         <option>2017</option>
@@ -136,6 +127,17 @@
                         <option value="12">Dezembro</option>
                     </select>
                 </div>
+                <br><br>
+                <label class="label">Segundo ano</label>
+                <div select class="select is-fullwidth">
+                    <select id="anoMes2">
+                        <option selected disabled="disabled" value="">Selecione o ano</option>
+                        <option>2018</option>
+                        <option>2017</option>
+                        <option>2016</option>
+                    </select>
+                </div>
+                
                 <br><br>
                 <button class="button is-success is-fullwidth" id="btMeses">Gerar gráfico</button>
             </section>
@@ -179,7 +181,7 @@
             </footer>
         </div>
     </div>
-    <div id="container" style="height: 400px" class="box"></div>
+    <div id="container" style="height: 550px" class="box"></div>
 
 
     <script src="code/highcharts.js"></script>
