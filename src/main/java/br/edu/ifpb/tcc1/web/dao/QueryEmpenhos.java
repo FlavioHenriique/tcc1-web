@@ -144,7 +144,7 @@ public class QueryEmpenhos {
         }
         return lista;
     }
-    
+
     public List<Object[]> subfuncoesSemestre(int semestre, String funcao) {
 
         List<Object[]> lista = new ArrayList<>();
@@ -169,6 +169,37 @@ public class QueryEmpenhos {
                     rs.getBigDecimal("total")
                 };
 
+                lista.add(array);
+            }
+            return lista;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return lista;
+    }
+
+    public List<Object[]> subfuncaoPorMes(int mes1, int mes2, String funcao) {
+
+        List<Object[]> lista = new ArrayList<>();
+
+        String sql = "SELECT a.nomesubfuncao, sum(e.valor) as total "
+                + "FROM acao a, empenho e, data d "
+                + "WHERE e.codacao = a.codigoacao "
+                + "AND e.coddata = d.codigo "
+                + "AND a.nomefuncao = ? "
+                + "AND d.codigo BETWEEN ? AND ? "
+                + "GROUP BY a.nomesubfuncao "
+                + "ORDER BY a.nomesubfuncao";
+
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, funcao);
+            stmt.setInt(2, mes1);
+            stmt.setInt(3, mes2);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Object[] array = {rs.getString("nomesubfuncao"),
+                    rs.getBigDecimal("total")};
                 lista.add(array);
             }
             return lista;

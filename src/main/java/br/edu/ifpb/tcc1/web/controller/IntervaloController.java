@@ -86,4 +86,12 @@ public class IntervaloController {
         
         return grafico;
     }
+    
+    public Grafico buscSubfuncaoPorMes(int mes1, int mes2, String funcao){
+        Grafico grafico = new Grafico("Subfunções da Função "+funcao+" entre meses");
+        grafico.setType("pie");
+        grafico.setData(query.subfuncaoPorMes(mes1, mes2, funcao));
+        grafico.setName("mes");
+        return grafico;
+    }
 }

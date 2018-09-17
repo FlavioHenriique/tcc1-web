@@ -13,64 +13,73 @@ import javax.ws.rs.core.Response;
 @Stateless
 public class EmpenhoResource {
 
-    //private QueryEmpenhosJDBC query = new QueryEmpenhosJDBC();
-    //private IntervaloController intervalo = new IntervaloController();
     @Inject
     private QueryEmpenhos query;
     @Inject
     private IntervaloController intervalo;
-    
+
     @GET
     @Path("/anos/{ano1}/{ano2}")
     public Response buscaPorano(@PathParam("ano1") int ano1,
             @PathParam("ano2") int ano2) {
-        
+
         return Response
                 .ok()
                 .entity(intervalo.buscaPorAno(ano1, ano2))
                 .build();
     }
-    
+
     @GET
     @Path("semestre/{sem}")
     public Response buscaPorSemestre(@PathParam("sem") int semestre) {
-        
+
         return Response
                 .ok()
                 .entity(intervalo.buscaPorSemestre(semestre))
                 .build();
     }
-    
+
     @GET
     @Path("mes/{mes1}/{mes2}")
     public Response buscaPorMes(@PathParam("mes1") int mes1,
             @PathParam("mes2") int mes2) {
-        
+
         return Response
                 .ok()
                 .entity(intervalo.buscaPorMes(mes1, mes2))
                 .build();
     }
-    
+
     @GET
     @Path("anos/{funcao}/{ano1}/{ano2}")
     public Response buscaSubfuncaoAno(@PathParam("ano1") int ano1,
             @PathParam("ano2") int ano2, @PathParam("funcao") String funcao) {
-        
+
         return Response
                 .ok()
                 .entity(intervalo.buscaSubfuncaoPorAno(ano1, ano2, funcao))
                 .build();
     }
-    
+
     @GET
     @Path("semestre/{funcao}/{sem}")
     public Response buscaSubfuncaoAno(@PathParam("sem") int semestre,
             @PathParam("funcao") String funcao) {
-        
+
         return Response
                 .ok()
                 .entity(intervalo.buscaSubfuncaoPorSemestre(semestre, funcao))
+                .build();
+    }
+
+    @GET
+    @Path("mes/{funcao}/{mes1}/{mes2}")
+    public Response buscaPorMes(@PathParam("mes1") int mes1,
+            @PathParam("mes2") int mes2, @PathParam("funcao") String funcao) {
+
+        return Response
+                .ok()
+                .entity(intervalo.buscSubfuncaoPorMes(mes1, mes2, funcao))
                 .build();
     }
 }

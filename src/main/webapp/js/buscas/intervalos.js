@@ -6,7 +6,7 @@ btAnos.onclick = function () {
     let json;
     let client = new XMLHttpRequest();
     let url = 'http://localhost:8080/tcc1-web/api/intervalo' +
-            '/anos/' + ano1.value + "/" + ano2.value;
+        '/anos/' + ano1.value + "/" + ano2.value;
 
     client.open('GET', url, false);
     client.send(null);
@@ -31,8 +31,8 @@ btSemestre.onclick = function () {
     let semestres;
     fecharmodal(document.getElementById("modalSemestre"));
     let url = 'http://localhost:8080/tcc1-web/api/intervalo' +
-            '/semestre/' + document.getElementById('semestre').value
-            + anoSemestre.value;
+        '/semestre/' + document.getElementById('semestre').value
+        + anoSemestre.value;
 
     console.log(url);
     client.open('GET', url, false);
@@ -49,11 +49,11 @@ btSemestre.onclick = function () {
             }
         };
         intervalos(
-                semestre, cliqueSemestre(
-                        document.getElementById('semestre').value,
-                        anoSemestre.value
-                        )
-                );
+            semestre, cliqueSemestre(
+                document.getElementById('semestre').value,
+                anoSemestre.value
+            )
+        );
 
     } else {
         swal({
@@ -71,22 +71,18 @@ btMeses.onclick = function () {
 
     let json;
     let client = new XMLHttpRequest();
+    let valormes1 = '' + anoMes1.value + mes1.value;
+    let valormes2 = '' + anoMes2.value + mes2.value;
     let url = 'http://localhost:8080/tcc1-web/api/intervalo' +
-            '/mes/' + anoMes1.value + mes1.value + "/" + anoMes2.value + mes2.value;
+        '/mes/' + valormes1 + "/" + valormes2;
     client.open('GET', url, false);
     client.send(null);
     if (client.status == 200) {
         json = JSON.parse(client.responseText);
         console.log(JSON.stringify(json));
 
-        let cliqueFuncao = {
-            events: {
-                click: function (event) {
-                    swal("meses " + this.name);
-                }
-            }
-        };
-        intervalos(json, cliqueFuncao);
+        
+        intervalos(json, cliqueMeses(valormes1,valormes2));
 
     } else {
         swal({
@@ -105,7 +101,7 @@ function cliquesAno(ano1, ano2) {
             click: function (event) {
                 let client2 = new XMLHttpRequest();
                 let url = 'http://localhost:8080/tcc1-web/api/intervalo' +
-                        '/anos/' + this.name + '/' + ano1 + "/" + ano2;
+                    '/anos/' + this.name + '/' + ano1 + "/" + ano2;
                 console.log(url);
                 client.open('GET', url, false);
                 client.send(null);
@@ -119,7 +115,6 @@ function cliquesAno(ano1, ano2) {
                             }
                         }
                     }
-
                     intervalos(json, cliqueSubfuncao);
                 }
             }
@@ -132,7 +127,7 @@ function cliqueSemestre(semestre, anoSemestre) {
             click: function (event) {
                 let client2 = new XMLHttpRequest();
                 let url = 'http://localhost:8080/tcc1-web/api/intervalo' +
-                        '/semestre/' + this.name + '/' + semestre + anoSemestre;
+                    '/semestre/' + this.name + '/' + semestre + anoSemestre;
                 console.log(url);
                 client.open('GET', url, false);
                 client.send(null);
@@ -146,7 +141,32 @@ function cliqueSemestre(semestre, anoSemestre) {
                             }
                         }
                     }
+                    intervalos(json, cliqueSubfuncao);
+                }
+            }
+        }
+    };
+}
+function cliqueMeses(valormes1, valormes2) {
+    return cliqueFuncao = {
+        events: {
+            click: function (event) {
+                let client2 = new XMLHttpRequest();
+                let url = 'http://localhost:8080/tcc1-web/api/intervalo' +
+                    '/mes/' + this.name + '/' +valormes1 + "/" + valormes2;
+                console.log(url);
+                client.open('GET', url, false);
+                client.send(null);
 
+                if (client.status == 200) {
+                    json = JSON.parse(client.responseText);
+                    let cliqueSubfuncao = {
+                        events: {
+                            click: function (event) {
+                                alert(this.name);
+                            }
+                        }
+                    }
                     intervalos(json, cliqueSubfuncao);
                 }
             }
