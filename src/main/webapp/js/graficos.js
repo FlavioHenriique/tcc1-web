@@ -1,6 +1,6 @@
 function intervalos(json, clique) {
     console.log(JSON.stringify(clique));
-    
+
     Highcharts.chart('container', {
         chart: {
             type: 'pie',
@@ -27,12 +27,24 @@ function intervalos(json, clique) {
                     enabled: true,
                     format: '{point.name}'
                 },
-            }},
+            },
+            /*column: {
+             allowPointSelect: true,
+             colorByPoint: true,
+             cursor: 'pointer',
+             depth: 35,
+             showInLegend: true,
+             dataLabels: {
+             enabled: true,
+             format: '{point.name}'
+             },
+             }*/
+        },
         series: [{
-                type: 'pie',
+                type: json.type,
                 name: json.name,
                 data: json.data,
-                point:clique
+                point: clique
             }]
     });
 }

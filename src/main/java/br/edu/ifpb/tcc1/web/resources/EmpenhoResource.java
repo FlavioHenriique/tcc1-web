@@ -1,22 +1,24 @@
 package br.edu.ifpb.tcc1.web.resources;
 
 import br.edu.ifpb.tcc1.web.controller.IntervaloController;
-import br.edu.ifpb.tcc1.web.dao.QueryEmpenhosJDBC;
-import br.edu.ifpb.tcc1.web.dao.QueryEmpenhosJPA;
-import br.edu.ifpb.tcc1.web.graficos.GraficoPizza;
-import com.google.gson.Gson;
-import java.time.Month;
-import java.time.YearMonth;
+import br.edu.ifpb.tcc1.web.dao.QueryEmpenhos;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
 @Path("intervalo")
+@Stateless
 public class EmpenhoResource {
-    
-    private QueryEmpenhosJDBC query = new QueryEmpenhosJDBC();
-    private IntervaloController intervalo = new IntervaloController();
+
+    //private QueryEmpenhosJDBC query = new QueryEmpenhosJDBC();
+    //private IntervaloController intervalo = new IntervaloController();
+    @Inject
+    private QueryEmpenhos query;
+    @Inject
+    private IntervaloController intervalo;
     
     @GET
     @Path("/anos/{ano1}/{ano2}")
@@ -47,6 +49,28 @@ public class EmpenhoResource {
         return Response
                 .ok()
                 .entity(intervalo.buscaPorMes(mes1, mes2))
+                .build();
+    }
+    
+    @GET
+    @Path("anos/{funcao}/{ano1}/{ano2}")
+    public Response buscaSubfuncaoAno(@PathParam("ano1") int ano1,
+            @PathParam("ano2") int ano2, @PathParam("funcao") String funcao) {
+        
+        return Response
+                .ok()
+                .entity(intervalo.buscaSubfuncaoPorAno(ano1, ano2, funcao))
+                .build();
+    }
+    
+    @GET
+    @Path("semestre/{funcao}/{sem}")
+    public Response buscaSubfuncaoAno(@PathParam("sem") int semestre,
+            @PathParam("funcao") String funcao) {
+        
+        return Response
+                .ok()
+                .entity(intervalo.buscaSubfuncaoPorSemestre(semestre, funcao))
                 .build();
     }
 }
