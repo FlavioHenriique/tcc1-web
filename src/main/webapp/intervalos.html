@@ -1,74 +1,74 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <title>Intervalos de tempo</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="bulma-0.7.1/css/bulma.min.css" />
-    <link rel="stylesheet" href="css/app.css" />
-    <link rel="icon" href="img/icon.png">
-</head>
+    <head>
+        <title>Intervalos de tempo</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="bulma-0.7.1/css/bulma.min.css" />
+        <link rel="stylesheet" href="css/app.css" />
+        <link rel="icon" href="img/icon.png">
+    </head>
 
-<body><br>
-    <div class="container has-text-centered ">
-        <h2 class="title is-2">Buscar gastos em um intervalo de tempo</h2>
-        <h3 class="title is-5">Selecione o intervalo de tempo desejado:</h3>
-        <div class="columns">
-            <div class="column"></div>
-            <div class="column"></div>
-            <div class="column">
-                <button class="button is-success is-large" onclick="abrirmodal(getElementById('modalAno'))">Anos</button>
+    <body><br>
+        <div class="container has-text-centered ">
+            <h2 class="title is-2">Buscar gastos em um intervalo de tempo</h2>
+            <h3 class="title is-5">Selecione o intervalo de tempo desejado:</h3>
+            <div class="columns">
+                <div class="column"></div>
+                <div class="column"></div>
+                <div class="column">
+                    <button class="button is-success is-large" onclick="abrirmodal(getElementById('modalAno'))">Anos</button>
+                </div>
+                <div class="column">
+                    <button class="button is-success is-large" onclick="abrirmodal(getElementById('modalSemestre'))">Semestres</button>
+                </div>
+                <div class="column">
+                    <button class="button is-success is-large" onclick="abrirmodal(getElementById('modalMes'))">Meses</button>
+                </div>
+                <div class="column"></div>
+                <div class="column"></div>
             </div>
-            <div class="column">
-                <button class="button is-success is-large" onclick="abrirmodal(getElementById('modalSemestre'))">Semestres</button>
-            </div>
-            <div class="column">
-                <button class="button is-success is-large" onclick="abrirmodal(getElementById('modalMes'))">Meses</button>
-            </div>
-            <div class="column"></div>
-            <div class="column"></div>
+            <br>
         </div>
         <br>
-    </div>
-    <br>
-    <div class="modal" id="modalAno">
-        <div class="modal-background"></div>
-        <div class="modal-card">
-            <header class="modal-card-head">
-                <p class="modal-card-title">Gastos entre anos</p>
-                <button class="delete" aria-label="close" onclick="fecharmodal(getElementById('modalAno'))"> </button>
-            </header>
-            <section class="modal-card-body">
-                <div class="field">
-                    <label class="label">Primeiro ano</label>
-                    <div class="select is-fullwidth">
-                        <select id="ano1">
-                            <option selected="true" disabled="disabled">Selecione um ano</option>
-                            <option>2018</option>
-                            <option>2017</option>
-                            <option>2016</option>
-                        </select>
+        <div class="modal" id="modalAno">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Gastos entre anos</p>
+                    <button class="delete" aria-label="close" onclick="fecharmodal(getElementById('modalAno'))"> </button>
+                </header>
+                <section class="modal-card-body">
+                    <div class="field">
+                        <label class="label">Primeiro ano</label>
+                        <div class="select is-fullwidth">
+                            <select id="ano1">
+                                <option selected="true" disabled="disabled">Selecione um ano</option>
+                                <option>2018</option>
+                                <option>2017</option>
+                                <option>2016</option>
+                            </select>
+                        </div>
+                        <br><br>
+                        <label class="label">Segundo ano</label>
+                        <div class="select is-fullwidth">
+                            <select id="ano2">
+                                <option selected="true" disabled="disabled">Selecione um ano</option>
+                                <option>2018</option>
+                                <option>2017</option>
+                                <option>2016</option>
+                            </select>
+                        </div>
+                        <br><br>
+                        <button id="btAnos" class="button is-success is-fullwidth">Gerar gráfico</button>
                     </div>
-                    <br><br>
-                    <label class="label">Segundo ano</label>
-                    <div class="select is-fullwidth">
-                        <select id="ano2">
-                            <option selected="true" disabled="disabled">Selecione um ano</option>
-                            <option>2018</option>
-                            <option>2017</option>
-                            <option>2016</option>
-                        </select>
-                    </div>
-                    <br><br>
-                    <button id="btAnos" class="button is-success is-fullwidth">Gerar gráfico</button>
-                </div>
-            </section>
-            <footer class="modal-card-foot">
+                </section>
+                <footer class="modal-card-foot">
 
-            </footer>
+                </footer>
+            </div>
+
         </div>
-
-    </div>
     </div>
     <div class="modal" id="modalMes">
         <div class="modal-background"></div>
@@ -78,9 +78,9 @@
                 <button class="delete" aria-label="close" onclick="fecharmodal(getElementById('modalMes'))"> </button>
             </header>
             <section class="modal-card-body">
-                
-                
-                
+
+
+
                 <label class="label">Primeiro mês</label>
                 <div class="select is-fullwidth">
                     <select id="mes1">
@@ -138,7 +138,7 @@
                         <option>2016</option>
                     </select>
                 </div>
-                
+
                 <br><br>
                 <button class="button is-success is-fullwidth" id="btMeses">Gerar gráfico</button>
             </section>
@@ -182,6 +182,15 @@
             </footer>
         </div>
     </div>
+    <h3 class="title is-5 has-text-centered">Selecione o tipo de representação desejada:</h3>
+    <div class="tabs is-centered is-medium">
+        <ul>
+            <li><a onclick="mudarTipo('bar')">Barra</a></li>
+            <li><a onclick="mudarTipo('pie')">Pizza</a></li>
+            <li><a onclick="mudarTipo('line')">Linha</a></li>
+        </ul>
+    </div>
+
     <div id="container" style="height: 550px" class="box"></div>
 
 
@@ -193,7 +202,7 @@
     <script src="js/swal.js"></script>
     <script src="js/modal.js"></script>
     <script src="js/buscas/intervalos.js"></script>
-    
+
 </body>
 
 </html>

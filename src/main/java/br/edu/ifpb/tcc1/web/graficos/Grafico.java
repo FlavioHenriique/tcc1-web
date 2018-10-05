@@ -8,9 +8,18 @@ public class Grafico {
     private String name;
     private List<Object[]> data;
     private String title;
+    private List<String> categorias;
 
     public Grafico(String title) {
         this.title = title;
+    }
+
+    public List<String> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<String> categorias) {
+        this.categorias = categorias;
     }
 
     public String getType() {

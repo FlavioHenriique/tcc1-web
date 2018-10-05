@@ -7,16 +7,12 @@ btAnos.onclick = function () {
     let client = new XMLHttpRequest();
     let url = 'http://localhost:8080/tcc1-web/api/intervalo' +
         '/anos/' + ano1.value + "/" + ano2.value;
-
     client.open('GET', url, false);
     client.send(null);
-    console.log(client.status);
+
     if (client.status == 200) {
         json = JSON.parse(client.responseText);
-        console.log(JSON.stringify(json));
-
         intervalos(json, cliquesAno(ano1.value, ano2.value));
-
     } else {
         swal({
             title: "Erro!",
@@ -26,7 +22,6 @@ btAnos.onclick = function () {
     }
 }
 
-
 btSemestre.onclick = function () {
     let semestres;
     fecharmodal(document.getElementById("modalSemestre"));
@@ -34,10 +29,10 @@ btSemestre.onclick = function () {
         '/semestre/' + document.getElementById('semestre').value
         + anoSemestre.value;
 
-    console.log(url);
+
     client.open('GET', url, false);
     client.send(null);
-    console.log(client.status);
+
     if (client.status == 200) {
         semestre = JSON.parse(client.responseText);
 
@@ -65,7 +60,6 @@ btSemestre.onclick = function () {
 
 }
 
-
 btMeses.onclick = function () {
     fecharmodal(document.getElementById("modalMes"));
 
@@ -79,10 +73,10 @@ btMeses.onclick = function () {
     client.send(null);
     if (client.status == 200) {
         json = JSON.parse(client.responseText);
-        console.log(JSON.stringify(json));
 
-        
-        intervalos(json, cliqueMeses(valormes1,valormes2));
+
+
+        intervalos(json, cliqueMeses(valormes1, valormes2));
 
     } else {
         swal({
@@ -93,8 +87,6 @@ btMeses.onclick = function () {
     }
 }
 
-
-
 function cliquesAno(ano1, ano2) {
     return cliqueFuncao = {
         events: {
@@ -102,7 +94,7 @@ function cliquesAno(ano1, ano2) {
                 let client2 = new XMLHttpRequest();
                 let url = 'http://localhost:8080/tcc1-web/api/intervalo' +
                     '/anos/' + this.name + '/' + ano1 + "/" + ano2;
-                console.log(url);
+
                 client.open('GET', url, false);
                 client.send(null);
 
@@ -115,7 +107,8 @@ function cliquesAno(ano1, ano2) {
                             }
                         }
                     }
-                    intervalos(json, cliqueSubfuncao);
+                    //intervalos(json, cliqueSubfuncao);
+                    mudarDados(json,cliqueSubfuncao);
                 }
             }
         }
@@ -128,7 +121,6 @@ function cliqueSemestre(semestre, anoSemestre) {
                 let client2 = new XMLHttpRequest();
                 let url = 'http://localhost:8080/tcc1-web/api/intervalo' +
                     '/semestre/' + this.name + '/' + semestre + anoSemestre;
-                console.log(url);
                 client.open('GET', url, false);
                 client.send(null);
 
@@ -141,20 +133,21 @@ function cliqueSemestre(semestre, anoSemestre) {
                             }
                         }
                     }
-                    intervalos(json, cliqueSubfuncao);
+                    //intervalos(json, cliqueSubfuncao);
+                    mudarDados(json,cliqueSubfuncao);
                 }
             }
         }
     };
 }
+
 function cliqueMeses(valormes1, valormes2) {
     return cliqueFuncao = {
         events: {
             click: function (event) {
                 let client2 = new XMLHttpRequest();
                 let url = 'http://localhost:8080/tcc1-web/api/intervalo' +
-                    '/mes/' + this.name + '/' +valormes1 + "/" + valormes2;
-                console.log(url);
+                    '/mes/' + this.name + '/' + valormes1 + "/" + valormes2;
                 client.open('GET', url, false);
                 client.send(null);
 
@@ -167,7 +160,8 @@ function cliqueMeses(valormes1, valormes2) {
                             }
                         }
                     }
-                    intervalos(json, cliqueSubfuncao);
+                    //intervalos(json, cliqueSubfuncao);
+                    mudarDados(json,cliqueSubfuncao);
                 }
             }
         }
