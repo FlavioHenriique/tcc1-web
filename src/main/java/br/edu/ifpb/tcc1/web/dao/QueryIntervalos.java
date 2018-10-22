@@ -42,14 +42,7 @@ public class QueryIntervalos {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, ano1);
             stmt.setInt(2, ano2);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                Object[] array = {rs.getString("nomefuncao"),
-                    rs.getBigDecimal("total"), rs.getInt("codigofuncao")};
-
-                lista.add(array);
-            }
-            return lista;
+            return prepararLista("nomefuncao", stmt);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -70,14 +63,7 @@ public class QueryIntervalos {
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, semestre);
-
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                Object[] array = {rs.getString("nomefuncao"),
-                    rs.getBigDecimal("total")};
-                lista.add(array);
-            }
-            return lista;
+            return prepararLista("nomefuncao", stmt);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -100,13 +86,7 @@ public class QueryIntervalos {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, mes1);
             stmt.setInt(2, mes2);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                Object[] array = {rs.getString("nomefuncao"),
-                    rs.getBigDecimal("total")};
-                lista.add(array);
-            }
-            return lista;
+            return prepararLista("nomefuncao", stmt);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -131,14 +111,7 @@ public class QueryIntervalos {
             stmt.setString(1, funcao);
             stmt.setInt(2, ano1);
             stmt.setInt(3, ano2);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                Object[] array = {rs.getString("nomesubfuncao"),
-                    rs.getBigDecimal("total")};
-
-                lista.add(array);
-            }
-            return lista;
+            return prepararLista("nomesubfuncao", stmt);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -162,16 +135,7 @@ public class QueryIntervalos {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, funcao);
             stmt.setInt(2, semestre);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                Object[] array = {
-                    rs.getString("nomesubfuncao"),
-                    rs.getBigDecimal("total")
-                };
-
-                lista.add(array);
-            }
-            return lista;
+            return prepararLista("nomesubfuncao", stmt);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -196,13 +160,7 @@ public class QueryIntervalos {
             stmt.setString(1, funcao);
             stmt.setInt(2, mes1);
             stmt.setInt(3, mes2);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                Object[] array = {rs.getString("nomesubfuncao"),
-                    rs.getBigDecimal("total")};
-                lista.add(array);
-            }
-            return lista;
+            return prepararLista("nomesubfuncao", stmt);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -212,7 +170,7 @@ public class QueryIntervalos {
     public List<Object[]> programaPorAno(int ano1, int ano2, String funcao,
             String subfuncao) {
 
-        System.out.println(ano1 + " " + ano2 + " " + funcao + " " + subfuncao);
+        
         List<Object[]> lista = new ArrayList<>();
         String sql = "SELECT a.nomeprograma, sum(e.valor) as total "
                 + "FROM acao a, empenho e, data d "
@@ -230,15 +188,7 @@ public class QueryIntervalos {
             stmt.setString(2, subfuncao);
             stmt.setInt(3, ano1);
             stmt.setInt(4, ano2);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                Object[] array = {
-                    rs.getString("nomeprograma"),
-                    rs.getBigDecimal("total")
-                };
-                lista.add(array);
-            }
-            return lista;
+            return prepararLista("nomeprograma", stmt);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -247,7 +197,7 @@ public class QueryIntervalos {
 
     public List<Object[]> programaPorSemestre(int semestre, String funcao,
             String subfuncao) {
-        List<Object[]> lista = new ArrayList<>();
+        
         String sql = "SELECT a.nomeprograma, sum(e.valor) as total "
                 + "FROM acao a, empenho e, data d "
                 + "WHERE e.codacao = a.codigoacao "
@@ -263,22 +213,15 @@ public class QueryIntervalos {
             stmt.setString(1, funcao);
             stmt.setString(2, subfuncao);
             stmt.setInt(3, semestre);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                Object[] array = {rs.getString("nomeprograma"),
-                    rs.getBigDecimal("total")};
-                lista.add(array);
-            }
-            return lista;
+            return prepararLista("nomeprograma", stmt);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return lista;
+        return new ArrayList<>();
     }
 
     private List<Object[]> prepararLista(String valor, PreparedStatement stmt)
             throws SQLException {
-
         List<Object[]> lista = new ArrayList<>();
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
@@ -288,9 +231,7 @@ public class QueryIntervalos {
             };
             lista.add(array);
         }
-
         return lista;
-
     }
 
 }
