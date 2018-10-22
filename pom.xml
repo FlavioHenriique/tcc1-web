@@ -97,6 +97,7 @@
                 </executions>
             </plugin>
         </plugins>
+        <finalName>tcc1-web</finalName>
     </build>
 
 </project>

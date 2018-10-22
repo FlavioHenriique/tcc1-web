@@ -18,7 +18,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 @Stateless
-public class QueryEmpenhos {
+public class QueryIntervalos {
 
     private Connection conn;
 
@@ -31,12 +31,12 @@ public class QueryEmpenhos {
 
         List<Object[]> lista = new ArrayList<>();
 
-        String sql = "SELECT a.nomefuncao, sum(e.valor) as total "
+        String sql = "SELECT a.nomefuncao, sum(e.valor) as total, a.codigofuncao "
                 + "FROM acao a, empenho e, data d "
                 + "WHERE e.codacao = a.codigoacao "
                 + "AND e.coddata = d.codigo "
                 + "AND d.ano between ? AND ? "
-                + "GROUP BY a.nomefuncao "
+                + "GROUP BY a.nomefuncao, a.codigofuncao "
                 + "ORDER BY a.nomefuncao";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -45,7 +45,7 @@ public class QueryEmpenhos {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Object[] array = {rs.getString("nomefuncao"),
-                    rs.getBigDecimal("total")};
+                    rs.getBigDecimal("total"),rs.getInt("codigofuncao")};
 
                 lista.add(array);
             }
@@ -208,4 +208,6 @@ public class QueryEmpenhos {
         }
         return lista;
     }
+    
+    
 }

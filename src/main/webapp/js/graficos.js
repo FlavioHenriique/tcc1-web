@@ -51,7 +51,14 @@ function mudarTipo(tipo) {
 }
 
 function mudarDados(json, clique) {
+    console.log(JSON.stringify(json));
     chart.update({
+        title: {
+            text: json.title
+        },
+        xAxis: {
+            categories: json.categorias
+        },
         series: [{
                 name: json.name,
                 data: json.data,

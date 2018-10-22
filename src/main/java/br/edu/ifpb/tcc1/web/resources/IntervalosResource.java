@@ -1,7 +1,6 @@
 package br.edu.ifpb.tcc1.web.resources;
 
 import br.edu.ifpb.tcc1.web.controller.IntervaloController;
-import br.edu.ifpb.tcc1.web.dao.QueryEmpenhos;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -11,10 +10,8 @@ import javax.ws.rs.core.Response;
 
 @Path("intervalo")
 @Stateless
-public class EmpenhoResource {
+public class IntervalosResource {
 
-    @Inject
-    private QueryEmpenhos query;
     @Inject
     private IntervaloController intervalo;
 
@@ -22,7 +19,6 @@ public class EmpenhoResource {
     @Path("/anos/{ano1}/{ano2}")
     public Response buscaPorano(@PathParam("ano1") int ano1,
             @PathParam("ano2") int ano2) {
-
         return Response
                 .ok()
                 .entity(intervalo.buscaPorAno(ano1, ano2))
@@ -32,7 +28,6 @@ public class EmpenhoResource {
     @GET
     @Path("semestre/{sem}")
     public Response buscaPorSemestre(@PathParam("sem") int semestre) {
-
         return Response
                 .ok()
                 .entity(intervalo.buscaPorSemestre(semestre))
@@ -43,7 +38,6 @@ public class EmpenhoResource {
     @Path("mes/{mes1}/{mes2}")
     public Response buscaPorMes(@PathParam("mes1") int mes1,
             @PathParam("mes2") int mes2) {
-
         return Response
                 .ok()
                 .entity(intervalo.buscaPorMes(mes1, mes2))
@@ -54,7 +48,6 @@ public class EmpenhoResource {
     @Path("anos/{funcao}/{ano1}/{ano2}")
     public Response buscaSubfuncaoAno(@PathParam("ano1") int ano1,
             @PathParam("ano2") int ano2, @PathParam("funcao") String funcao) {
-
         return Response
                 .ok()
                 .entity(intervalo.buscaSubfuncaoPorAno(ano1, ano2, funcao))
@@ -65,7 +58,6 @@ public class EmpenhoResource {
     @Path("semestre/{funcao}/{sem}")
     public Response buscaSubfuncaoAno(@PathParam("sem") int semestre,
             @PathParam("funcao") String funcao) {
-
         return Response
                 .ok()
                 .entity(intervalo.buscaSubfuncaoPorSemestre(semestre, funcao))
@@ -76,7 +68,6 @@ public class EmpenhoResource {
     @Path("mes/{funcao}/{mes1}/{mes2}")
     public Response buscaPorMes(@PathParam("mes1") int mes1,
             @PathParam("mes2") int mes2, @PathParam("funcao") String funcao) {
-
         return Response
                 .ok()
                 .entity(intervalo.buscSubfuncaoPorMes(mes1, mes2, funcao))

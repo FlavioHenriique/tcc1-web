@@ -1,6 +1,6 @@
 package br.edu.ifpb.tcc1.web.controller;
 
-import br.edu.ifpb.tcc1.web.dao.QueryEmpenhos;
+import br.edu.ifpb.tcc1.web.dao.QueryIntervalos;
 import br.edu.ifpb.tcc1.web.graficos.Grafico;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +11,8 @@ import javax.inject.Inject;
 public class IntervaloController {
 
     @Inject
-    private QueryEmpenhos query;
+    private QueryIntervalos query;
 
-    /*
-    public IntervaloController() {
-        //query = new QueryEmpenhosJDBC();
-    }
-     */
     public Grafico buscaPorMes(int mes1, int mes2) {
 
         Grafico grafico = new Grafico("Busca por gastos entre meses");

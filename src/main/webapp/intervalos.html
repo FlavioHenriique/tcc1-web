@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
     <head>
         <title>Intervalos de tempo</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -8,7 +7,6 @@
         <link rel="stylesheet" href="css/app.css" />
         <link rel="icon" href="img/icon.png">
     </head>
-
     <body><br>
         <div class="container has-text-centered ">
             <h2 class="title is-2">Buscar gastos em um intervalo de tempo</h2>
@@ -60,14 +58,13 @@
                             </select>
                         </div>
                         <br><br>
-                        <button id="btAnos" class="button is-success is-fullwidth">Gerar gráfico</button>
+                        <button id="btAnos" class="button is-success is-fullwidth">GERAR GRÁFICO</button>
                     </div>
                 </section>
                 <footer class="modal-card-foot">
 
                 </footer>
             </div>
-
         </div>
     </div>
     <div class="modal" id="modalMes">
@@ -78,9 +75,6 @@
                 <button class="delete" aria-label="close" onclick="fecharmodal(getElementById('modalMes'))"> </button>
             </header>
             <section class="modal-card-body">
-
-
-
                 <label class="label">Primeiro mês</label>
                 <div class="select is-fullwidth">
                     <select id="mes1">
@@ -140,13 +134,12 @@
                 </div>
 
                 <br><br>
-                <button class="button is-success is-fullwidth" id="btMeses">Gerar gráfico</button>
+                <button class="button is-success is-fullwidth" id="btMeses">GERAR GRÁFICO</button>
             </section>
             <footer class="modal-card-foot">
 
             </footer>
         </div>
-
     </div>
     <div class="modal" id="modalSemestre">
         <div class="modal-background"></div>
@@ -175,24 +168,22 @@
                     </select>
                 </div>
                 <br><br>
-                <button id="btSemestre" class="button is-success is-fullwidth">Gerar gráfico</button>
+                <button id="btSemestre" class="button is-success is-fullwidth">GERAR GRÁFICO</button>
             </section>
             <footer class="modal-card-foot">
 
             </footer>
         </div>
     </div>
-    <h3 class="title is-5 has-text-centered">Selecione o tipo de representação desejada:</h3>
-    <div class="tabs is-centered is-medium">
+    <h3 class="title is-5 has-text-centered">Selecione o tipo de gráfico desejado:</h3>
+    <div class="tabs is-centered is-medium is-toggle-rounded is-toggle">
         <ul>
             <li><a onclick="mudarTipo('bar')">Barra</a></li>
             <li><a onclick="mudarTipo('pie')">Pizza</a></li>
             <li><a onclick="mudarTipo('line')">Linha</a></li>
         </ul>
     </div>
-
     <div id="container" style="height: 550px" class="box"></div>
-
 
     <script src="code/highcharts.js"></script>
     <script src="code/highcharts-3d.js"></script>
@@ -202,7 +193,5 @@
     <script src="js/swal.js"></script>
     <script src="js/modal.js"></script>
     <script src="js/buscas/intervalos.js"></script>
-
 </body>
-
 </html>
