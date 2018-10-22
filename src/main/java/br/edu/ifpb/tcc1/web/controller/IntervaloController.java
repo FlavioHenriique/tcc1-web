@@ -83,6 +83,29 @@ public class IntervaloController {
         return grafico;
     }
 
+    public Grafico buscaProgramaPorAno(int ano1, int ano2, String funcao, String subfuncao) {
+        Grafico grafico = new Grafico("Programas da subfunção " + subfuncao
+                + " entre " + ano1 + " e " + ano2);
+        grafico.setType("pie");
+        grafico.setData(query.programaPorAno(ano1, ano2, funcao, subfuncao));
+        grafico.setName("Empenhos");
+        grafico.setCategorias(categorias(grafico.getData()));
+        return grafico;
+    }
+
+    public Grafico buscaProgramaPorSemestre(int semestre, String funcao, String subfuncao) {
+        String sem = "" + semestre;
+        Grafico grafico = new Grafico(("Programas da subfunção " + subfuncao + " no "
+                + sem.substring(0, 1)
+                + "º semestre de "
+                + sem.substring(1, sem.length())));
+        grafico.setData(query.programaPorSemestre(semestre, funcao, subfuncao));
+        grafico.setType("pie");
+        grafico.setName("Empenhos");
+        grafico.setCategorias(categorias(grafico.getData()));
+        return grafico;
+    }
+
     public List<String> categorias(List<Object[]> lista) {
         List<String> categorias = new ArrayList<>();
         lista.forEach(d -> categorias.add(d[0].toString()));

@@ -73,4 +73,26 @@ public class IntervalosResource {
                 .entity(intervalo.buscSubfuncaoPorMes(mes1, mes2, funcao))
                 .build();
     }
+
+    @GET
+    @Path("ano/{funcao}/{subfuncao}/{ano1}/{ano2}")
+    public Response programaPorAno(@PathParam("funcao") String funcao,
+            @PathParam("subfuncao") String subfuncao, @PathParam("ano1") int ano1,
+            @PathParam("ano2") int ano2) {
+
+        return Response
+                .ok()
+                .entity(intervalo.buscaProgramaPorAno(ano1, ano2, funcao, subfuncao))
+                .build();
+    }
+
+    @GET
+    @Path("semestre/{funcao}/{subfuncao}/{sem}/")
+    public Response programaPorSemestre(@PathParam("sem") int semestre,
+            @PathParam("funcao") String funcao, @PathParam("subfuncao") String subfuncao) {
+        return Response
+                .ok()
+                .entity(intervalo.buscaProgramaPorSemestre(semestre, funcao, subfuncao))
+                .build();
+    }
 }

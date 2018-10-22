@@ -51,7 +51,6 @@ function mudarTipo(tipo) {
 }
 
 function mudarDados(json, clique) {
-    console.log(JSON.stringify(json));
     chart.update({
         title: {
             text: json.title
