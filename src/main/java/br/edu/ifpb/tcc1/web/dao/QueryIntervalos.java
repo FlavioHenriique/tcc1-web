@@ -180,7 +180,6 @@ public class QueryIntervalos {
                 + "AND d.ano BETWEEN ? AND ? "
                 + "GROUP BY a.nomeprograma "
                 + "ORDER BY a.nomeprograma";
-        System.out.println(sql);
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, funcao);
@@ -236,6 +235,33 @@ public class QueryIntervalos {
             stmt.setInt(3, mes1);
             stmt.setInt(4, mes2);
             return prepararLista("nomeprograma", stmt);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
+
+    public List<Object[]> acaoPorAno(int ano1, int ano2, String funcao,
+            String subfuncao, String programa) {
+        String sql = "SELECT a.nomeacao, sum(e.valor) as total "
+                + "FROM acao a, empenho e, data d "
+                + "WHERE e.codacao = a.codigoacao "
+                + "AND e.coddata = d.codigo "
+                + "AND a.nomefuncao = ? "
+                + "AND a.nomesubfuncao = ? "
+                + "AND a.nomeprograma = ? "
+                + "AND d.ano BETWEEN ? AND ? "
+                + "GROUP BY a.nomeacao "
+                + "ORDER BY a.nomeacao";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, funcao);
+            stmt.setString(2, subfuncao);
+            stmt.setString(3, programa);
+            stmt.setInt(4, ano1);
+            stmt.setInt(5, ano2);
+            return prepararLista("nomeacao", stmt);
+            
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
