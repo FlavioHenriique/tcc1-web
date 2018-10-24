@@ -261,7 +261,60 @@ public class QueryIntervalos {
             stmt.setInt(4, ano1);
             stmt.setInt(5, ano2);
             return prepararLista("nomeacao", stmt);
-            
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
+
+    public List<Object[]> acaoPorSemestre(int semestre, String funcao,
+            String subfuncao, String programa) {
+
+        String sql = "SELECT a.nomeacao, sum(e.valor) as total "
+                + "FROM acao a, empenho e, data d "
+                + "WHERE e.codacao = a.codigoacao "
+                + "AND d.codigo = e.coddata "
+                + "AND a.nomefuncao = ? "
+                + "AND a.nomesubfuncao = ? "
+                + "AND a.nomeprograma = ? "
+                + "AND d.semestre = ? "
+                + "GROUP BY a.nomeacao"
+                + " ORDER BY a.nomeacao";
+
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, funcao);
+            stmt.setString(2, subfuncao);
+            stmt.setString(3, programa);
+            stmt.setInt(4, semestre);
+            return prepararLista("nomeacao", stmt);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
+
+    public List<Object[]> acaoPorMes(int mes1, int mes2, String funcao,
+            String subfuncao, String programa) {
+        String sql = "SELECT a.nomeacao, sum(e.valor) as total "
+                + "FROM acao a, empenho e, data d "
+                + "WHERE e.codacao = a.codigoacao "
+                + "AND d.codigo = e.coddata "
+                + "AND a.nomefuncao = ? "
+                + "AND a.nomesubfuncao = ? "
+                + "AND a.nomeprograma = ? "
+                + "AND d.codigo BETWEEN ? AND ? "
+                + "GROUP BY a.nomeacao "
+                + " ORDER BY a.nomeacao ";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, funcao);
+            stmt.setString(2, subfuncao);
+            stmt.setString(3, programa);
+            stmt.setInt(4, mes1);
+            stmt.setInt(5, mes2);
+            return prepararLista("nomeacao", stmt);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
