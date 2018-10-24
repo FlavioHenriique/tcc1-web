@@ -124,8 +124,11 @@ function cliqueMeses(valormes1, valormes2) {
                 client.open('GET', url, false);
                 client.send(null);
                 if (client.status == 200) {
+                    let urlInicial = 'http://localhost:8080/tcc1-web/api/intervalo' +
+                            '/mes/' + funcao + '/';
+                    let urlFinal = '/' + valormes1 + "/" + valormes2;
                     json = JSON.parse(client.responseText);
-                    mudarDados(json, subfuncao(url, funcao));
+                    mudarDados(json, subfuncao(urlInicial, urlFinal));
                 }
             }
         }

@@ -106,6 +106,15 @@ public class IntervaloController {
         return grafico;
     }
 
+    public Grafico buscaProgramaPorMes(int mes1, int mes2, String funcao, String subfuncao) {
+        Grafico grafico = new Grafico("Programas da subfunção " + subfuncao + " entre meses");
+        grafico.setType("pie");
+        grafico.setData(query.programaPorMes(mes1, mes2, funcao, subfuncao));
+        grafico.setName("Empenhos");
+        grafico.setCategorias(categorias(grafico.getData()));
+        return grafico;
+    }
+
     public List<String> categorias(List<Object[]> lista) {
         List<String> categorias = new ArrayList<>();
         lista.forEach(d -> categorias.add(d[0].toString()));

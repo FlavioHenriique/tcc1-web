@@ -170,7 +170,6 @@ public class QueryIntervalos {
     public List<Object[]> programaPorAno(int ano1, int ano2, String funcao,
             String subfuncao) {
 
-        
         List<Object[]> lista = new ArrayList<>();
         String sql = "SELECT a.nomeprograma, sum(e.valor) as total "
                 + "FROM acao a, empenho e, data d "
@@ -197,7 +196,7 @@ public class QueryIntervalos {
 
     public List<Object[]> programaPorSemestre(int semestre, String funcao,
             String subfuncao) {
-        
+
         String sql = "SELECT a.nomeprograma, sum(e.valor) as total "
                 + "FROM acao a, empenho e, data d "
                 + "WHERE e.codacao = a.codigoacao "
@@ -213,6 +212,29 @@ public class QueryIntervalos {
             stmt.setString(1, funcao);
             stmt.setString(2, subfuncao);
             stmt.setInt(3, semestre);
+            return prepararLista("nomeprograma", stmt);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
+
+    public List<Object[]> programaPorMes(int mes1, int mes2, String funcao, String subfuncao) {
+        String sql = "SELECT a.nomeprograma, sum(e.valor) as total "
+                + "FROM acao a, empenho e, data d "
+                + "WHERE e.codacao = a.codigoacao "
+                + "AND d.codigo = e.coddata "
+                + "AND a.nomefuncao = ? "
+                + "AND a.nomesubfuncao = ? "
+                + "AND d.codigo BETWEEN ? AND ? "
+                + "GROUP BY a.nomeprograma "
+                + " ORDER BY a.nomeprograma ";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, funcao);
+            stmt.setString(2, subfuncao);
+            stmt.setInt(3, mes1);
+            stmt.setInt(4, mes2);
             return prepararLista("nomeprograma", stmt);
         } catch (SQLException ex) {
             ex.printStackTrace();

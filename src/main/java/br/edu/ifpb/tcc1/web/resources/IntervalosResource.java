@@ -56,7 +56,7 @@ public class IntervalosResource {
 
     @GET
     @Path("semestre/{funcao}/{sem}")
-    public Response buscaSubfuncaoAno(@PathParam("sem") int semestre,
+    public Response buscaSubfuncaoSemestre(@PathParam("sem") int semestre,
             @PathParam("funcao") String funcao) {
         return Response
                 .ok()
@@ -66,7 +66,7 @@ public class IntervalosResource {
 
     @GET
     @Path("mes/{funcao}/{mes1}/{mes2}")
-    public Response buscaPorMes(@PathParam("mes1") int mes1,
+    public Response buscaSubfuncaoPorMes(@PathParam("mes1") int mes1,
             @PathParam("mes2") int mes2, @PathParam("funcao") String funcao) {
         return Response
                 .ok()
@@ -93,6 +93,18 @@ public class IntervalosResource {
         return Response
                 .ok()
                 .entity(intervalo.buscaProgramaPorSemestre(semestre, funcao, subfuncao))
+                .build();
+    }
+
+    @GET
+    @Path("mes/{funcao}/{subfuncao}/{mes1}/{mes2}")
+    public Response programaPorMes(@PathParam("mes1") int mes1,
+            @PathParam("mes2") int mes2, @PathParam("funcao") String funcao,
+            @PathParam("subfuncao") String subfuncao) {
+        System.out.println(funcao + " " + subfuncao);
+        return Response
+                .ok()
+                .entity(intervalo.buscaProgramaPorMes(mes1, mes2, funcao, subfuncao))
                 .build();
     }
 }

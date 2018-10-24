@@ -2,7 +2,10 @@ function subfuncao(url1, url2) {
     return cliqueSubfuncao = {
         events: {
             click: function (event) {
+                console.log(url1);
+                console.log(url2);
                 let url = url1 + this.name + url2;
+                
                 client.open('GET', url, false);
                 console.log(url);
                 client.send(null);
