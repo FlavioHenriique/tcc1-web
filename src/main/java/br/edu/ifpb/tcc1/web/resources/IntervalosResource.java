@@ -101,7 +101,6 @@ public class IntervalosResource {
     public Response programaPorMes(@PathParam("mes1") int mes1,
             @PathParam("mes2") int mes2, @PathParam("funcao") String funcao,
             @PathParam("subfuncao") String subfuncao) {
-        System.out.println(funcao + " " + subfuncao);
         return Response
                 .ok()
                 .entity(intervalo.buscaProgramaPorMes(mes1, mes2, funcao, subfuncao))
@@ -138,7 +137,6 @@ public class IntervalosResource {
     public Response acaoPorMes(@PathParam("mes1") int mes1,
             @PathParam("mes2") int mes2, @PathParam("funcao") String funcao,
             @PathParam("subfuncao") String subfuncao, @PathParam("programa") String programa) {
-        System.out.println(funcao + " " + subfuncao);
         return Response
                 .ok()
                 .entity(intervalo.buscaAcaoPorMes(mes1, mes2, funcao, subfuncao, programa))

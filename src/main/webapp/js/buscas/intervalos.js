@@ -1,10 +1,11 @@
-let client = new XMLHttpRequest();
+var client = new XMLHttpRequest();
 
 btAnos.onclick = function () {
     fecharmodal(document.getElementById("modalAno"));
     let json;
     let url = 'http://localhost:8080/tcc1-web/api/intervalo' +
             '/ano/' + ano1.value + "/" + ano2.value;
+    alterarUrl(url, url);
     client.open('GET', url, false);
     client.send(null);
 
@@ -28,7 +29,7 @@ btSemestre.onclick = function () {
             + anoSemestre.value;
     client.open('GET', url, false);
     client.send(null);
-
+    alterarUrl(url, url);
     if (client.status == 200) {
         semestre = JSON.parse(client.responseText);
         intervalos(
@@ -58,6 +59,8 @@ btMeses.onclick = function () {
             '/mes/' + valormes1 + "/" + valormes2;
     client.open('GET', url, false);
     client.send(null);
+    alterarUrl(url, url);
+    
     if (client.status == 200) {
         json = JSON.parse(client.responseText);
         intervalos(json, cliqueMeses(valormes1, valormes2));
@@ -72,57 +75,21 @@ btMeses.onclick = function () {
 }
 
 function cliquesAno(ano1, ano2) {
-    return cliqueFuncao = {
-        events: {
-            click: function (event) {
-                let funcao = this.name;
-                let url = 'http://localhost:8080/tcc1-web/api/intervalo' +
-                        '/ano/' + ano1 + "/" + ano2 + '/' + funcao + '/';
-                client.open('GET', url, false);
-                client.send(null);
-
-                if (client.status == 200) {
-                    json = JSON.parse(client.responseText);
-                    mudarDados(json, subfuncao(url));
-                }
-            }
-        }
-    };
+    let url = 'http://localhost:8080/tcc1-web/api/intervalo' +
+            '/ano/' + ano1 + "/" + ano2 + '/';
+    return funcao(url);
 }
-function cliqueSemestre(semestre, anoSemestre) {
-    return cliqueFuncao = {
-        events: {
-            click: function (event) {
-                let funcao = this.name;
-                let url = 'http://localhost:8080/tcc1-web/api/intervalo' +
-                        '/semestre/' + semestre + anoSemestre + '/' + funcao + '/';
-                client.open('GET', url, false);
-                client.send(null);
 
-                if (client.status == 200) {
-                    json = JSON.parse(client.responseText);
-                    mudarDados(json, subfuncao(url));
-                }
-            }
-        }
-    };
+function cliqueSemestre(semestre, anoSemestre) {
+
+    let url = 'http://localhost:8080/tcc1-web/api/intervalo' +
+            '/semestre/' + semestre + anoSemestre + '/';
+    return funcao(url);
 }
 
 function cliqueMeses(valormes1, valormes2) {
-    return cliqueFuncao = {
-        events: {
-            click: function (event) {
-                let funcao = this.name;
-                let url = 'http://localhost:8080/tcc1-web/api/intervalo' +
-                        '/mes/' + valormes1 + "/" + valormes2 + '/'+ funcao + '/';
-                client.open('GET', url, false);
-                client.send(null);
-                if (client.status == 200) {
-                    json = JSON.parse(client.responseText);
-                    mudarDados(json, subfuncao(url));
-                }
-            }
-        }
-    };
+    let url = 'http://localhost:8080/tcc1-web/api/intervalo' +
+            '/mes/' + valormes1 + "/" + valormes2 + '/';
+    return funcao(url);
 }
 

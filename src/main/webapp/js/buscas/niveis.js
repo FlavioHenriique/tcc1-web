@@ -1,14 +1,32 @@
+function funcao(urlInicial) {
+    return cliqueFuncao = {
+        events: {
+            click: function (event) {
+                let url = urlInicial + this.name + '/';
+                alterarUrl(urlPagina, url);
+                client.open('GET', url, false);
+                client.send(null);
+
+                if (client.status == 200) {
+                    json = JSON.parse(client.responseText);
+                    mudarDados(json, subfuncao(url));
+                }
+            }
+        }
+    };
+}
+
 function subfuncao(urlInicial) {
     return cliqueSubfuncao = {
         events: {
             click: function (event) {
                 let url = urlInicial + this.name + '/';
                 client.open('GET', url, false);
-                console.log(url);
+                alterarUrl(urlPagina, url);
                 client.send(null);
+                urlPagina = url;
                 if (client.status == 200) {
                     json = JSON.parse(client.responseText);
-                    
                     mudarDados(json, programa(url));
                 }
             }
@@ -21,9 +39,10 @@ function programa(urlinicial) {
         events: {
             click: function (event) {
                 let url = urlinicial + this.name;
-                console.log(url);
+                alterarUrl(urlPagina, url);
                 client.open('GET', url, false);
                 client.send(null);
+                urlPagina = url;
                 if (client.status == 200) {
                     json = JSON.parse(client.responseText);
                     mudarDados(json, acao(url));
@@ -44,3 +63,10 @@ function acao(urlInicial) {
     }
 }
 
+function subirNivel() {
+
+}
+
+function descerNivel() {
+    alert("desceu");
+}

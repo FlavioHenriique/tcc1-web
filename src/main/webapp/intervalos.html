@@ -5,6 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="bulma-0.7.1/css/bulma.min.css" />
         <link rel="stylesheet" href="css/app.css" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
         <link rel="icon" href="img/icon.png">
     </head>
     <body><br>
@@ -45,6 +46,7 @@
                                 <option>2018</option>
                                 <option>2017</option>
                                 <option>2016</option>
+                                <option>2015</option>
                             </select>
                         </div>
                         <br><br>
@@ -55,6 +57,7 @@
                                 <option>2018</option>
                                 <option>2017</option>
                                 <option>2016</option>
+                                <option>2015</option>
                             </select>
                         </div>
                         <br><br>
@@ -101,6 +104,7 @@
                         <option>2018</option>
                         <option>2017</option>
                         <option>2016</option>
+                        <option>2015</option>
                     </select>
                 </div>
                 <br><br>
@@ -130,6 +134,7 @@
                         <option>2018</option>
                         <option>2017</option>
                         <option>2016</option>
+                        <option>2015</option>
                     </select>
                 </div>
 
@@ -156,6 +161,7 @@
                         <option>2018</option>
                         <option>2017</option>
                         <option>2016</option>
+                        <option>2015</option>
                     </select>
                 </div>
                 <br><br>
@@ -183,8 +189,22 @@
             <li><a onclick="mudarTipo('line')">Linha</a></li>
         </ul>
     </div>
+    <h3 class="title is-5 has-text-centered">Altere os níveis de detalhamento das informações:</h3>
+    <div class="has-text-centered">
+        <a class="button is-large is-rounded is-success" onclick="subirNivel()">
+            <span class="icon">
+                <i class="fas fa-arrow-left"></i>
+            </span>
+        </a>
+        <a class="button is-large is-rounded is-success" onclick="descerNivel()">
+            <span class="icon">
+                <i class="fas fa-arrow-right"></i>
+            </span>
+        </a>
+    </div>
     <div id="container" style="height: 550px" class="box"></div>
-
+    <script src="js/url.js"></script>
+    <script src="js/modal.js"></script>
     <script src="code/highcharts.js"></script>
     <script src="code/highcharts-3d.js"></script>
     <script src="code/modules/exporting.js"></script>
@@ -192,8 +212,7 @@
     <script src="js/graficos.js"></script>
     <script src="js/swal.js"></script>
     <script src="js/buscas/niveis.js"></script>
-    <script src="js/modal.js"></script>
     <script src="js/buscas/intervalos.js"></script>
-    
+
 </body>
 </html>
