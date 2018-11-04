@@ -50,7 +50,7 @@ function mudarTipo(tipo) {
     });
 }
 
-function mudarDados(json, clique) {
+function mudarDados(json, clique){
     chart.update({
         title: {
             text: json.title

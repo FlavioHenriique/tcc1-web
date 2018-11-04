@@ -1,12 +1,20 @@
 var urlPagina = "";
 var urlAnterior = "";
-
-function alterarUrl(urlAnt, urlPag) {
+var tipoDados = "";
+var client = new XMLHttpRequest();
+//
+function alterarUrl(urlAnt, urlPag, tipo) {
     urlAnterior = urlAnt;
     urlPagina = urlPag;
-    console.log("pagina: "+ urlPagina);
-    console.log("anterior: "+ urlAnterior);
+    tipoDados = tipo;
+    console.log("url pagina: "+urlPagina);
 }
 
+function buscarDados(url) {
+    client.open('GET', url, false);
+    client.send(null);
+    if (client.status == 200) {
+        return JSON.parse(client.responseText);
+    }
 
-
+}

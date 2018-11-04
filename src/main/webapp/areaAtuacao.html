@@ -1,0 +1,40 @@
+
+<html>
+    <head>
+        <title>Áreas de atuação</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="bulma-0.7.1/css/bulma.min.css" />
+        <link rel="stylesheet" href="css/app.css" />
+        
+        <link rel="icon" href="img/icon.png">
+    </head>
+    <body>
+        <br>
+        <div class="container has-text-centered ">
+            <h2 class="title is-2">Buscar gastos por área de atuação</h2>
+            <h3 class="title is-5">Selecione uma área de atuação:</h3>
+            <div class="columns">
+                <div class="select is-fullwidth">
+                    <select id="areas">
+                        <option selected="true" disabled="disabled">Selecione uma área de atuação</option>
+                    </select>
+                </div>
+                <button class="button is-success is-large" onclick="buscaAreasDeAtuacao()">Buscar</button>
+            </div>
+            <br>
+        </div>
+
+        <div id="container" style="height: 550px" class="box"></div>
+        <script src="js/url.js"></script>
+        <script src="js/modal.js"></script>
+        <script src="code/highcharts.js"></script>
+        <script src="code/highcharts-3d.js"></script>
+        <script src="code/modules/exporting.js"></script>
+        <script src="code/modules/export-data.js"></script>
+        <script src="js/graficos.js"></script>
+        <script src="js/swal.js"></script>
+        <script src="js/buscas/niveis.js"></script>
+        <script src="js/buscas/areaAtuacao.js"></script>
+    </body>
+</html>
