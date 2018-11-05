@@ -1,4 +1,3 @@
-
 package br.edu.ifpb.tcc1.web.dao;
 
 import java.sql.Connection;
@@ -42,19 +41,76 @@ public class QueryAreaDeAtuacao {
     public List<Object[]> buscarAreaDeAtuacao(String area) {
 
         List<Object[]> lista = new ArrayList<>();
-        String sql = "SELECT a.nomesubfuncao, sum(e.valor) as total "
+        String campo = "nomesubfuncao";
+        String sql = "SELECT a." + campo + ", sum(e.valor) as total "
                 + "FROM acao a, empenho e "
                 + "WHERE e.codacao = a.codigoacao "
                 + "AND a.nomefuncao = ? "
-                + "GROUP BY a.nomesubfuncao "
-                + "ORDER BY a.nomesubfuncao";
+                + "GROUP BY a." + campo + " "
+                + "ORDER BY a." + campo;
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, area);
-            ResultSet rs = stmt.executeQuery();
+            return prepararLista(stmt, campo);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return lista;
+    }
+
+    public List<Object[]> buscaPorPrograma(String area, String subfuncao) {
+
+        List<Object[]> lista = new ArrayList<>();
+        String campo = "nomeprograma";
+        String sql = "SELECT a." + campo + ", sum(e.valor) as total "
+                + "FROM acao a, empenho e "
+                + "WHERE e.codacao = a.codigoacao "
+                + "AND a.nomefuncao = ? "
+                + "AND a.nomesubfuncao = ? "
+                + "GROUP BY a." + campo + " "
+                + "ORDER BY a." + campo;
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, area);
+            stmt.setString(2, subfuncao);
+            return prepararLista(stmt, campo);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return lista;
+    }
+
+    public List<Object[]> buscaPorAcao(String area, String subfuncao, String programa) {
+        List<Object[]> lista = new ArrayList<>();
+        String campo = "nomeacao";
+        String sql = "SELECT a." + campo + ", sum(e.valor) as total "
+                + "FROM acao a, empenho e "
+                + "WHERE e.codacao = a.codigoacao "
+                + "AND a.nomefuncao = ? "
+                + "AND a.nomesubfuncao = ? "
+                + "AND a.nomeprograma = ? "
+                + "GROUP BY a." + campo + " "
+                + "ORDER BY a." + campo;
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, area);
+            stmt.setString(2, subfuncao);
+            stmt.setString(3, programa);
+            return prepararLista(stmt, campo);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return lista;
+    }
+
+    public List<Object[]> prepararLista(PreparedStatement stmt, String campo) {
+        List<Object[]> lista = new ArrayList<>();
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery();
             while (rs.next()) {
                 lista.add(new Object[]{
-                    rs.getString("nomesubfuncao"),
+                    rs.getString(campo),
                     rs.getBigDecimal("total")
                 });
             }
@@ -63,6 +119,5 @@ public class QueryAreaDeAtuacao {
             ex.printStackTrace();
         }
         return lista;
-
     }
 }

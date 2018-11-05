@@ -60,7 +60,11 @@ function acao(urlInicial) {
     return cliqueAcao = {
         events: {
             click: function (event) {
-                alert(this.name);
+                swal({
+                    title: "Opa...",
+                    text: "Não há mais níveis de detalhamento disponíveis!",
+                    icon: "error",
+                });
                 alterarUrl(urlPagina, url, "programa");
             }
         }

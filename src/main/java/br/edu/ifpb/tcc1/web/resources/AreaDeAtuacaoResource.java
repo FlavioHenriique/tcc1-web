@@ -32,4 +32,24 @@ public class AreaDeAtuacaoResource {
                 .entity(controller.buscarPorArea(area))
                 .build();
     }
+
+    @GET
+    @Path("/{area}/{subfuncao}")
+    public Response buscaPorPrograma(@PathParam("area") String area,
+            @PathParam("subfuncao") String subfuncao) {
+        return Response
+                .ok()
+                .entity(controller.buscaPorPrograma(area, subfuncao))
+                .build();
+    }
+//
+    @GET
+    @Path("/{area}/{subfuncao}/{programa}")
+    public Response buscaPorAcao(@PathParam("area") String area,
+            @PathParam("subfuncao") String subfuncao, @PathParam("programa") String programa) {
+        return Response
+                .ok()
+                .entity(controller.buscaPorAcao(area, subfuncao, programa))
+                .build();
+    }
 }
