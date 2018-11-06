@@ -14,23 +14,33 @@ function PreencherAreas() {
     }//
 }
 PreencherAreas();
+/*
+ function buscaAreasDeAtuacao(area) {
+ //let area = areas.options[areas.selectedIndex].text;
+ 
+ if (area != "Selecione uma área de atuação") {
+ let url = urlArea + area + '/';
+ client.open('GET', url, false);
+ client.send(null);
+ if (client.status == 200) {
+ let json = JSON.parse(client.responseText);
+ intervalos(json, subfuncao(url));
+ }
+ } else {
+ swal({
+ title: "Opa...",
+ text: "Selecione uma área de atuação!",
+ icon: "error",
+ });
+ }
+ }*/
 
-function buscaAreasDeAtuacao(area) {
-    //let area = areas.options[areas.selectedIndex].text;
-
-    if (area != "Selecione uma área de atuação") {
-        let url = urlArea + area + '/';
-        client.open('GET', url, false);
-        client.send(null);
-        if (client.status == 200) {
-            let json = JSON.parse(client.responseText);
-            intervalos(json, subfuncao(url));
-        }
-    } else {
-        swal({
-            title: "Opa...",
-            text: "Selecione uma área de atuação!",
-            icon: "error",
-        });
+function buscaAreasDeAtuacao(area, url) {
+    let urlBusca = url + area + '/';
+    client.open('GET', urlBusca, false);
+    client.send(null);
+    if (client.status == 200) {
+        let json = JSON.parse(client.responseText);
+        intervalos(json, subfuncao(url));
     }
 }

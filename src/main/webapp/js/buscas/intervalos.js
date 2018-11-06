@@ -4,8 +4,8 @@ btAnos.onclick = function () {
     fecharmodal(document.getElementById("modalAno"));
     let json;
     let area = areasAnos.options[areasAnos.selectedIndex].text;
+    let url = urlIntervalo + '/ano/' + ano1.value + "/" + ano2.value + '/';
     if (verificarAreaAtuacao(area)) {
-        let url = urlIntervalo + '/ano/' + ano1.value + "/" + ano2.value + '/';
         alterarUrl(url, url, "inicial");
         client.open('GET', url, false);
         client.send(null);
@@ -20,7 +20,7 @@ btAnos.onclick = function () {
             });
         }
     } else {
-        buscaAreasDeAtuacao(area);
+        buscaAreasDeAtuacao(area, url);
     }
 
 }
@@ -29,9 +29,9 @@ btSemestre.onclick = function () {
     let semestres;
     fecharmodal(document.getElementById("modalSemestre"));
     let area = areasSemestres.options[areasSemestres.selectedIndex].text;
+    let url = urlIntervalo + '/semestre/' + document.getElementById('semestre').value
+            + anoSemestre.value + '/';
     if (verificarAreaAtuacao(area)) {
-        let url = urlIntervalo + '/semestre/' + document.getElementById('semestre').value
-                + anoSemestre.value;
         client.open('GET', url, false);
         client.send(null);
         alterarUrl(url, url, "inicial");
@@ -52,20 +52,20 @@ btSemestre.onclick = function () {
             });
         }
     } else {
-        buscaAreasDeAtuacao(area);
+        buscaAreasDeAtuacao(area, url);
     }
 }
 
 btMeses.onclick = function () {
     fecharmodal(document.getElementById("modalMes"));
-
     let json;
     let area = areasMeses.options[areasMeses.selectedIndex].text;
+    let valormes1 = '' + anoMes1.value + mes1.value;
+    let valormes2 = '' + anoMes2.value + mes2.value;
+    let url = urlIntervalo + '/mes/' + valormes1 + "/" + valormes2 +  '/';
     if (verificarAreaAtuacao(area)) {
         let client = new XMLHttpRequest();
-        let valormes1 = '' + anoMes1.value + mes1.value;
-        let valormes2 = '' + anoMes2.value + mes2.value;
-        let url = urlIntervalo + '/mes/' + valormes1 + "/" + valormes2;
+
         client.open('GET', url, false);
         client.send(null);
         alterarUrl(url, url, "inicial");
@@ -82,7 +82,7 @@ btMeses.onclick = function () {
             });
         }
     } else {
-        buscaAreasDeAtuacao(area);
+        buscaAreasDeAtuacao(area, url);
     }
 
 }
