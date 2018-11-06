@@ -1,6 +1,6 @@
 package br.edu.ifpb.tcc1.web.controller;
 
-import br.edu.ifpb.tcc1.web.dao.QueryAreaDeAtuacao;
+import br.edu.ifpb.tcc1.web.query.QueryAreaDeAtuacao;
 import br.edu.ifpb.tcc1.web.graficos.Grafico;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ public class AreaDeAtuacaoController {
     }
 
     public Grafico buscarPorArea(String area) {
-        String titulo = "Busca por gastos em " + area;
+        String titulo = "Busca por gastos na área de atuação " + area;
         return montaGrafico(titulo, query.buscarAreaDeAtuacao(area));
     }
 

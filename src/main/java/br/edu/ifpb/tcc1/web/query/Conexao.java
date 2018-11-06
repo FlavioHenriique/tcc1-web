@@ -1,4 +1,4 @@
-package br.edu.ifpb.tcc1.web.dao;
+package br.edu.ifpb.tcc1.web.query;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

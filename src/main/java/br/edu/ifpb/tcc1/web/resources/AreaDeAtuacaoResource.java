@@ -42,7 +42,7 @@ public class AreaDeAtuacaoResource {
                 .entity(controller.buscaPorPrograma(area, subfuncao))
                 .build();
     }
-//
+
     @GET
     @Path("/{area}/{subfuncao}/{programa}")
     public Response buscaPorAcao(@PathParam("area") String area,

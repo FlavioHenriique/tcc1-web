@@ -5,16 +5,19 @@ function PreencherAreas() {
     client.send(null);
     if (client.status == 200) {
         let array = client.responseText.split(',');
+        console.log(array);
         for (i in array) {
-            areas.options[areas.options.length] = new Option(array[i], i);
+            areasAnos.options[areasAnos.options.length] = new Option(array[i], i);
+            areasSemestres.options[areasSemestres.options.length] = new Option(array[i], i);
+            areasMeses.options[areasMeses.options.length] = new Option(array[i], i);
         }
-    }
+    }//
 }
 PreencherAreas();
 
-function buscaAreasDeAtuacao() {
-    let area = areas.options[areas.selectedIndex].text;
-    console.log(area);
+function buscaAreasDeAtuacao(area) {
+    //let area = areas.options[areas.selectedIndex].text;
+
     if (area != "Selecione uma área de atuação") {
         let url = urlArea + area + '/';
         client.open('GET', url, false);
