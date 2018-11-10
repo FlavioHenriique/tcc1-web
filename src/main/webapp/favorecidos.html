@@ -1,0 +1,77 @@
+
+<html>
+    <head>
+        <title>Favorecidos</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="bulma-0.7.1/css/bulma.min.css" />
+        <link rel="stylesheet" href="css/app.css" />
+
+        <link rel="icon" href="img/icon.png">
+    </head>
+    <body>
+        <div class="container has-text-centered ">
+            <br>
+            <h2 class="title is-2">Verificar gastos por favorecido</h2>
+            <nav class="level">
+                <div class="level-left">
+                    <div class="level-item">
+                        <input 
+                            class="input is-medium " 
+                            type="text" 
+                            placeholder="Informe o Nome do favorecido"
+                            id="nomeFavorecido">
+                        <button class="button is-success is-medium" 
+                                onclick="favorecidoPorNome()">Buscar</button>             
+                    </div>
+                </div>
+                <div class="level-right">
+                    <div class="level-item">
+                        <input 
+                            class="input is-medium" 
+                            type="text" 
+                            placeholder="Informe o CNPJ do favorecido"
+                            id="cnpjFavorecido">
+                        <button class="button is-success is-medium" 
+                                onclick="favorecidoPorCNPJ()">Buscar</button>    
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <br><br>
+        <div class="modal is-fullwidth" id="modalFavorecido">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Favorecidos encontrados</p>
+                    <button class="delete" aria-label="close" onclick="fecharmodal(getElementById('modalFavorecido'))"> </button>
+                </header>
+                <section class="modal-card-body">
+                    <table class="table" id="valoresFavorecidos">
+                        <thead>
+                            <tr> 
+                                <th>Nome do favorecido</th>
+                                <th>Verificar</th>
+                            </tr>    
+                        </thead>
+                    </table>
+                </section>
+                <footer class="modal-card-foot">
+                </footer>
+            </div>
+        </div>
+        <br>
+        <div id="container" style="height: 550px" class="box"></div>
+        <script src="js/url.js"></script>
+        <script src="js/modal.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="code/highcharts.js"></script>
+        <script src="code/highcharts-3d.js"></script>
+        <script src="code/modules/exporting.js"></script>
+        <script src="code/modules/export-data.js"></script>
+        <script src="js/graficos.js"></script>
+        <script src="js/swal.js"></script>
+        <script src="js/buscas/niveis.js"></script>
+        <script src="js/buscas/favorecidos.js"></script>
+    </body>
+</html>

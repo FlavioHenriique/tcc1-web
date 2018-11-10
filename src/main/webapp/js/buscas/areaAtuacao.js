@@ -5,35 +5,14 @@ function PreencherAreas() {
     client.send(null);
     if (client.status == 200) {
         let array = client.responseText.split(',');
-        console.log(array);
         for (i in array) {
             areasAnos.options[areasAnos.options.length] = new Option(array[i], i);
             areasSemestres.options[areasSemestres.options.length] = new Option(array[i], i);
             areasMeses.options[areasMeses.options.length] = new Option(array[i], i);
         }
-    }//
+    }
 }
 PreencherAreas();
-/*
- function buscaAreasDeAtuacao(area) {
- //let area = areas.options[areas.selectedIndex].text;
- 
- if (area != "Selecione uma área de atuação") {
- let url = urlArea + area + '/';
- client.open('GET', url, false);
- client.send(null);
- if (client.status == 200) {
- let json = JSON.parse(client.responseText);
- intervalos(json, subfuncao(url));
- }
- } else {
- swal({
- title: "Opa...",
- text: "Selecione uma área de atuação!",
- icon: "error",
- });
- }
- }*/
 
 function buscaAreasDeAtuacao(area, url) {
     let urlBusca = url + area + '/';
@@ -41,6 +20,7 @@ function buscaAreasDeAtuacao(area, url) {
     client.send(null);
     if (client.status == 200) {
         let json = JSON.parse(client.responseText);
-        intervalos(json, subfuncao(url));
+        intervalos(json, subfuncao(urlBusca));
+        
     }
 }

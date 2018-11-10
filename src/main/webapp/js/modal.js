@@ -1,4 +1,3 @@
-
 function abrirmodal(modal) {
     modal.classList.add("is-active");
 }

@@ -2,7 +2,6 @@ package br.edu.ifpb.tcc1.web.resources;
 
 import br.edu.ifpb.tcc1.web.controller.IntervaloController;
 import br.edu.ifpb.tcc1.web.graficos.Grafico;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -108,10 +107,8 @@ public class IntervalosResource {
     }
 
     private Response verificaConteudo(Grafico grafico) {
-        if (grafico.getData().isEmpty()) {
-            return Response.noContent().build();
-        } else {
-            return Response.ok().entity(grafico).build();
-        }
+        return (grafico.getData().isEmpty())
+                ? Response.noContent().build()
+                : Response.ok().entity(grafico).build();
     }
 }
