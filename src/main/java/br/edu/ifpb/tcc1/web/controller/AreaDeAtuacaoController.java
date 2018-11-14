@@ -13,9 +13,7 @@ public class AreaDeAtuacaoController {
     @Inject
     private QueryAreaDeAtuacao query;
 
-    public List<String> todasAsAreas() {
-        return query.todasAsAreas();
-    }
+    
 
     public Grafico buscarPorArea(String area) {
         String titulo = "Busca por gastos na área de atuação " + area;

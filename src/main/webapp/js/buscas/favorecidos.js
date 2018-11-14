@@ -1,5 +1,7 @@
 var urlFavorecido = 'http://localhost:8080/tcc1-web/api/favorecidos/';
 
+$("#botoesIntervalo").load("trechos/botoesIntervalos.html");
+
 function favorecidoPorNome() {
     let url = urlFavorecido + 'nome/' + nomeFavorecido.value;
     buscarFavorecidos(url);
@@ -25,7 +27,5 @@ function buscarFavorecidos(url) {
                     '<td><button class="button is-success" onclick="">Visualizar</button></td></tr>'
                     ).attr('id', 'valoresFavorecidos');
         }
-    } else {
-        console.log("opa");
     }
 }

@@ -21,23 +21,6 @@ public class QueryAreaDeAtuacao {
         conn = Conexao.getConnection();
     }
 
-    public List<String> todasAsAreas() {
-
-        List<String> lista = new ArrayList<>();
-        String sql = "SELECT DISTINCT NomeFuncao FROM Acao ORDER BY NomeFuncao";
-        try {
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                lista.add(rs.getString("NomeFuncao"));
-            }
-            return lista;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return lista;
-    }
-
     public List<Object[]> buscarAreaDeAtuacao(String area) {
 
         List<Object[]> lista = new ArrayList<>();

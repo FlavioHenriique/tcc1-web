@@ -40,7 +40,7 @@ public class QueryFavorecidos {
         String sql = "SELECT DISTINCT Nome FROM Favorecido WHERE codigo ilike ?";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, cnpj + "%");
+            stmt.setString(1, cnpj);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 lista.add(rs.getString("nome"));

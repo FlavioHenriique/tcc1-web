@@ -16,15 +16,6 @@ public class AreaDeAtuacaoResource {
     private AreaDeAtuacaoController controller;
 
     @GET
-    @Path("/todas")
-    public Response todasAsAreas() {
-        return Response
-                .ok()
-                .entity(controller.todasAsAreas().toString())
-                .build();
-    }
-
-    @GET
     @Path("/{area}")
     public Response buscaPorArea(@PathParam("area") String area) {
         return Response
