@@ -7,7 +7,7 @@ function funcao(urlInicial) {
                 alterarUrl(urlPagina, url, "funcao");
                 client.open('GET', url, false);
                 client.send(null);
-
+                console.log(url);
                 if (client.status == 200) {
                     json = JSON.parse(client.responseText);
                     mudarDados(json, subfuncao(url));
@@ -26,7 +26,6 @@ function subfuncao(urlInicial) {
                 client.open('GET', url, false);
                 alterarUrl(urlPagina, url, "subfuncao");
                 client.send(null);
-
                 if (client.status == 200) {
                     json = JSON.parse(client.responseText);
                     mudarDados(json, programa(url));
@@ -45,7 +44,7 @@ function programa(urlinicial) {
                 alterarUrl(urlPagina, url, "programa");
                 client.open('GET', url, false);
                 client.send(null);
-
+                console.log(url);
                 if (client.status == 200) {
                     json = JSON.parse(client.responseText);
                     mudarDados(json, acao(url));
@@ -79,7 +78,7 @@ function subirNivel() {
         mudarDados(buscarDados(urlAnterior), func());
         //intervalos(buscarDados(urlAnterior), func());
     }
-}//
+}
 
 function descerNivel() {
     alert("desceu");

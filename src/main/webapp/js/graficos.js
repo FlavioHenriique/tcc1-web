@@ -1,5 +1,6 @@
 var chart;
 function intervalos(json, clique) {
+    console.log("grafico");
     chart = Highcharts.chart('container', {
         title: {
             text: json.title
@@ -51,6 +52,7 @@ function mudarTipo(tipo) {
 }
 
 function mudarDados(json, clique){
+    console.log("atualizar");
     chart.update({
         title: {
             text: json.title

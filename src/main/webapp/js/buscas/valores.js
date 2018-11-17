@@ -2,15 +2,16 @@ var urlValores = 'http://localhost:8080/tcc1-web/api/valor/';
 
 function PreencherAreas() {
     client.open('GET', urlValores + 'areas', false);
-    console.log(urlValores + 'areas');
     client.send(null);
-    if (client.status == 200) {
-        let json = JSON.parse(client.responseText);
-        let array = json.valores;
-        for (i in array) {
-            areasAnos.options[areasAnos.options.length] = new Option(array[i], i);
-            areasSemestres.options[areasSemestres.options.length] = new Option(array[i], i);
-            areasMeses.options[areasMeses.options.length] = new Option(array[i], i);
+    if (document.getElementById("areasAnos")) {
+        if ((client.status == 200)) {
+            let json = JSON.parse(client.responseText);
+            let array = json.valores;
+            for (i in array) {
+                areasAnos.options[areasAnos.options.length] = new Option(array[i], i);
+                areasSemestres.options[areasSemestres.options.length] = new Option(array[i], i);
+                areasMeses.options[areasMeses.options.length] = new Option(array[i], i);
+            }
         }
     }
 }
@@ -18,7 +19,6 @@ function PreencherAreas() {
 function anos() {
     client.open('GET', urlValores + 'anos', false);
     client.send(null);
-    console.log(urlValores + 'anos');
     if (client.status == 200) {
         let json = JSON.parse(client.responseText);
         let array = json.valores;
@@ -34,7 +34,6 @@ function anos() {
 function meses() {
     client.open('GET', urlValores + 'meses', false);
     client.send(null);
-    console.log(urlValores + 'meses');
     if (client.status == 200) {
         let json = JSON.parse(client.responseText);
         let array = json.valores;

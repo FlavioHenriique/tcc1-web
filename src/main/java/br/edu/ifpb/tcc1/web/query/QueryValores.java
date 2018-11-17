@@ -41,7 +41,7 @@ public class QueryValores {
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                System.out.println(rs.getString(campo));
+                
                 lista.add(rs.getString(campo));
             }
         } catch (SQLException ex) {

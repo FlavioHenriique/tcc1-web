@@ -50,9 +50,37 @@ public class FavorecidosResource {
     }
 
     @GET
-    @Path("/{nome}")
-    public Response funcoesPorNome(@PathParam("nome") String nome) {
-        Grafico grafico = controller.funcaoFavorecidos(nome);
+    @Path("/anos/{ano1}/{ano2}/{nome}")
+    public Response funcoesPorNome(@PathParam("nome") String nome, @PathParam("ano1") int ano1,
+            @PathParam("ano2") int ano2) {
+        Grafico grafico = controller.funcaoFavorecidos(nome, ano1, ano2);
+        return response(grafico);
+    }
+
+    @GET
+    @Path("/anos/{ano1}/{ano2}/{nome}/{funcao}")
+    public Response subfuncoesPorNome(@PathParam("nome") String nome, @PathParam("ano1") int ano1,
+            @PathParam("ano2") int ano2, @PathParam("funcao") String funcao) {
+        Grafico grafico = controller.subfuncaoFavorecidos(nome, ano1, ano2, funcao);
+        return response(grafico);
+    }
+
+    @GET
+    @Path("/anos/{ano1}/{ano2}/{nome}/{funcao}/{subfuncao}")
+    public Response programasPorNome(@PathParam("nome") String nome, @PathParam("ano1") int ano1,
+            @PathParam("ano2") int ano2, @PathParam("funcao") String funcao,
+            @PathParam("subfuncao") String subfuncao) {
+        Grafico grafico = controller.programaFavorecidos(nome, ano1, ano2, funcao, subfuncao);
+        return response(grafico);
+    }
+
+    @GET
+    @Path("/anos/{ano1}/{ano2}/{nome}/{funcao}/{subfuncao}/{programa}")
+    public Response acoesPorNome(@PathParam("nome") String nome, @PathParam("ano1") int ano1,
+            @PathParam("ano2") int ano2, @PathParam("subfuncao") String subfuncao,
+            @PathParam("programa") String programa, @PathParam("funcao") String funcao) {
+        Grafico grafico = controller.acoesFavorecidos(nome, ano1, ano2, funcao,
+                subfuncao, programa);
         return response(grafico);
     }
 

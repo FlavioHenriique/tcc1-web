@@ -62,7 +62,7 @@ btMeses.onclick = function () {
     let area = areasMeses.options[areasMeses.selectedIndex].text;
     let valormes1 = '' + anoMes1.value + mes1.value;
     let valormes2 = '' + anoMes2.value + mes2.value;
-    let url = urlIntervalo + '/mes/' + valormes1 + "/" + valormes2 +  '/';
+    let url = urlIntervalo + '/mes/' + valormes1 + "/" + valormes2 + '/';
     if (verificarAreaAtuacao(area)) {
         let client = new XMLHttpRequest();
 

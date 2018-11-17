@@ -7,7 +7,7 @@ function alterarUrl(urlAnt, urlPag, tipo) {
     urlAnterior = urlAnt;
     urlPagina = urlPag;
     tipoDados = tipo;
-    console.log("url pagina: "+urlPagina);
+    
 }
 
 function buscarDados(url) {

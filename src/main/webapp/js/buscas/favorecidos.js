@@ -1,20 +1,31 @@
 var urlFavorecido = 'http://localhost:8080/tcc1-web/api/favorecidos/';
-
+var urlBuscaFavorecido = '';
 $("#botoesIntervalo").load("trechos/botoesIntervalos.html");
 
-function favorecidoPorNome() {
-    let url = urlFavorecido + 'nome/' + nomeFavorecido.value;
+function buscaAnos() {
+    fecharmodal(document.getElementById('modalAno'));
+    urlBuscaFavorecido = urlFavorecido + 'anos/' + ano1.value + '/' + ano2.value + '/';
+    let valor = nomeCNPJ.value;
+    if (isNaN(valor)) {
+        favorecidoPorNome(valor);
+    } else {
+        favorecidoPorCNPJ(valor);
+    }
+}
+
+
+function favorecidoPorNome(nome) {
+    let url = urlFavorecido + 'nome/' + nome;
     buscarFavorecidos(url);
 }
 
-function favorecidoPorCNPJ() {
-    let url = urlFavorecido + 'cnpj/' + cnpjFavorecido.value;
+function favorecidoPorCNPJ(cnpj) {
+    let url = urlFavorecido + 'cnpj/' + cnpj;
     buscarFavorecidos(url);
 }
 
 function buscarFavorecidos(url) {
 
-    console.log(url);
     client.open('GET', url, false);
     client.send(null);
     abrirmodal(document.getElementById("modalFavorecido"));
@@ -24,8 +35,27 @@ function buscarFavorecidos(url) {
         for (k = 0; k < json.favorecidos.length; k++) {
             $('table').append(
                     '<tr><td>' + json.favorecidos[k] + '</td>' +
-                    '<td><button class="button is-success" onclick="">Visualizar</button></td></tr>'
-                    ).attr('id', 'valoresFavorecidos');
+                    '<td><button class="button is-success" onclick="favorecidoSelecionado(\'' + json.favorecidos[k] + '\')">Visualizar</button></td></tr>')
+                    .attr('id', 'valoresFavorecidos');
         }
     }
 }
+
+function favorecidoSelecionado(favorecido) {
+    let url = urlBuscaFavorecido + favorecido + '/';
+    fecharmodal(document.getElementById("modalFavorecido"));
+    client.open('GET', url, false);
+    client.send(null);
+    console.log(url);
+    if (client.status == 200) {
+        let json = JSON.parse(client.responseText);
+        intervalos(json, funcao(url));
+    } else {
+        swal({
+            title: "Erro!",
+            text: "Valores indisponíveis",
+            icon: "error",
+        });
+    }
+}
+
