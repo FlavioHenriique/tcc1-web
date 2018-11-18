@@ -5,7 +5,19 @@ $("#botoesIntervalo").load("trechos/botoesIntervalos.html");
 function buscaAnos() {
     fecharmodal(document.getElementById('modalAno'));
     urlBuscaFavorecido = urlFavorecido + 'anos/' + ano1.value + '/' + ano2.value + '/';
-    let valor = nomeCNPJ.value;
+    let valor = nomeCNPJAno.value;
+    if (isNaN(valor)) {
+        favorecidoPorNome(valor);
+    } else {
+        favorecidoPorCNPJ(valor);
+    }
+}
+
+function buscaSemestre() {
+    fecharmodal(document.getElementById('modalSemestre'));
+    urlBuscaFavorecido = urlFavorecido + 'semestres/' + document.getElementById('semestre').value
+            + anoSemestre.value + '/';
+    let valor = nomeCNPJSemestre.value;
     if (isNaN(valor)) {
         favorecidoPorNome(valor);
     } else {

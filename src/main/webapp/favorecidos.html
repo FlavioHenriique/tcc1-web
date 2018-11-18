@@ -79,7 +79,7 @@
                         </div>
                         <br><br>
                         <label class="label">Nome ou CNPJ do favorecido</label>
-                        <input type="text" class="input" id="nomeCNPJ">
+                        <input type="text" class="input" id="nomeCNPJAno">
                         <br><br>
                         <button class="button is-success is-fullwidth" onclick="buscaAnos()">GERAR GRÁFICO</button>
                     </div>
@@ -159,9 +159,12 @@
                         </select>
                     </div>
                     <br><br>
-
+                    <label class="label">Nome ou CNPJ do favorecido</label>
+                    <input type="text" class="input" id="nomeCNPJSemestre">
                     <br><br>
-                    <button id="btSemestre" class="button is-success is-fullwidth">GERAR GRÁFICO</button>
+
+                    
+                    <button onclick="buscaSemestre()" class="button is-success is-fullwidth">GERAR GRÁFICO</button>
                 </section>
                 <footer class="modal-card-foot">
 
