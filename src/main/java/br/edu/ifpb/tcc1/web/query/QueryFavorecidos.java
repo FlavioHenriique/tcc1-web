@@ -70,8 +70,8 @@ public class QueryFavorecidos {
             stmt.setInt(2, ano1);
             stmt.setInt(3, ano2);
             stmt.setString(4, funcao);
-
             System.out.println(sql);
+            
             return preparaLista(campo, stmt);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -81,6 +81,7 @@ public class QueryFavorecidos {
 
     public List<Object[]> programasFavorecidoAnos(String favorecido, int ano1,
             int ano2, String funcao, String subfuncao) {
+        System.out.println(favorecido + " " + funcao + " " + subfuncao);
         List<Object[]> lista = new ArrayList<>();
         String campo = "nomeprograma";
         String sql = "SELECT SUM(e.valor) as total, a." + campo

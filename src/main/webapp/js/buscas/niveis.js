@@ -25,6 +25,7 @@ function subfuncao(urlInicial) {
                 let url = urlInicial + this.name + '/';
                 client.open('GET', url, false);
                 alterarUrl(urlPagina, url, "subfuncao");
+                console.log(url);
                 client.send(null);
                 if (client.status == 200) {
                     json = JSON.parse(client.responseText);
@@ -36,11 +37,12 @@ function subfuncao(urlInicial) {
 }
 
 function programa(urlinicial) {
-    console.log("executando programa");
     return cliquePrograma = {
         events: {
             click: function (event) {
+                console.log(urlinicial);
                 let url = urlinicial + this.name;
+                console.log(urlinicial);
                 alterarUrl(urlPagina, url, "programa");
                 client.open('GET', url, false);
                 client.send(null);
@@ -76,7 +78,6 @@ function subirNivel() {
         console.log(f);
         var func = new Function(f);
         mudarDados(buscarDados(urlAnterior), func());
-        //intervalos(buscarDados(urlAnterior), func());
     }
 }
 
