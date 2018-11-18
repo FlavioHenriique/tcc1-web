@@ -55,15 +55,9 @@ public class QueryFavorecidos {
     public List<Object[]> FavorecidoAnos(String favorecido, int ano1, int ano2) {
         List<Object[]> lista = new ArrayList<>();
         String campo = "nomefuncao";
-        String sql = "SELECT SUM(e.valor) as total, a." + campo
-                + " FROM Acao a, Empenho e, Favorecido f, Data d "
-                + "WHERE e.codacao = a.codigoacao "
-                + "AND e.coddata = d.codigo "
-                + "AND f.codigo = e.codfavorecido "
-                + "AND f.nome ilike ? "
+        String sql = inicioSQL(campo)
                 + "AND d.ano BETWEEN ? AND ? "
-                + "GROUP BY a." + campo + " "
-                + "ORDER BY sum(e.valor), a." + campo;
+                + fimSQL(campo);
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, favorecido);
@@ -79,16 +73,10 @@ public class QueryFavorecidos {
     public List<Object[]> subfuncoesFavorecidoAnos(String favorecido, int ano1, int ano2, String funcao) {
         List<Object[]> lista = new ArrayList<>();
         String campo = "nomesubfuncao";
-        String sql = "SELECT SUM(e.valor) as total, a." + campo
-                + " FROM Acao a, Empenho e, Favorecido f, Data d "
-                + "WHERE e.codacao = a.codigoacao "
-                + "AND f.codigo = e.codfavorecido "
-                + "AND e.coddata = d.codigo "
-                + "AND f.nome ilike ? "
+        String sql = inicioSQL(campo)
                 + "AND d.ano BETWEEN ? AND ? "
                 + "AND a.nomefuncao = ? "
-                + "GROUP BY a." + campo
-                + " ORDER BY sum(e.valor), a." + campo;
+                + fimSQL(campo);
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, favorecido);
@@ -106,20 +94,14 @@ public class QueryFavorecidos {
 
     public List<Object[]> programasFavorecidoAnos(String favorecido, int ano1,
             int ano2, String funcao, String subfuncao) {
-        System.out.println(favorecido + " " + funcao + " " + subfuncao);
+
         List<Object[]> lista = new ArrayList<>();
         String campo = "nomeprograma";
-        String sql = "SELECT SUM(e.valor) as total, a." + campo
-                + " FROM Acao a, Empenho e, Favorecido f, Data d "
-                + "WHERE e.codacao = a.codigoacao "
-                + "AND e.coddata = d.codigo "
-                + "AND f.codigo = e.codfavorecido "
-                + "AND f.nome ilike ? "
+        String sql = inicioSQL(campo)
                 + "AND d.ano BETWEEN ? AND ? "
                 + "AND a.nomefuncao = ? "
                 + "AND a.nomesubfuncao = ? "
-                + "GROUP BY a." + campo + " "
-                + "ORDER BY sum(e.valor), a." + campo;
+                + fimSQL(campo);
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, favorecido);
@@ -138,18 +120,12 @@ public class QueryFavorecidos {
             int ano2, String funcao, String subfuncao, String programa) {
         List<Object[]> lista = new ArrayList<>();
         String campo = "nomeacao";
-        String sql = "SELECT SUM(e.valor) as total, a." + campo
-                + " FROM Acao a, Empenho e, Favorecido f, Data d "
-                + "WHERE e.codacao = a.codigoacao "
-                + "AND e.coddata = d.codigo "
-                + "AND f.codigo = e.codfavorecido "
-                + "AND f.nome ilike ? "
+        String sql = inicioSQL(campo)
                 + "AND d.ano BETWEEN ? AND ? "
                 + "AND a.nomefuncao = ? "
                 + "AND a.nomesubfuncao = ? "
                 + "AND a.nomeprograma = ? "
-                + "GROUP BY a." + campo + " "
-                + "ORDER BY sum(e.valor), a." + campo;
+                + fimSQL(campo);
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, favorecido);
@@ -169,15 +145,9 @@ public class QueryFavorecidos {
     public List<Object[]> FavorecidoSemestre(String favorecido, int semestre) {
         List<Object[]> lista = new ArrayList<>();
         String campo = "nomefuncao";
-        String sql = "SELECT SUM(e.valor) as total, a." + campo
-                + " FROM Acao a, Empenho e, Favorecido f, Data d "
-                + "WHERE e.codacao = a.codigoacao "
-                + "AND e.coddata = d.codigo "
-                + "AND f.codigo = e.codfavorecido "
-                + "AND f.nome ilike ? "
+        String sql = inicioSQL(campo)
                 + "AND d.semestre = ? "
-                + "GROUP BY a." + campo + " "
-                + "ORDER BY sum(e.valor), a." + campo;
+                + fimSQL(campo);
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, favorecido);
@@ -193,16 +163,10 @@ public class QueryFavorecidos {
             String funcao) {
         List<Object[]> lista = new ArrayList<>();
         String campo = "nomesubfuncao";
-        String sql = "SELECT SUM(e.valor) as total, a." + campo
-                + " FROM Acao a, Empenho e, Favorecido f, Data d "
-                + "WHERE e.codacao = a.codigoacao "
-                + "AND f.codigo = e.codfavorecido "
-                + "AND e.coddata = d.codigo "
-                + "AND f.nome ilike ? "
+        String sql = inicioSQL(campo)
                 + "AND d.semestre = ? "
                 + "AND a.nomefuncao = ? "
-                + "GROUP BY a." + campo
-                + " ORDER BY sum(e.valor), a." + campo;
+                + fimSQL(campo);
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, favorecido);
@@ -219,17 +183,11 @@ public class QueryFavorecidos {
             String funcao, String subfuncao) {
         List<Object[]> lista = new ArrayList<>();
         String campo = "nomeprograma";
-        String sql = "SELECT SUM(e.valor) as total, a." + campo
-                + " FROM Acao a, Empenho e, Favorecido f, Data d "
-                + "WHERE e.codacao = a.codigoacao "
-                + "AND e.coddata = d.codigo "
-                + "AND f.codigo = e.codfavorecido "
-                + "AND f.nome ilike ? "
+        String sql = inicioSQL(campo)
                 + "AND d.semestre = ? "
                 + "AND a.nomefuncao = ? "
                 + "AND a.nomesubfuncao = ? "
-                + "GROUP BY a." + campo + " "
-                + "ORDER BY sum(e.valor), a." + campo;
+                + fimSQL(campo);
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, favorecido);
@@ -247,18 +205,12 @@ public class QueryFavorecidos {
             String funcao, String subfuncao, String programa) {
         List<Object[]> lista = new ArrayList<>();
         String campo = "nomeacao";
-        String sql = "SELECT SUM(e.valor) as total, a." + campo
-                + " FROM Acao a, Empenho e, Favorecido f, Data d "
-                + "WHERE e.codacao = a.codigoacao "
-                + "AND e.coddata = d.codigo "
-                + "AND f.codigo = e.codfavorecido "
-                + "AND f.nome ilike ? "
+        String sql = inicioSQL(campo)
                 + "AND d.semestre = ? "
                 + "AND a.nomefuncao = ? "
                 + "AND a.nomesubfuncao = ? "
                 + "AND a.nomeprograma = ? "
-                + "GROUP BY a." + campo + " "
-                + "ORDER BY sum(e.valor), a." + campo;
+                + fimSQL(campo);
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, favorecido);
@@ -266,7 +218,7 @@ public class QueryFavorecidos {
             stmt.setString(3, funcao);
             stmt.setString(4, subfuncao);
             stmt.setString(5, programa);
-            
+
             return preparaLista(campo, stmt);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -274,7 +226,96 @@ public class QueryFavorecidos {
         return lista;
     }
 
-    public List<Object[]> preparaLista(String campo, PreparedStatement stmt) throws SQLException {
+    // MESES
+    public List<Object[]> FavorecidoMeses(String favorecido, int mes1, int mes2) {
+        List<Object[]> lista = new ArrayList<>();
+        String campo = "nomefuncao";
+        String sql = inicioSQL(campo)
+                + "AND d.codigo BETWEEN ? AND ? "
+                + fimSQL(campo);
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, favorecido);
+            stmt.setInt(2, mes1);
+            stmt.setInt(3, mes2);
+            return preparaLista(campo, stmt);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return lista;
+    }
+
+    public List<Object[]> subfuncoesFavorecidoMeses(String favorecido, int mes1, int mes2,
+            String funcao) {
+        List<Object[]> lista = new ArrayList<>();
+        String campo = "nomesubfuncao";
+        String sql = inicioSQL(campo)
+                + "AND d.codigo BETWEEN ? AND ? "
+                + "AND a.nomefuncao = ? "
+                + fimSQL(campo);
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, favorecido);
+            stmt.setInt(2, mes1);
+            stmt.setInt(3, mes2);
+            stmt.setString(4, funcao);
+            return preparaLista(campo, stmt);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return lista;
+    }
+
+    public List<Object[]> programasFavorecidoMeses(String favorecido, int mes1, int mes2,
+            String funcao, String subfuncao) {
+        List<Object[]> lista = new ArrayList<>();
+        String campo = "nomeprograma";
+        String sql = inicioSQL(campo)
+                + "AND d.codigo BETWEEN ? AND ? "
+                + "AND a.nomefuncao = ? "
+                + "AND a.nomesubfuncao = ? "
+                + fimSQL(campo);
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, favorecido);
+            stmt.setInt(2, mes1);
+            stmt.setInt(3, mes2);
+            stmt.setString(4, funcao);
+            stmt.setString(5, subfuncao);
+            return preparaLista(campo, stmt);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return lista;
+    }
+
+    public List<Object[]> acoesFavorecidoMeses(String favorecido, int mes1, int mes2,
+            String funcao, String subfuncao, String programa) {
+        List<Object[]> lista = new ArrayList<>();
+        String campo = "nomeacao";
+        String sql = inicioSQL(campo)
+                + "AND d.codigo BETWEEN ? AND ? "
+                + "AND a.nomefuncao = ? "
+                + "AND a.nomesubfuncao = ? "
+                + "AND a.nomeprograma = ? "
+                + fimSQL(campo);
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, favorecido);
+            stmt.setInt(2, mes1);
+            stmt.setInt(3, mes2);
+            stmt.setString(4, funcao);
+            stmt.setString(5, subfuncao);
+            stmt.setString(6, programa);
+
+            return preparaLista(campo, stmt);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return lista;
+    }
+
+    private List<Object[]> preparaLista(String campo, PreparedStatement stmt) throws SQLException {
         List<Object[]> lista = new ArrayList<>();
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
@@ -284,5 +325,18 @@ public class QueryFavorecidos {
             });
         }
         return lista;
+    }
+
+    private String inicioSQL(String campo) {
+        return "SELECT SUM(e.valor) as total, a." + campo
+                + " FROM Acao a, Empenho e, Favorecido f, Data d "
+                + "WHERE e.codacao = a.codigoacao "
+                + "AND e.coddata = d.codigo "
+                + "AND f.codigo = e.codfavorecido "
+                + "AND f.nome ilike ? ";
+    }
+
+    private String fimSQL(String campo) {
+        return "GROUP BY a." + campo + " ORDER BY sum(e.valor), a." + campo;
     }
 }

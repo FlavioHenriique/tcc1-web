@@ -124,11 +124,12 @@
                             <option selected disabled="disabled" value="">Selecione o ano</option>
                         </select>
                     </div>
-
+ 
                     <br><br>
-
+                    <label class="label">Nome ou CNPJ do favorecido</label>
+                    <input type="text" class="input" id="nomeCNPJMeses">
                     <br><br>
-                    <button class="button is-success is-fullwidth" id="btMeses">GERAR GRÁFICO</button>
+                    <button class="button is-success is-fullwidth" onclick="buscaMeses()">GERAR GRÁFICO</button>
                 </section>
                 <footer class="modal-card-foot">
 
@@ -163,7 +164,7 @@
                     <input type="text" class="input" id="nomeCNPJSemestre">
                     <br><br>
 
-                    
+
                     <button onclick="buscaSemestre()" class="button is-success is-fullwidth">GERAR GRÁFICO</button>
                 </section>
                 <footer class="modal-card-foot">

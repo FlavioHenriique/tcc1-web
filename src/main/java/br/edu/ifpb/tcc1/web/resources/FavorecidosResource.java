@@ -80,7 +80,7 @@ public class FavorecidosResource {
     public Response acoesPorAno(@PathParam("nome") String nome, @PathParam("ano1") int ano1,
             @PathParam("ano2") int ano2, @PathParam("subfuncao") String subfuncao,
             @PathParam("programa") String programa, @PathParam("funcao") String funcao) {
-        
+
         Grafico grafico = controller.acoesFavorecidosAnos(nome, ano1, ano2, funcao,
                 subfuncao, programa);
         return response(grafico);
@@ -118,6 +118,43 @@ public class FavorecidosResource {
             @PathParam("funcao") String funcao) {
         Grafico grafico = controller.acoesFavorecidosSemestre(nome, semestre, funcao,
                 subfuncao, programa);
+        return response(grafico);
+    }
+// MESES
+
+    @GET
+    @Path("/meses/{mes1}/{mes2}/{nome}")
+    public Response funcoesPorMeses(@PathParam("nome") String nome, @PathParam("mes1") int mes1,
+            @PathParam("mes2") int mes2) {
+        Grafico grafico = controller.funcaoFavorecidosMeses(nome, mes1, mes2);
+        return response(grafico);
+    }
+
+    @GET
+    @Path("/meses/{mes1}/{mes2}/{nome}/{funcao}")
+    public Response subfuncoesPorMeses(@PathParam("nome") String nome, @PathParam("mes1") int mes1,
+            @PathParam("mes2") int mes2, @PathParam("funcao") String funcao) {
+        Grafico grafico = controller.subfuncaoFavorecidosMeses(nome, mes1, mes2, funcao);
+        return response(grafico);
+    }
+
+    @GET
+    @Path("/meses/{mes1}/{mes2}/{nome}/{funcao}/{subfuncao}")
+    public Response programasPorMeses(@PathParam("nome") String nome, @PathParam("mes1") int mes1,
+            @PathParam("mes2") int mes2, @PathParam("funcao") String funcao,
+            @PathParam("subfuncao") String subfuncao) {
+        Grafico grafico = controller.programaFavorecidosMeses(nome, mes1, mes2, funcao, subfuncao);
+        return response(grafico);
+    }
+
+    @GET
+    @Path("/meses/{mes1}/{mes2}/{nome}/{funcao}/{subfuncao}/{programa}")
+    public Response acoesPorMeses(@PathParam("nome") String nome, @PathParam("mes1") int mes1,
+            @PathParam("mes2") int mes2, @PathParam("subfuncao") String subfuncao,
+            @PathParam("programa") String programa, @PathParam("funcao") String funcao) {
+
+        Grafico grafico = controller
+                .acoesFavorecidosMeses(nome, mes1, mes2, funcao, subfuncao, programa);
         return response(grafico);
     }
 

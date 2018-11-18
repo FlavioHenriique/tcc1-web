@@ -71,7 +71,7 @@ public class FavorecidoController {
     public Grafico programaFavorecidosSemestre(String favorecido, int semestre,
             String funcao, String subfuncao) {
         String sem = "" + semestre;
-        String titulo = "Subfunções da função " + funcao + " no "
+        String titulo = "Programas da subfunção " + subfuncao + " no "
                 + sem.substring(0, 1)
                 + "º semestre de "
                 + sem.substring(1, sem.length());
@@ -82,15 +82,43 @@ public class FavorecidoController {
     public Grafico acoesFavorecidosSemestre(String favorecido, int semestre,
             String funcao, String subfuncao, String programa) {
         String sem = "" + semestre;
-        String titulo = "Subfunções da função " + funcao + " no "
+        String titulo = "Ações do programa " + programa + " no "
                 + sem.substring(0, 1)
                 + "º semestre de "
                 + sem.substring(1, sem.length());
-        return preparaGrafico(titulo, query.acoesFavorecidoSemestre(favorecido, 
+        return preparaGrafico(titulo, query.acoesFavorecidoSemestre(favorecido,
                 semestre, funcao, subfuncao, programa));
     }
 
-    public Grafico preparaGrafico(String titulo, List<Object[]> dados) {
+    public Grafico funcaoFavorecidosMeses(String favorecido, int mes1, int mes2) {
+        String titulo = "Busca por gastos relacionados ao favorecido "
+                + favorecido + " entre meses";
+        return preparaGrafico(titulo, query.FavorecidoMeses(favorecido, mes1, mes2));
+    }
+
+    public Grafico subfuncaoFavorecidosMeses(String favorecido, int mes1, int mes2, String funcao) {
+        String titulo = "Subfunções da " + funcao + " relacionados ao favorecido "
+                + favorecido + " entre meses";
+        return preparaGrafico(titulo, query.subfuncoesFavorecidoMeses(favorecido, mes1, mes2, funcao));
+    }
+
+    public Grafico programaFavorecidosMeses(String favorecido, int ano1, int ano2,
+            String funcao, String subfuncao) {
+        String titulo = "Programas da subfunção " + subfuncao + " relacionados ao favorecido "
+                + favorecido + " entre meses";
+        return preparaGrafico(titulo, query
+                .programasFavorecidoMeses(favorecido, ano1, ano2, funcao, subfuncao));
+    }
+
+    public Grafico acoesFavorecidosMeses(String favorecido, int ano1, int ano2,
+            String funcao, String subfuncao, String programa) {
+        String titulo = "Ações do programa " + programa + " relacionados ao favorecido "
+                + favorecido + " entre meses";
+        return preparaGrafico(titulo, query
+                .acoesFavorecidoMeses(favorecido, ano1, ano2, funcao, subfuncao, programa));
+    }
+
+    private Grafico preparaGrafico(String titulo, List<Object[]> dados) {
         Grafico grafico = new Grafico(titulo);
         grafico.setData(dados);
         grafico.setCategorias(categorias(grafico.getData()));

@@ -25,6 +25,19 @@ function buscaSemestre() {
     }
 }
 
+function buscaMeses() {
+    fecharmodal(document.getElementById('modalMes'));
+    let valormes1 = '' + anoMes1.value + mes1.value;
+    let valormes2 = '' + anoMes2.value + mes2.value;
+    urlBuscaFavorecido = urlFavorecido + 'meses/' + valormes1 + "/" + valormes2 + '/';
+    let valor = nomeCNPJMeses.value;
+    if (isNaN(valor)) {
+        favorecidoPorNome(valor);
+    } else {
+        favorecidoPorCNPJ(valor);
+    }
+}
+
 
 function favorecidoPorNome(nome) {
     let url = urlFavorecido + 'nome/' + nome;

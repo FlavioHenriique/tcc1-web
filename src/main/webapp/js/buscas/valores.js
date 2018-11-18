@@ -37,8 +37,8 @@ function meses() {
     if (client.status == 200) {
         let json = JSON.parse(client.responseText);
         let array = json.valores;
-        for (i = 1; i <= array.length; i++) {
-            if (i < 10) {
+        for (i = 0; i <= array.length; i++) {
+            if (i+1 < 10) {
                 mes1.options[mes1.options.length] = new Option(array[i], '0' + i);
                 mes2.options[mes2.options.length] = new Option(array[i], '0' + i);
             } else {
