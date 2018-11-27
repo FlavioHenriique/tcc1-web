@@ -1,7 +1,7 @@
 package br.edu.ifpb.tcc1.web.controller;
 
 import br.edu.ifpb.tcc1.web.query.QueryAreaDeAtuacao;
-import br.edu.ifpb.tcc1.web.graficos.Grafico;
+import br.edu.ifpb.tcc1.web.graficos.GraficoIntervalos;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -15,23 +15,23 @@ public class AreaDeAtuacaoController {
 
     
 
-    public Grafico buscarPorArea(String area) {
+    public GraficoIntervalos buscarPorArea(String area) {
         String titulo = "Busca por gastos na área de atuação " + area;
-        return montaGrafico(titulo, query.buscarAreaDeAtuacao(area));
+        return montaGraficoIntervalos(titulo, query.buscarAreaDeAtuacao(area));
     }
 
-    public Grafico buscaPorPrograma(String area, String subfuncao) {
+    public GraficoIntervalos buscaPorPrograma(String area, String subfuncao) {
         String titulo = "Programas da subfunção " + subfuncao + " da função " + area;
-        return montaGrafico(titulo, query.buscaPorPrograma(area, subfuncao));
+        return montaGraficoIntervalos(titulo, query.buscaPorPrograma(area, subfuncao));
     }
 
-    public Grafico buscaPorAcao(String area, String subfuncao, String programa) {
+    public GraficoIntervalos buscaPorAcao(String area, String subfuncao, String programa) {
         String titulo = "Ações do programa " + programa + " da subfunção " + subfuncao;
-        return montaGrafico(titulo, query.buscaPorAcao(area, subfuncao, programa));
+        return montaGraficoIntervalos(titulo, query.buscaPorAcao(area, subfuncao, programa));
     }
 
-    private Grafico montaGrafico(String titulo, List<Object[]> dados) {
-        Grafico grafico = new Grafico(titulo);
+    private GraficoIntervalos montaGraficoIntervalos(String titulo, List<Object[]> dados) {
+        GraficoIntervalos grafico = new GraficoIntervalos(titulo);
         grafico.setData(dados);
         grafico.setCategorias(categorias(grafico.getData()));
         grafico.setName("Empenhos");

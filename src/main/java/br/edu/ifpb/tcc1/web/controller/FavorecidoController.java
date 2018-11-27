@@ -1,6 +1,8 @@
 package br.edu.ifpb.tcc1.web.controller;
 
-import br.edu.ifpb.tcc1.web.graficos.Grafico;
+import br.edu.ifpb.tcc1.web.graficos.GraficoIntervalos;
+import br.edu.ifpb.tcc1.web.graficos.ResultadoTabela;
+import br.edu.ifpb.tcc1.web.graficos.Tabela;
 import br.edu.ifpb.tcc1.web.query.QueryFavorecidos;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,19 +23,22 @@ public class FavorecidoController {
         return query.favorecidosPorCNPJ(cnpj);
     }
 
-    public Grafico funcaoFavorecidosAnos(String favorecido, int ano1, int ano2) {
+    public ResultadoTabela funcaoFavorecidosAnos(String favorecido, int ano1, int ano2) {
         String titulo = "Busca por gastos relacionados ao favorecido "
                 + favorecido + " de " + ano1 + " a " + ano2;
-        return preparaGrafico(titulo, query.FavorecidoAnos(favorecido, ano1, ano2));
+        ResultadoTabela rt = new ResultadoTabela();
+        rt.setTitulo(titulo);
+        rt.setDados(query.FavorecidoAnos(favorecido, ano1, ano2));
+        return rt;
     }
 
-    public Grafico subfuncaoFavorecidosAnos(String favorecido, int ano1, int ano2, String funcao) {
+    public GraficoIntervalos subfuncaoFavorecidosAnos(String favorecido, int ano1, int ano2, String funcao) {
         String titulo = "Subfunções da " + funcao + " relacionados ao favorecido "
                 + favorecido + " de " + ano1 + " a " + ano2;
         return preparaGrafico(titulo, query.subfuncoesFavorecidoAnos(favorecido, ano1, ano2, funcao));
     }
 
-    public Grafico programaFavorecidosAnos(String favorecido, int ano1, int ano2,
+    public GraficoIntervalos programaFavorecidosAnos(String favorecido, int ano1, int ano2,
             String funcao, String subfuncao) {
         String titulo = "Programas da subfunção " + subfuncao + " relacionados ao favorecido "
                 + favorecido + " de " + ano1 + " a " + ano2;
@@ -41,7 +46,7 @@ public class FavorecidoController {
                 ano1, ano2, funcao, subfuncao));
     }
 
-    public Grafico acoesFavorecidosAnos(String favorecido, int ano1, int ano2,
+    public GraficoIntervalos acoesFavorecidosAnos(String favorecido, int ano1, int ano2,
             String funcao, String subfuncao, String programa) {
         String titulo = "Ações do programa " + programa + " relacionados ao favorecido "
                 + favorecido + " de " + ano1 + " a " + ano2;
@@ -49,7 +54,7 @@ public class FavorecidoController {
                 ano1, ano2, funcao, subfuncao, programa));
     }
 
-    public Grafico funcaoFavorecidosSemestre(String favorecido, int semestre) {
+    public GraficoIntervalos funcaoFavorecidosSemestre(String favorecido, int semestre) {
         String sem = "" + semestre;
         String titulo = "Áreas de atuação relacionadas ao favorecido " + favorecido + " no "
                 + sem.substring(0, 1)
@@ -59,7 +64,7 @@ public class FavorecidoController {
         return preparaGrafico(titulo, query.FavorecidoSemestre(favorecido, semestre));
     }
 
-    public Grafico subfuncaoFavorecidosSemestre(String favorecido, int semestre, String funcao) {
+    public GraficoIntervalos subfuncaoFavorecidosSemestre(String favorecido, int semestre, String funcao) {
         String sem = "" + semestre;
         String titulo = "Subfunções da função " + funcao + " no "
                 + sem.substring(0, 1)
@@ -68,7 +73,7 @@ public class FavorecidoController {
         return preparaGrafico(titulo, query.subfuncoesFavorecidoSemestre(favorecido, semestre, funcao));
     }
 
-    public Grafico programaFavorecidosSemestre(String favorecido, int semestre,
+    public GraficoIntervalos programaFavorecidosSemestre(String favorecido, int semestre,
             String funcao, String subfuncao) {
         String sem = "" + semestre;
         String titulo = "Programas da subfunção " + subfuncao + " no "
@@ -79,7 +84,7 @@ public class FavorecidoController {
                 favorecido, semestre, funcao, subfuncao));
     }
 
-    public Grafico acoesFavorecidosSemestre(String favorecido, int semestre,
+    public GraficoIntervalos acoesFavorecidosSemestre(String favorecido, int semestre,
             String funcao, String subfuncao, String programa) {
         String sem = "" + semestre;
         String titulo = "Ações do programa " + programa + " no "
@@ -90,19 +95,19 @@ public class FavorecidoController {
                 semestre, funcao, subfuncao, programa));
     }
 
-    public Grafico funcaoFavorecidosMeses(String favorecido, int mes1, int mes2) {
+    public GraficoIntervalos funcaoFavorecidosMeses(String favorecido, int mes1, int mes2) {
         String titulo = "Busca por gastos relacionados ao favorecido "
                 + favorecido + " entre meses";
         return preparaGrafico(titulo, query.FavorecidoMeses(favorecido, mes1, mes2));
     }
 
-    public Grafico subfuncaoFavorecidosMeses(String favorecido, int mes1, int mes2, String funcao) {
+    public GraficoIntervalos subfuncaoFavorecidosMeses(String favorecido, int mes1, int mes2, String funcao) {
         String titulo = "Subfunções da " + funcao + " relacionados ao favorecido "
                 + favorecido + " entre meses";
         return preparaGrafico(titulo, query.subfuncoesFavorecidoMeses(favorecido, mes1, mes2, funcao));
     }
 
-    public Grafico programaFavorecidosMeses(String favorecido, int ano1, int ano2,
+    public GraficoIntervalos programaFavorecidosMeses(String favorecido, int ano1, int ano2,
             String funcao, String subfuncao) {
         String titulo = "Programas da subfunção " + subfuncao + " relacionados ao favorecido "
                 + favorecido + " entre meses";
@@ -110,7 +115,7 @@ public class FavorecidoController {
                 .programasFavorecidoMeses(favorecido, ano1, ano2, funcao, subfuncao));
     }
 
-    public Grafico acoesFavorecidosMeses(String favorecido, int ano1, int ano2,
+    public GraficoIntervalos acoesFavorecidosMeses(String favorecido, int ano1, int ano2,
             String funcao, String subfuncao, String programa) {
         String titulo = "Ações do programa " + programa + " relacionados ao favorecido "
                 + favorecido + " entre meses";
@@ -118,18 +123,19 @@ public class FavorecidoController {
                 .acoesFavorecidoMeses(favorecido, ano1, ano2, funcao, subfuncao, programa));
     }
 
-    private Grafico preparaGrafico(String titulo, List<Object[]> dados) {
-        Grafico grafico = new Grafico(titulo);
+    private GraficoIntervalos preparaGrafico(String titulo, List<Object[]> dados) {
+        GraficoIntervalos grafico = new GraficoIntervalos(titulo);
         grafico.setData(dados);
-        grafico.setCategorias(categorias(grafico.getData()));
+        //grafico.setCategorias(categorias(grafico.getData()));
         grafico.setName("Empenhos");
         grafico.setType("pie");
         return grafico;
     }
 
+    /*
     private List<String> categorias(List<Object[]> lista) {
         List<String> categorias = new ArrayList<>();
         lista.forEach(d -> categorias.add(d[0].toString()));
         return categorias;
-    }
+    }*/
 }

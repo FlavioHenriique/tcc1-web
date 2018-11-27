@@ -2,6 +2,7 @@ package br.edu.ifpb.tcc1.web.resources;
 
 import br.edu.ifpb.tcc1.web.controller.FavorecidoController;
 import br.edu.ifpb.tcc1.web.graficos.Grafico;
+import br.edu.ifpb.tcc1.web.graficos.ResultadoTabela;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -54,8 +55,13 @@ public class FavorecidosResource {
     @Path("/anos/{ano1}/{ano2}/{nome}")
     public Response funcoesPorAno(@PathParam("nome") String nome, @PathParam("ano1") int ano1,
             @PathParam("ano2") int ano2) {
-        Grafico grafico = controller.funcaoFavorecidosAnos(nome, ano1, ano2);
-        return response(grafico);
+
+        ResultadoTabela rt = controller.funcaoFavorecidosAnos(nome, ano1, ano2);
+        if (rt.getDados().isEmpty()) {
+            return Response.noContent().build();
+        } else {
+            return Response.ok().entity(rt).build();
+        }
     }
 
     @GET

@@ -2,24 +2,15 @@ package br.edu.ifpb.tcc1.web.graficos;
 
 import java.util.List;
 
-public class Grafico {
+public abstract class Grafico {
 
     private String type;
     private String name;
     private List<Object[]> data;
     private String title;
-    private List<String> categorias;
 
     public Grafico(String title) {
         this.title = title;
-    }
-
-    public List<String> getCategorias() {
-        return categorias;
-    }
-
-    public void setCategorias(List<String> categorias) {
-        this.categorias = categorias;
     }
 
     public String getType() {

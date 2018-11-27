@@ -1,5 +1,6 @@
 package br.edu.ifpb.tcc1.web.query;
 
+import br.edu.ifpb.tcc1.web.graficos.Tabela;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -52,22 +53,23 @@ public class QueryFavorecidos {
     }
 
     //ANOS
-    public List<Object[]> FavorecidoAnos(String favorecido, int ano1, int ano2) {
-        List<Object[]> lista = new ArrayList<>();
+    public List<Tabela> FavorecidoAnos(String favorecido, int ano1, int ano2) {
+        Tabela tabela = new Tabela();
         String campo = "nomefuncao";
         String sql = inicioSQL(campo)
                 + "AND d.ano BETWEEN ? AND ? "
                 + fimSQL(campo);
+        System.out.println(sql);
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, favorecido);
             stmt.setInt(2, ano1);
             stmt.setInt(3, ano2);
-            return preparaLista(campo, stmt);
+            return preparaTabela(campo, stmt);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return lista;
+        return new ArrayList<>();
     }
 
     public List<Object[]> subfuncoesFavorecidoAnos(String favorecido, int ano1, int ano2, String funcao) {
@@ -328,15 +330,32 @@ public class QueryFavorecidos {
     }
 
     private String inicioSQL(String campo) {
-        return "SELECT SUM(e.valor) as total, a." + campo
-                + " FROM Acao a, Empenho e, Favorecido f, Data d "
+        return "SELECT SUM(e.valor) as total, d.ano, d.nome_mes, u.nomeunidadegestora, a." + campo
+                + " FROM Acao a, Empenho e, Favorecido f, Data d, unidadegestora u "
                 + "WHERE e.codacao = a.codigoacao "
                 + "AND e.coddata = d.codigo "
+                + "and u.codigounidadegestora = e.codunidadegestora "
                 + "AND f.codigo = e.codfavorecido "
                 + "AND f.nome ilike ? ";
     }
 
     private String fimSQL(String campo) {
-        return "GROUP BY a." + campo + " ORDER BY sum(e.valor), a." + campo;
+        return "GROUP BY d.ano, d.nome_mes, u.nomeunidadegestora, d.numero_Mes, "
+                + "a." + campo + " ORDER BY d.ano desc, d.numero_mes desc, sum(e.valor), a." + campo + " desc";
+    }
+
+    private List<Tabela> preparaTabela(String campo, PreparedStatement stmt) throws SQLException {
+        List<Tabela> lista = new ArrayList<>();
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            Tabela t = new Tabela();
+            t.setAno(rs.getInt("ano"));
+            t.setDetalhamento(rs.getString(campo));
+            t.setMes(rs.getString("nome_mes"));
+            t.setTotal(rs.getBigDecimal("total"));
+            t.setUnidadeGestora(rs.getString("nomeunidadegestora"));
+            lista.add(t);
+        }
+        return lista;
     }
 }

@@ -58,7 +58,7 @@ function buscarFavorecidos(url) {
     if (client.status == 200) {
         let json = JSON.parse(client.responseText);
         for (k = 0; k < json.favorecidos.length; k++) {
-            $('table').append(
+            $('#valoresFavorecidos').append(
                     '<tr><td>' + json.favorecidos[k] + '</td>' +
                     '<td><button class="button is-success" onclick="favorecidoSelecionado(\'' + json.favorecidos[k] + '\')">Visualizar</button></td></tr>')
                     .attr('id', 'valoresFavorecidos');
@@ -71,10 +71,36 @@ function favorecidoSelecionado(favorecido) {
     fecharmodal(document.getElementById("modalFavorecido"));
     client.open('GET', url, false);
     client.send(null);
-    console.log(url);
+    console.log(url);//
     if (client.status == 200) {
         let json = JSON.parse(client.responseText);
-        intervalos(json, funcao(url));
+        //intervalos(json, funcao(url));
+        $("#titulo").html(json.titulo);
+        console.log(json.dados);
+
+        var $teste = $("<table class='table' style='width: 100%;'>");
+        $teste.append('<tr>'
+                + '<th>Área de atuação</th>'
+                + '<th>Ano</th>'
+                + '<th>Mês</th>'
+                + '<th>Unidade gestora</th>'
+                + '<th>Valor</th>'
+                + '<th>Nível de detalhamento</th>'
+                + '</tr>');
+        for (k = 0; k < json.dados.length; k++) {
+            //$('#valores').append(
+            $teste.append(
+                    '<tr><td>' + json.dados[k].detalhamento + '</td>' +
+                    '<td>' + json.dados[k].ano + '</td>' +
+                    '<td>' + json.dados[k].mes + '</td>' +
+                    '<td>' + json.dados[k].unidadeGestora + '</td>' +
+                    '<td>' + 'R$ ' + json.dados[k].total + '</td>' +
+                    '<td><button class="button is-success" onclick="favorecidoSelecionado()">Detalhar</button></td></tr>')
+                    .attr('id', 'valoresFavorecidos');
+        }
+        $teste.append("</table");
+        $teste.appendTo("#container");
+
     } else {
         swal({
             title: "Erro!",

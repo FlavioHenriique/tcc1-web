@@ -124,7 +124,7 @@
                             <option selected disabled="disabled" value="">Selecione o ano</option>
                         </select>
                     </div>
- 
+
                     <br><br>
                     <label class="label">Nome ou CNPJ do favorecido</label>
                     <input type="text" class="input" id="nomeCNPJMeses">
@@ -172,18 +172,13 @@
                 </footer>
             </div>
         </div>
-
-        <h3 class="title is-5 has-text-centered">Selecione o tipo de gráfico desejado:</h3>
-        <div class="tabs is-centered is-medium is-toggle-rounded is-toggle">
-            <ul>
-                <li><a onclick="mudarTipo('bar')">Barra</a></li>
-                <li><a onclick="mudarTipo('pie')">Pizza</a></li>
-                <li><a onclick="mudarTipo('line')">Linha</a></li>
-            </ul>
-        </div>
-
+        
         <br>
-        <div id="container" style="height: 550px" class="box"></div>
+        <div id="container"  class="box has-text-centered">
+            <h3 class="title is-5" id="titulo"></h3>            
+        </div>
+        <br><br>
+
         <script src="js/url.js"></script>
         <script src="js/modal.js"></script>
         <script src="js/jquery.min.js"></script>
