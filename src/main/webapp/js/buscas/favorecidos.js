@@ -1,5 +1,7 @@
 var urlFavorecido = 'http://localhost:8080/tcc1-web/api/favorecidos/';
 var urlBuscaFavorecido = '';
+var estado = 0;
+
 $("#botoesIntervalo").load("trechos/botoesIntervalos.html");
 
 function buscaAnos() {
@@ -68,39 +70,15 @@ function buscarFavorecidos(url) {
 
 function favorecidoSelecionado(favorecido) {
     let url = urlBuscaFavorecido + favorecido + '/';
+    urlBuscaFavorecido = url;
     fecharmodal(document.getElementById("modalFavorecido"));
     client.open('GET', url, false);
     client.send(null);
-    console.log(url);//
+    console.log(url);
     if (client.status == 200) {
         let json = JSON.parse(client.responseText);
-        //intervalos(json, funcao(url));
-        $("#titulo").html(json.titulo);
-        console.log(json.dados);
-
-        var $teste = $("<table class='table' style='width: 100%;'>");
-        $teste.append('<tr>'
-                + '<th>Área de atuação</th>'
-                + '<th>Ano</th>'
-                + '<th>Mês</th>'
-                + '<th>Unidade gestora</th>'
-                + '<th>Valor</th>'
-                + '<th>Nível de detalhamento</th>'
-                + '</tr>');
-        for (k = 0; k < json.dados.length; k++) {
-            //$('#valores').append(
-            $teste.append(
-                    '<tr><td>' + json.dados[k].detalhamento + '</td>' +
-                    '<td>' + json.dados[k].ano + '</td>' +
-                    '<td>' + json.dados[k].mes + '</td>' +
-                    '<td>' + json.dados[k].unidadeGestora + '</td>' +
-                    '<td>' + 'R$ ' + json.dados[k].total + '</td>' +
-                    '<td><button class="button is-success" onclick="favorecidoSelecionado()">Detalhar</button></td></tr>')
-                    .attr('id', 'valoresFavorecidos');
-        }
-        $teste.append("</table");
-        $teste.appendTo("#container");
-
+        estado = 0;
+        geraTabela(json);
     } else {
         swal({
             title: "Erro!",
@@ -109,4 +87,51 @@ function favorecidoSelecionado(favorecido) {
         });
     }
 }
+
+function geraTabela(json) {
+    $("#container table").remove();
+    estado++;
+    $("#titulo").html(json.titulo);
+    let $teste = $("<table class='table' style='width: 100%;' id='tabelaDados'>");
+    $teste.append("<tr id='tr'>"
+            + '<th>Área de atuação</th>'
+            + '<th>Ano</th>'
+            + '<th>Mês</th>'
+            + '<th>Unidade gestora</th>'
+            + '<th>Valor</th>'
+            + '<th>Nível de detalhamento</th>'
+            + '</tr>');
+
+    for (k = 0; k < json.dados.length; k++) {
+        $teste.append(
+                '<tr><td>' + json.dados[k].detalhamento + '</td>' +
+                '<td>' + json.dados[k].ano + '</td>' +
+                '<td>' + json.dados[k].mes + '</td>' +
+                '<td>' + json.dados[k].unidadeGestora + '</td>' +
+                '<td>' + 'R$ ' + json.dados[k].total + '</td>' +
+                '<td><button class="button is-success" onclick="descerNivel(\'' + json.dados[k].detalhamento + '\')">Detalhar</button></td></tr>')
+                .attr('id', 'valoresFavorecidos');
+    }
+    $teste.append("</table>");
+    $teste.appendTo("#container");
+
+}
+
+function descerNivel(detalhamento) {
+    urlBuscaFavorecido = urlBuscaFavorecido + detalhamento + '/';
+    client.open('GET', urlBuscaFavorecido, false);
+    client.send(null);
+    if (client.status == 200) {
+        let json = JSON.parse(client.responseText);
+        geraTabela(json);
+    } else {
+        swal({
+            title: "Opa...",
+            text: "Não há mais níveis de detalhamento disponíveis!",
+            icon: "error",
+        });
+    }
+}
+
+
 

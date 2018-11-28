@@ -1,7 +1,6 @@
 package br.edu.ifpb.tcc1.web.resources;
 
 import br.edu.ifpb.tcc1.web.controller.FavorecidoController;
-import br.edu.ifpb.tcc1.web.graficos.Grafico;
 import br.edu.ifpb.tcc1.web.graficos.ResultadoTabela;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -68,8 +67,8 @@ public class FavorecidosResource {
     @Path("/anos/{ano1}/{ano2}/{nome}/{funcao}")
     public Response subfuncoesPorAno(@PathParam("nome") String nome, @PathParam("ano1") int ano1,
             @PathParam("ano2") int ano2, @PathParam("funcao") String funcao) {
-        Grafico grafico = controller.subfuncaoFavorecidosAnos(nome, ano1, ano2, funcao);
-        return response(grafico);
+        ResultadoTabela resultado = controller.subfuncaoFavorecidosAnos(nome, ano1, ano2, funcao);
+        return response(resultado);
     }
 
     @GET
@@ -77,8 +76,8 @@ public class FavorecidosResource {
     public Response programasPorAno(@PathParam("nome") String nome, @PathParam("ano1") int ano1,
             @PathParam("ano2") int ano2, @PathParam("funcao") String funcao,
             @PathParam("subfuncao") String subfuncao) {
-        Grafico grafico = controller.programaFavorecidosAnos(nome, ano1, ano2, funcao, subfuncao);
-        return response(grafico);
+        ResultadoTabela resultado = controller.programaFavorecidosAnos(nome, ano1, ano2, funcao, subfuncao);
+        return response(resultado);
     }
 
     @GET
@@ -87,9 +86,9 @@ public class FavorecidosResource {
             @PathParam("ano2") int ano2, @PathParam("subfuncao") String subfuncao,
             @PathParam("programa") String programa, @PathParam("funcao") String funcao) {
 
-        Grafico grafico = controller.acoesFavorecidosAnos(nome, ano1, ano2, funcao,
+        ResultadoTabela resultado = controller.acoesFavorecidosAnos(nome, ano1, ano2, funcao,
                 subfuncao, programa);
-        return response(grafico);
+        return response(resultado);
     }
 
     // SEMESTRE
@@ -97,24 +96,24 @@ public class FavorecidosResource {
     @Path("/semestres/{semestre}/{nome}")
     public Response funcoesPorSemestre(@PathParam("nome") String nome,
             @PathParam("semestre") int semestre) {
-        Grafico grafico = controller.funcaoFavorecidosSemestre(nome, semestre);
-        return response(grafico);
+        ResultadoTabela resultado = controller.funcaoFavorecidosSemestre(nome, semestre);
+        return response(resultado);
     }
 
     @GET
     @Path("/semestres/{semestre}/{nome}/{funcao}")
     public Response subfuncoesPorSemestre(@PathParam("nome") String nome,
             @PathParam("semestre") int semestre, @PathParam("funcao") String funcao) {
-        Grafico grafico = controller.subfuncaoFavorecidosSemestre(nome, semestre, funcao);
-        return response(grafico);
+        ResultadoTabela resultado = controller.subfuncaoFavorecidosSemestre(nome, semestre, funcao);
+        return response(resultado);
     }
 
     @GET
     @Path("/semestres/{semestre}/{nome}/{funcao}/{subfuncao}")
     public Response programasPorSemestre(@PathParam("nome") String nome, @PathParam("semestre") int semestre,
             @PathParam("funcao") String funcao, @PathParam("subfuncao") String subfuncao) {
-        Grafico grafico = controller.programaFavorecidosSemestre(nome, semestre, funcao, subfuncao);
-        return response(grafico);
+        ResultadoTabela resultado = controller.programaFavorecidosSemestre(nome, semestre, funcao, subfuncao);
+        return response(resultado);
     }
 
     @GET
@@ -122,9 +121,9 @@ public class FavorecidosResource {
     public Response acoesPorSemestre(@PathParam("nome") String nome, @PathParam("semestre") int semestre,
             @PathParam("subfuncao") String subfuncao, @PathParam("programa") String programa,
             @PathParam("funcao") String funcao) {
-        Grafico grafico = controller.acoesFavorecidosSemestre(nome, semestre, funcao,
+        ResultadoTabela resultado = controller.acoesFavorecidosSemestre(nome, semestre, funcao,
                 subfuncao, programa);
-        return response(grafico);
+        return response(resultado);
     }
 // MESES
 
@@ -132,16 +131,16 @@ public class FavorecidosResource {
     @Path("/meses/{mes1}/{mes2}/{nome}")
     public Response funcoesPorMeses(@PathParam("nome") String nome, @PathParam("mes1") int mes1,
             @PathParam("mes2") int mes2) {
-        Grafico grafico = controller.funcaoFavorecidosMeses(nome, mes1, mes2);
-        return response(grafico);
+        ResultadoTabela resultado = controller.funcaoFavorecidosMeses(nome, mes1, mes2);
+        return response(resultado);
     }
 
     @GET
     @Path("/meses/{mes1}/{mes2}/{nome}/{funcao}")
     public Response subfuncoesPorMeses(@PathParam("nome") String nome, @PathParam("mes1") int mes1,
             @PathParam("mes2") int mes2, @PathParam("funcao") String funcao) {
-        Grafico grafico = controller.subfuncaoFavorecidosMeses(nome, mes1, mes2, funcao);
-        return response(grafico);
+        ResultadoTabela resultado = controller.subfuncaoFavorecidosMeses(nome, mes1, mes2, funcao);
+        return response(resultado);
     }
 
     @GET
@@ -149,8 +148,8 @@ public class FavorecidosResource {
     public Response programasPorMeses(@PathParam("nome") String nome, @PathParam("mes1") int mes1,
             @PathParam("mes2") int mes2, @PathParam("funcao") String funcao,
             @PathParam("subfuncao") String subfuncao) {
-        Grafico grafico = controller.programaFavorecidosMeses(nome, mes1, mes2, funcao, subfuncao);
-        return response(grafico);
+        ResultadoTabela resultado = controller.programaFavorecidosMeses(nome, mes1, mes2, funcao, subfuncao);
+        return response(resultado);
     }
 
     @GET
@@ -159,14 +158,14 @@ public class FavorecidosResource {
             @PathParam("mes2") int mes2, @PathParam("subfuncao") String subfuncao,
             @PathParam("programa") String programa, @PathParam("funcao") String funcao) {
 
-        Grafico grafico = controller
+        ResultadoTabela resultado = controller
                 .acoesFavorecidosMeses(nome, mes1, mes2, funcao, subfuncao, programa);
-        return response(grafico);
+        return response(resultado);
     }
 
-    public Response response(Grafico grafico) {
-        return (grafico.getData().isEmpty())
+    public Response response(ResultadoTabela resultado) {
+        return (resultado.getDados().isEmpty())
                 ? Response.noContent().build()
-                : Response.ok().entity(grafico).build();
+                : Response.ok().entity(resultado).build();
     }
 }

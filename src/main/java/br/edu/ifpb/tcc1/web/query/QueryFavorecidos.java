@@ -59,7 +59,6 @@ public class QueryFavorecidos {
         String sql = inicioSQL(campo)
                 + "AND d.ano BETWEEN ? AND ? "
                 + fimSQL(campo);
-        System.out.println(sql);
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, favorecido);
@@ -72,8 +71,8 @@ public class QueryFavorecidos {
         return new ArrayList<>();
     }
 
-    public List<Object[]> subfuncoesFavorecidoAnos(String favorecido, int ano1, int ano2, String funcao) {
-        List<Object[]> lista = new ArrayList<>();
+    public List<Tabela> subfuncoesFavorecidoAnos(String favorecido, int ano1, int ano2, String funcao) {
+        System.out.println("subfuncoes");
         String campo = "nomesubfuncao";
         String sql = inicioSQL(campo)
                 + "AND d.ano BETWEEN ? AND ? "
@@ -85,19 +84,17 @@ public class QueryFavorecidos {
             stmt.setInt(2, ano1);
             stmt.setInt(3, ano2);
             stmt.setString(4, funcao);
-            System.out.println(sql);
 
-            return preparaLista(campo, stmt);
+            return preparaTabela(campo, stmt);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return lista;
+        return new ArrayList<>();
     }
 
-    public List<Object[]> programasFavorecidoAnos(String favorecido, int ano1,
+    public List<Tabela> programasFavorecidoAnos(String favorecido, int ano1,
             int ano2, String funcao, String subfuncao) {
 
-        List<Object[]> lista = new ArrayList<>();
         String campo = "nomeprograma";
         String sql = inicioSQL(campo)
                 + "AND d.ano BETWEEN ? AND ? "
@@ -111,16 +108,16 @@ public class QueryFavorecidos {
             stmt.setInt(3, ano2);
             stmt.setString(4, funcao);
             stmt.setString(5, subfuncao);
-            return preparaLista(campo, stmt);
+            return preparaTabela(campo, stmt);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return lista;
+        return new ArrayList<>();
     }
 
-    public List<Object[]> acoesFavorecidoAnos(String favorecido, int ano1,
+    public List<Tabela> acoesFavorecidoAnos(String favorecido, int ano1,
             int ano2, String funcao, String subfuncao, String programa) {
-        List<Object[]> lista = new ArrayList<>();
+        List<Tabela> lista = new ArrayList<>();
         String campo = "nomeacao";
         String sql = inicioSQL(campo)
                 + "AND d.ano BETWEEN ? AND ? "
@@ -136,7 +133,7 @@ public class QueryFavorecidos {
             stmt.setString(4, funcao);
             stmt.setString(5, subfuncao);
             stmt.setString(6, programa);
-            return preparaLista(campo, stmt);
+            return preparaTabela(campo, stmt);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -144,8 +141,8 @@ public class QueryFavorecidos {
     }
 
     //SEMESTRE
-    public List<Object[]> FavorecidoSemestre(String favorecido, int semestre) {
-        List<Object[]> lista = new ArrayList<>();
+    public List<Tabela> FavorecidoSemestre(String favorecido, int semestre) {
+        List<Tabela> lista = new ArrayList<>();
         String campo = "nomefuncao";
         String sql = inicioSQL(campo)
                 + "AND d.semestre = ? "
@@ -154,16 +151,16 @@ public class QueryFavorecidos {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, favorecido);
             stmt.setInt(2, semestre);
-            return preparaLista(campo, stmt);
+            return preparaTabela(campo, stmt);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return lista;
     }
 
-    public List<Object[]> subfuncoesFavorecidoSemestre(String favorecido, int semestre,
+    public List<Tabela> subfuncoesFavorecidoSemestre(String favorecido, int semestre,
             String funcao) {
-        List<Object[]> lista = new ArrayList<>();
+        List<Tabela> lista = new ArrayList<>();
         String campo = "nomesubfuncao";
         String sql = inicioSQL(campo)
                 + "AND d.semestre = ? "
@@ -174,16 +171,16 @@ public class QueryFavorecidos {
             stmt.setString(1, favorecido);
             stmt.setInt(2, semestre);
             stmt.setString(3, funcao);
-            return preparaLista(campo, stmt);
+            return preparaTabela(campo, stmt);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return lista;
     }
 
-    public List<Object[]> programasFavorecidoSemestre(String favorecido, int semestre,
+    public List<Tabela> programasFavorecidoSemestre(String favorecido, int semestre,
             String funcao, String subfuncao) {
-        List<Object[]> lista = new ArrayList<>();
+        List<Tabela> lista = new ArrayList<>();
         String campo = "nomeprograma";
         String sql = inicioSQL(campo)
                 + "AND d.semestre = ? "
@@ -196,16 +193,16 @@ public class QueryFavorecidos {
             stmt.setInt(2, semestre);
             stmt.setString(3, funcao);
             stmt.setString(4, subfuncao);
-            return preparaLista(campo, stmt);
+            return preparaTabela(campo, stmt);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return lista;
     }
 
-    public List<Object[]> acoesFavorecidoSemestre(String favorecido, int semestre,
+    public List<Tabela> acoesFavorecidoSemestre(String favorecido, int semestre,
             String funcao, String subfuncao, String programa) {
-        List<Object[]> lista = new ArrayList<>();
+        List<Tabela> lista = new ArrayList<>();
         String campo = "nomeacao";
         String sql = inicioSQL(campo)
                 + "AND d.semestre = ? "
@@ -221,7 +218,7 @@ public class QueryFavorecidos {
             stmt.setString(4, subfuncao);
             stmt.setString(5, programa);
 
-            return preparaLista(campo, stmt);
+            return preparaTabela(campo, stmt);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -229,8 +226,8 @@ public class QueryFavorecidos {
     }
 
     // MESES
-    public List<Object[]> FavorecidoMeses(String favorecido, int mes1, int mes2) {
-        List<Object[]> lista = new ArrayList<>();
+    public List<Tabela> FavorecidoMeses(String favorecido, int mes1, int mes2) {
+        List<Tabela> lista = new ArrayList<>();
         String campo = "nomefuncao";
         String sql = inicioSQL(campo)
                 + "AND d.codigo BETWEEN ? AND ? "
@@ -240,16 +237,16 @@ public class QueryFavorecidos {
             stmt.setString(1, favorecido);
             stmt.setInt(2, mes1);
             stmt.setInt(3, mes2);
-            return preparaLista(campo, stmt);
+            return preparaTabela(campo, stmt);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return lista;
     }
 
-    public List<Object[]> subfuncoesFavorecidoMeses(String favorecido, int mes1, int mes2,
+    public List<Tabela> subfuncoesFavorecidoMeses(String favorecido, int mes1, int mes2,
             String funcao) {
-        List<Object[]> lista = new ArrayList<>();
+        List<Tabela> lista = new ArrayList<>();
         String campo = "nomesubfuncao";
         String sql = inicioSQL(campo)
                 + "AND d.codigo BETWEEN ? AND ? "
@@ -261,16 +258,16 @@ public class QueryFavorecidos {
             stmt.setInt(2, mes1);
             stmt.setInt(3, mes2);
             stmt.setString(4, funcao);
-            return preparaLista(campo, stmt);
+            return preparaTabela(campo, stmt);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return lista;
     }
 
-    public List<Object[]> programasFavorecidoMeses(String favorecido, int mes1, int mes2,
+    public List<Tabela> programasFavorecidoMeses(String favorecido, int mes1, int mes2,
             String funcao, String subfuncao) {
-        List<Object[]> lista = new ArrayList<>();
+        List<Tabela> lista = new ArrayList<>();
         String campo = "nomeprograma";
         String sql = inicioSQL(campo)
                 + "AND d.codigo BETWEEN ? AND ? "
@@ -284,16 +281,16 @@ public class QueryFavorecidos {
             stmt.setInt(3, mes2);
             stmt.setString(4, funcao);
             stmt.setString(5, subfuncao);
-            return preparaLista(campo, stmt);
+            return preparaTabela(campo, stmt);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return lista;
     }
 
-    public List<Object[]> acoesFavorecidoMeses(String favorecido, int mes1, int mes2,
+    public List<Tabela> acoesFavorecidoMeses(String favorecido, int mes1, int mes2,
             String funcao, String subfuncao, String programa) {
-        List<Object[]> lista = new ArrayList<>();
+        List<Tabela> lista = new ArrayList<>();
         String campo = "nomeacao";
         String sql = inicioSQL(campo)
                 + "AND d.codigo BETWEEN ? AND ? "
@@ -310,21 +307,9 @@ public class QueryFavorecidos {
             stmt.setString(5, subfuncao);
             stmt.setString(6, programa);
 
-            return preparaLista(campo, stmt);
+            return preparaTabela(campo, stmt);
         } catch (SQLException ex) {
             ex.printStackTrace();
-        }
-        return lista;
-    }
-
-    private List<Object[]> preparaLista(String campo, PreparedStatement stmt) throws SQLException {
-        List<Object[]> lista = new ArrayList<>();
-        ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {
-            lista.add(new Object[]{
-                rs.getString(campo),
-                rs.getBigDecimal("total")
-            });
         }
         return lista;
     }

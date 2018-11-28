@@ -1,6 +1,6 @@
 package br.edu.ifpb.tcc1.web.controller;
 
-import br.edu.ifpb.tcc1.web.graficos.GraficoIntervalos;
+import br.edu.ifpb.tcc1.web.graficos.ResultadoTabela;
 import br.edu.ifpb.tcc1.web.graficos.ResultadoTabela;
 import br.edu.ifpb.tcc1.web.graficos.Tabela;
 import br.edu.ifpb.tcc1.web.query.QueryFavorecidos;
@@ -32,104 +32,130 @@ public class FavorecidoController {
         return rt;
     }
 
-    public GraficoIntervalos subfuncaoFavorecidosAnos(String favorecido, int ano1, int ano2, String funcao) {
+    public ResultadoTabela subfuncaoFavorecidosAnos(String favorecido, int ano1, int ano2, String funcao) {
+        System.out.println("subfu");
         String titulo = "Subfunções da " + funcao + " relacionados ao favorecido "
                 + favorecido + " de " + ano1 + " a " + ano2;
-        return preparaGrafico(titulo, query.subfuncoesFavorecidoAnos(favorecido, ano1, ano2, funcao));
+        ResultadoTabela rt = new ResultadoTabela();
+        rt.setTitulo(titulo);
+        rt.setDados(query.subfuncoesFavorecidoAnos(favorecido, ano1, ano2, funcao));
+        return rt;
+
     }
 
-    public GraficoIntervalos programaFavorecidosAnos(String favorecido, int ano1, int ano2,
+    public ResultadoTabela programaFavorecidosAnos(String favorecido, int ano1, int ano2,
             String funcao, String subfuncao) {
         String titulo = "Programas da subfunção " + subfuncao + " relacionados ao favorecido "
                 + favorecido + " de " + ano1 + " a " + ano2;
-        return preparaGrafico(titulo, query.programasFavorecidoAnos(favorecido,
-                ano1, ano2, funcao, subfuncao));
+        ResultadoTabela rt = new ResultadoTabela();
+        rt.setTitulo(titulo);
+        rt.setDados(query.programasFavorecidoAnos(favorecido, ano1, ano2, funcao, subfuncao));
+        return rt;
     }
 
-    public GraficoIntervalos acoesFavorecidosAnos(String favorecido, int ano1, int ano2,
+    public ResultadoTabela acoesFavorecidosAnos(String favorecido, int ano1, int ano2,
             String funcao, String subfuncao, String programa) {
         String titulo = "Ações do programa " + programa + " relacionados ao favorecido "
                 + favorecido + " de " + ano1 + " a " + ano2;
-        return preparaGrafico(titulo, query.acoesFavorecidoAnos(favorecido,
-                ano1, ano2, funcao, subfuncao, programa));
+        ResultadoTabela rt = new ResultadoTabela();
+        rt.setTitulo(titulo);
+        rt.setDados(query.acoesFavorecidoAnos(favorecido, ano1, ano2, funcao, subfuncao, programa));
+        return rt;
+
     }
 
-    public GraficoIntervalos funcaoFavorecidosSemestre(String favorecido, int semestre) {
+    public ResultadoTabela funcaoFavorecidosSemestre(String favorecido, int semestre) {
         String sem = "" + semestre;
         String titulo = "Áreas de atuação relacionadas ao favorecido " + favorecido + " no "
                 + sem.substring(0, 1)
                 + "º semestre de "
                 + sem.substring(1, sem.length());
+        ResultadoTabela rt = new ResultadoTabela();
+        rt.setTitulo(titulo);
+        rt.setDados(query.FavorecidoSemestre(favorecido, semestre));
+        return rt;
 
-        return preparaGrafico(titulo, query.FavorecidoSemestre(favorecido, semestre));
     }
 
-    public GraficoIntervalos subfuncaoFavorecidosSemestre(String favorecido, int semestre, String funcao) {
+    public ResultadoTabela subfuncaoFavorecidosSemestre(String favorecido, int semestre, String funcao) {
         String sem = "" + semestre;
         String titulo = "Subfunções da função " + funcao + " no "
                 + sem.substring(0, 1)
                 + "º semestre de "
                 + sem.substring(1, sem.length());
-        return preparaGrafico(titulo, query.subfuncoesFavorecidoSemestre(favorecido, semestre, funcao));
+        ResultadoTabela rt = new ResultadoTabela();
+        rt.setTitulo(titulo);
+        rt.setDados(query.subfuncoesFavorecidoSemestre(favorecido, semestre, funcao));
+        return rt;
+
     }
 
-    public GraficoIntervalos programaFavorecidosSemestre(String favorecido, int semestre,
+    public ResultadoTabela programaFavorecidosSemestre(String favorecido, int semestre,
             String funcao, String subfuncao) {
         String sem = "" + semestre;
         String titulo = "Programas da subfunção " + subfuncao + " no "
                 + sem.substring(0, 1)
                 + "º semestre de "
                 + sem.substring(1, sem.length());
-        return preparaGrafico(titulo, query.programasFavorecidoSemestre(
-                favorecido, semestre, funcao, subfuncao));
+        ResultadoTabela rt = new ResultadoTabela();
+        rt.setTitulo(titulo);
+        rt.setDados(query.programasFavorecidoSemestre(favorecido, semestre, funcao, subfuncao));
+        return rt;
     }
 
-    public GraficoIntervalos acoesFavorecidosSemestre(String favorecido, int semestre,
+    public ResultadoTabela acoesFavorecidosSemestre(String favorecido, int semestre,
             String funcao, String subfuncao, String programa) {
         String sem = "" + semestre;
         String titulo = "Ações do programa " + programa + " no "
                 + sem.substring(0, 1)
                 + "º semestre de "
                 + sem.substring(1, sem.length());
-        return preparaGrafico(titulo, query.acoesFavorecidoSemestre(favorecido,
-                semestre, funcao, subfuncao, programa));
+        ResultadoTabela rt = new ResultadoTabela();
+        rt.setTitulo(titulo);
+        rt.setDados(query.acoesFavorecidoSemestre(favorecido, semestre, funcao, subfuncao, programa));
+        return rt;
+
     }
 
-    public GraficoIntervalos funcaoFavorecidosMeses(String favorecido, int mes1, int mes2) {
+    public ResultadoTabela funcaoFavorecidosMeses(String favorecido, int mes1, int mes2) {
         String titulo = "Busca por gastos relacionados ao favorecido "
                 + favorecido + " entre meses";
-        return preparaGrafico(titulo, query.FavorecidoMeses(favorecido, mes1, mes2));
+        ResultadoTabela rt = new ResultadoTabela();
+        rt.setTitulo(titulo);
+        rt.setDados(query.FavorecidoMeses(favorecido, mes1, mes2));
+        return rt;
+
     }
 
-    public GraficoIntervalos subfuncaoFavorecidosMeses(String favorecido, int mes1, int mes2, String funcao) {
+    public ResultadoTabela subfuncaoFavorecidosMeses(String favorecido, int mes1, int mes2, String funcao) {
         String titulo = "Subfunções da " + funcao + " relacionados ao favorecido "
                 + favorecido + " entre meses";
-        return preparaGrafico(titulo, query.subfuncoesFavorecidoMeses(favorecido, mes1, mes2, funcao));
+        ResultadoTabela rt = new ResultadoTabela();
+        rt.setTitulo(titulo);
+        rt.setDados(query.subfuncoesFavorecidoMeses(favorecido, mes1, mes2, funcao));
+        return rt;
+
     }
 
-    public GraficoIntervalos programaFavorecidosMeses(String favorecido, int ano1, int ano2,
+    public ResultadoTabela programaFavorecidosMeses(String favorecido, int ano1, int ano2,
             String funcao, String subfuncao) {
         String titulo = "Programas da subfunção " + subfuncao + " relacionados ao favorecido "
                 + favorecido + " entre meses";
-        return preparaGrafico(titulo, query
-                .programasFavorecidoMeses(favorecido, ano1, ano2, funcao, subfuncao));
+        ResultadoTabela rt = new ResultadoTabela();
+        rt.setTitulo(titulo);
+        rt.setDados(query.programasFavorecidoMeses(favorecido, ano1, ano2, funcao, subfuncao));
+        return rt;
     }
 
-    public GraficoIntervalos acoesFavorecidosMeses(String favorecido, int ano1, int ano2,
+    public ResultadoTabela acoesFavorecidosMeses(String favorecido, int ano1, int ano2,
             String funcao, String subfuncao, String programa) {
         String titulo = "Ações do programa " + programa + " relacionados ao favorecido "
                 + favorecido + " entre meses";
-        return preparaGrafico(titulo, query
-                .acoesFavorecidoMeses(favorecido, ano1, ano2, funcao, subfuncao, programa));
-    }
+        ResultadoTabela rt = new ResultadoTabela();
+        rt.setTitulo(titulo);
+        rt.setDados(query.acoesFavorecidoMeses(favorecido, ano1, ano2, funcao, subfuncao, programa));
+        return rt;
 
-    private GraficoIntervalos preparaGrafico(String titulo, List<Object[]> dados) {
-        GraficoIntervalos grafico = new GraficoIntervalos(titulo);
-        grafico.setData(dados);
-        //grafico.setCategorias(categorias(grafico.getData()));
-        grafico.setName("Empenhos");
-        grafico.setType("pie");
-        return grafico;
     }
 
     /*
