@@ -29,7 +29,7 @@ public class QueryIntervalos {
                 + "AND e.coddata = d.codigo "
                 + "AND d.ano between ? AND ? "
                 + "GROUP BY a.nomefuncao, a.codigofuncao "
-                + "ORDER BY a.nomefuncao";
+                + "ORDER BY  sum(e.valor) desc,  a.nomefuncao";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, ano1);
@@ -51,7 +51,7 @@ public class QueryIntervalos {
                 + "AND e.coddata = d.codigo "
                 + "AND d.semestre = ? "
                 + "GROUP BY a.nomefuncao"
-                + " ORDER BY a.nomefuncao";
+                + " ORDER BY  sum(e.valor) desc,  a.nomefuncao";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, semestre);
@@ -72,7 +72,7 @@ public class QueryIntervalos {
                 + "AND e.coddata = d.codigo "
                 + "AND d.codigo BETWEEN ? AND ? "
                 + "GROUP BY a.nomefuncao "
-                + "ORDER BY a.nomefuncao";
+                + "ORDER BY  sum(e.valor) desc,  a.nomefuncao";
 
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -96,7 +96,7 @@ public class QueryIntervalos {
                 + "AND a.nomefuncao = ? "
                 + "AND d.ano between ? AND ? "
                 + "GROUP BY a.nomesubfuncao"
-                + " ORDER BY a.nomesubfuncao";
+                + " ORDER BY  sum(e.valor) desc,  a.nomesubfuncao";
 
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -121,7 +121,7 @@ public class QueryIntervalos {
                 + "AND a.nomefuncao = ? "
                 + "AND d.semestre = ? "
                 + "GROUP BY a.nomesubfuncao"
-                + " ORDER BY a.nomesubfuncao";
+                + " ORDER BY  sum(e.valor) desc,  a.nomesubfuncao";
 
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -145,7 +145,7 @@ public class QueryIntervalos {
                 + "AND a.nomefuncao = ? "
                 + "AND d.codigo BETWEEN ? AND ? "
                 + "GROUP BY a.nomesubfuncao "
-                + "ORDER BY a.nomesubfuncao";
+                + "ORDER BY  sum(e.valor) desc,  a.nomesubfuncao";
 
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -171,7 +171,7 @@ public class QueryIntervalos {
                 + "AND a.nomesubfuncao = ?"
                 + "AND d.ano BETWEEN ? AND ? "
                 + "GROUP BY a.nomeprograma "
-                + "ORDER BY a.nomeprograma";
+                + "ORDER BY  sum(e.valor) desc,  a.nomeprograma";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, funcao);
@@ -196,7 +196,7 @@ public class QueryIntervalos {
                 + "AND a.nomesubfuncao = ?"
                 + "AND d.semestre = ? "
                 + "GROUP BY a.nomeprograma"
-                + " ORDER BY a.nomeprograma";
+                + " ORDER BY  sum(e.valor) desc,  a.nomeprograma";
 
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -219,7 +219,7 @@ public class QueryIntervalos {
                 + "AND a.nomesubfuncao = ? "
                 + "AND d.codigo BETWEEN ? AND ? "
                 + "GROUP BY a.nomeprograma "
-                + " ORDER BY a.nomeprograma ";
+                + " ORDER BY  sum(e.valor) desc,  a.nomeprograma ";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, funcao);
@@ -244,7 +244,7 @@ public class QueryIntervalos {
                 + "AND a.nomeprograma = ? "
                 + "AND d.ano BETWEEN ? AND ? "
                 + "GROUP BY a.nomeacao "
-                + "ORDER BY a.nomeacao";
+                + "ORDER BY  sum(e.valor) desc,  a.nomeacao";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, funcao);
@@ -272,7 +272,7 @@ public class QueryIntervalos {
                 + "AND a.nomeprograma = ? "
                 + "AND d.semestre = ? "
                 + "GROUP BY a.nomeacao"
-                + " ORDER BY a.nomeacao";
+                + " ORDER BY  sum(e.valor) desc,  a.nomeacao";
 
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -298,7 +298,7 @@ public class QueryIntervalos {
                 + "AND a.nomeprograma = ? "
                 + "AND d.codigo BETWEEN ? AND ? "
                 + "GROUP BY a.nomeacao "
-                + " ORDER BY a.nomeacao ";
+                + " ORDER BY  sum(e.valor) desc,  a.nomeacao ";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, funcao);
