@@ -60,10 +60,33 @@ public class UnidadesResource {
 
     @GET
     @Path("/semestre/{semestre}/{orgaoSuperior}/{orgao}")
-    public Response unidadesPorSemestre(@PathParam("semestre") int semestre, 
+    public Response unidadesPorSemestre(@PathParam("semestre") int semestre,
             @PathParam("orgaoSuperior") String orgaoSuperior,
             @PathParam("orgao") String orgao) {
         GraficoIntervalos grafico = controller.unidadesPorSemestre(semestre, orgaoSuperior, orgao);
+        return response(grafico);
+    }
+
+    @GET
+    @Path("/mes/{mes1}/{mes2}")
+    public Response orgaoSuperiorPorMes(@PathParam("mes1") int mes1, @PathParam("mes2") int mes2) {
+        GraficoIntervalos grafico = controller.orgaoSuperiorPorMeses(mes1, mes2);
+        return response(grafico);
+    }
+
+    @GET
+    @Path("/mes/{mes1}/{mes2}/{orgaoSuperior}")
+    public Response orgaoPorMes(@PathParam("mes1") int mes1, @PathParam("mes2") int mes2,
+            @PathParam("orgaoSuperior") String orgaoSuperior) {
+        GraficoIntervalos grafico = controller.orgaoPorMes(mes1, mes2, orgaoSuperior);
+        return response(grafico);
+    }
+
+    @GET
+    @Path("/mes/{mes1}/{mes2}/{orgaoSuperior}/{orgao}")
+    public Response unidadesPorMes(@PathParam("mes1") int mes1, @PathParam("mes2") int mes2,
+            @PathParam("orgaoSuperior") String orgaoSuperior, @PathParam("orgao") String orgao) {
+        GraficoIntervalos grafico = controller.unidadesPorMeses(mes1, mes2, orgaoSuperior, orgao);
         return response(grafico);
     }
 

@@ -14,16 +14,14 @@ function buscaUnidadesSemestres() {
     busca(url, orgaoSuperior);
 }
 function buscaUnidadesMeses() {
-    fecharmodal(document.getElementById("modalSemestre"));
+    fecharmodal(document.getElementById("modalMes"));
     let valormes1 = '' + anoMes1.value + mes1.value;
     let valormes2 = '' + anoMes2.value + mes2.value;
     let url = urlUnidades + '/mes/' + valormes1 + "/" + valormes2 + '/';
     busca(url, orgaoSuperior);
 }
 
-function buscaUnidadesMeses() {
-    fecharmodal(document.getElementById("modalMes"));
-}
+
 
 function busca(url, funcao) {
     client.open('GET', url, false);

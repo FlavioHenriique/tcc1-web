@@ -65,7 +65,7 @@ public class QueryUnidades {
                 + "AND u.nomeorgaosuperior = ? "
                 + "AND u.nomeorgao = ? "
                 + fimSQL(campo);
-        
+
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, ano1);
@@ -78,8 +78,7 @@ public class QueryUnidades {
         }
         return new ArrayList<>();
     }
-    
-    
+
     public List<Object[]> orgaoSuperiorPorSemestre(int semestre) {
         String campo = "nomeorgaosuperior";
         String sql = inicioSQL(campo)
@@ -107,7 +106,7 @@ public class QueryUnidades {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, semestre);
             stmt.setString(2, orgaoSuperior);
-           
+
             return preparaLista(campo, stmt);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -122,12 +121,70 @@ public class QueryUnidades {
                 + "AND u.nomeorgaosuperior = ? "
                 + "AND u.nomeorgao = ? "
                 + fimSQL(campo);
-        
+
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, semestre);
             stmt.setString(2, orgaoSuperior);
             stmt.setString(3, orgao);
+            return preparaLista(campo, stmt);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
+
+    public List<Object[]> orgaoSuperiorPorMeses(int mes1, int mes2) {
+        String campo = "nomeorgaosuperior";
+        String sql = inicioSQL(campo)
+                + "AND d.codigo BETWEEN ? AND ? "
+                + fimSQL(campo);
+        
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, mes1);
+            stmt.setInt(2, mes2);
+            return preparaLista(campo, stmt);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
+
+    public List<Object[]> orgaoPorMeses(int mes1, int mes2, String orgaoSuperior) {
+        String campo = "nomeorgao";
+        String sql = inicioSQL(campo)
+                + "AND d.codigo BETWEEN ? AND ? "
+                + "AND u.nomeorgaosuperior = ? "
+                + fimSQL(campo);
+
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, mes1);
+            stmt.setInt(2, mes2);
+            stmt.setString(3, orgaoSuperior);
+
+            return preparaLista(campo, stmt);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
+
+    public List<Object[]> unidadePorMeses(int mes1, int mes2, String orgaoSuperior, String orgao) {
+        String campo = "nomeunidadegestora";
+        String sql = inicioSQL(campo)
+                + "AND d.codigo BETWEEN ? AND ? "
+                + "AND u.nomeorgaosuperior = ? "
+                + "AND u.nomeorgao = ? "
+                + fimSQL(campo);
+
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, mes1);
+            stmt.setInt(2, mes2);
+            stmt.setString(3, orgaoSuperior);
+            stmt.setString(4, orgao);
             return preparaLista(campo, stmt);
         } catch (SQLException ex) {
             ex.printStackTrace();
