@@ -137,14 +137,26 @@ function descerNivel(detalhamento) {
 function ordenarDados() {
     let ordena = ordenacao.options[ordenacao.selectedIndex].value;
     if (ordena == 1) {
-        jsonFavorecido.dados.sort(function (a, b) {
-            return a.unidadeGestora - b.unidadeGestora;
+        let dados = jsonFavorecido.dados;
+        dados.sort(function (a, b) {
+            return b.total - a.total;
         });
-        console.log(jsonFavorecido);
+        jsonFavorecido.dados = dados;
         geraTabela(jsonFavorecido);
-        console.log("ordenou");
+
     } else {
-        console.log("calma");
+        let dados = jsonFavorecido.dados;
+        dados.sort(function (a, b) {
+            if (a.unidadeGestora < b.unidadeGestora) {
+                return -1;
+            }
+            if (a.unidadeGestora > b.unidadeGestora) {
+                return 1;
+            }
+            return 0;
+        });
+        jsonFavorecido.dados = dados;
+        geraTabela(jsonFavorecido);
     }
 }
 

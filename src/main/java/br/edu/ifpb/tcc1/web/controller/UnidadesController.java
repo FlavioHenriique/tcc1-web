@@ -80,6 +80,7 @@ public class UnidadesController {
         grafico.setData(dados);
         grafico.setType("pie");
         grafico.setCategorias(categorias(grafico.getData()));
+        grafico.setName("Empenhos");
         return grafico;
     }
 

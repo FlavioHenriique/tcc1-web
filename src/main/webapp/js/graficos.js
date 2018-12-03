@@ -6,7 +6,7 @@ function intervalos(json, clique) {
             text: json.title
         },
         tooltip: {
-            pointFormat: '{series.name}: <b>R$ {point.y}</b>'
+            pointFormat: 'Valor: <b>R$ {point.y}</b>'
         },
         xAxis: {
             categories: json.categorias
