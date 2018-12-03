@@ -1,4 +1,5 @@
 var urlValores = 'http://localhost:8080/tcc1-web/api/valor/';
+var client = new XMLHttpRequest();
 
 function PreencherAreas() {
     client.open('GET', urlValores + 'areas', false);

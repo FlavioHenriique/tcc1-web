@@ -6,6 +6,7 @@ public class ResultadoTabela {
 
     private List<Tabela> dados;
     private String titulo;
+    private List<String> unidades;
 
     public ResultadoTabela() {
 
@@ -25,6 +26,14 @@ public class ResultadoTabela {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public List<String> getUnidades() {
+        return unidades;
+    }
+
+    public void setUnidades(List<String> unidades) {
+        this.unidades = unidades;
     }
 
 }

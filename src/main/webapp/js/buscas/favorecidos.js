@@ -1,6 +1,7 @@
 var urlFavorecido = 'http://localhost:8080/tcc1-web/api/favorecidos/';
 var urlBuscaFavorecido = '';
 var estado = 0;
+var jsonFavorecido = null;
 
 $("#botoesIntervalo").load("trechos/botoesIntervalos.html");
 
@@ -58,11 +59,11 @@ function buscarFavorecidos(url) {
     abrirmodal(document.getElementById("modalFavorecido"));
     $("#valoresFavorecidos tr td").remove();
     if (client.status == 200) {
-        let json = JSON.parse(client.responseText);
-        for (k = 0; k < json.favorecidos.length; k++) {
+        jsonFavorecido = JSON.parse(client.responseText);
+        for (k = 0; k < jsonFavorecido.favorecidos.length; k++) {
             $('#valoresFavorecidos').append(
-                    '<tr><td>' + json.favorecidos[k] + '</td>' +
-                    '<td><button class="button is-success" onclick="favorecidoSelecionado(\'' + json.favorecidos[k] + '\')">Visualizar</button></td></tr>')
+                    '<tr><td>' + jsonFavorecido.favorecidos[k] + '</td>' +
+                    '<td><button class="button is-success" onclick="favorecidoSelecionado(\'' + jsonFavorecido.favorecidos[k] + '\')">Visualizar</button></td></tr>')
                     .attr('id', 'valoresFavorecidos');
         }
     }
@@ -76,13 +77,13 @@ function favorecidoSelecionado(favorecido) {
     client.send(null);
     console.log(url);
     if (client.status == 200) {
-        let json = JSON.parse(client.responseText);
+        jsonFavorecido = JSON.parse(client.responseText);
         estado = 0;
-        geraTabela(json);
+        geraTabela(jsonFavorecido);
     } else {
         swal({
-            title: "Erro!",
-            text: "Valores indisponíveis",
+            title: "Opa...",
+            text: "Não foi encontrado nenhum resultado para este intervalo de tempo!",
             icon: "error",
         });
     }
@@ -122,8 +123,8 @@ function descerNivel(detalhamento) {
     client.open('GET', urlBuscaFavorecido, false);
     client.send(null);
     if (client.status == 200) {
-        let json = JSON.parse(client.responseText);
-        geraTabela(json);
+        jsonFavorecido = JSON.parse(client.responseText);
+        geraTabela(jsonFavorecido);
     } else {
         swal({
             title: "Opa...",
@@ -133,5 +134,17 @@ function descerNivel(detalhamento) {
     }
 }
 
-
+function ordenarDados() {
+    let ordena = ordenacao.options[ordenacao.selectedIndex].value;
+    if (ordena == 1) {
+        jsonFavorecido.dados.sort(function (a, b) {
+            return a.unidadeGestora - b.unidadeGestora;
+        });
+        console.log(jsonFavorecido);
+        geraTabela(jsonFavorecido);
+        console.log("ordenou");
+    } else {
+        console.log("calma");
+    }
+}
 

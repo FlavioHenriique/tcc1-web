@@ -22,7 +22,6 @@ btAnos.onclick = function () {
     } else {
         buscaAreasDeAtuacao(area, url);
     }
-
 }
 
 btSemestre.onclick = function () {

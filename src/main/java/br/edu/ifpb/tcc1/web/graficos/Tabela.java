@@ -1,6 +1,7 @@
 package br.edu.ifpb.tcc1.web.graficos;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Tabela {
 

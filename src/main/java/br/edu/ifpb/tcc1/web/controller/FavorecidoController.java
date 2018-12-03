@@ -29,6 +29,7 @@ public class FavorecidoController {
         ResultadoTabela rt = new ResultadoTabela();
         rt.setTitulo(titulo);
         rt.setDados(query.FavorecidoAnos(favorecido, ano1, ano2));
+        rt.setUnidades(unidades(rt.getDados()));
         return rt;
     }
 
@@ -39,6 +40,7 @@ public class FavorecidoController {
         ResultadoTabela rt = new ResultadoTabela();
         rt.setTitulo(titulo);
         rt.setDados(query.subfuncoesFavorecidoAnos(favorecido, ano1, ano2, funcao));
+        rt.setUnidades(unidades(rt.getDados()));
         return rt;
 
     }
@@ -50,6 +52,7 @@ public class FavorecidoController {
         ResultadoTabela rt = new ResultadoTabela();
         rt.setTitulo(titulo);
         rt.setDados(query.programasFavorecidoAnos(favorecido, ano1, ano2, funcao, subfuncao));
+        rt.setUnidades(unidades(rt.getDados()));
         return rt;
     }
 
@@ -60,6 +63,7 @@ public class FavorecidoController {
         ResultadoTabela rt = new ResultadoTabela();
         rt.setTitulo(titulo);
         rt.setDados(query.acoesFavorecidoAnos(favorecido, ano1, ano2, funcao, subfuncao, programa));
+        rt.setUnidades(unidades(rt.getDados()));
         return rt;
 
     }
@@ -73,6 +77,7 @@ public class FavorecidoController {
         ResultadoTabela rt = new ResultadoTabela();
         rt.setTitulo(titulo);
         rt.setDados(query.FavorecidoSemestre(favorecido, semestre));
+        rt.setUnidades(unidades(rt.getDados()));
         return rt;
 
     }
@@ -86,6 +91,7 @@ public class FavorecidoController {
         ResultadoTabela rt = new ResultadoTabela();
         rt.setTitulo(titulo);
         rt.setDados(query.subfuncoesFavorecidoSemestre(favorecido, semestre, funcao));
+        rt.setUnidades(unidades(rt.getDados()));
         return rt;
 
     }
@@ -100,6 +106,7 @@ public class FavorecidoController {
         ResultadoTabela rt = new ResultadoTabela();
         rt.setTitulo(titulo);
         rt.setDados(query.programasFavorecidoSemestre(favorecido, semestre, funcao, subfuncao));
+        rt.setUnidades(unidades(rt.getDados()));
         return rt;
     }
 
@@ -113,6 +120,7 @@ public class FavorecidoController {
         ResultadoTabela rt = new ResultadoTabela();
         rt.setTitulo(titulo);
         rt.setDados(query.acoesFavorecidoSemestre(favorecido, semestre, funcao, subfuncao, programa));
+        rt.setUnidades(unidades(rt.getDados()));
         return rt;
 
     }
@@ -123,6 +131,7 @@ public class FavorecidoController {
         ResultadoTabela rt = new ResultadoTabela();
         rt.setTitulo(titulo);
         rt.setDados(query.FavorecidoMeses(favorecido, mes1, mes2));
+        rt.setUnidades(unidades(rt.getDados()));
         return rt;
 
     }
@@ -133,6 +142,7 @@ public class FavorecidoController {
         ResultadoTabela rt = new ResultadoTabela();
         rt.setTitulo(titulo);
         rt.setDados(query.subfuncoesFavorecidoMeses(favorecido, mes1, mes2, funcao));
+        rt.setUnidades(unidades(rt.getDados()));
         return rt;
 
     }
@@ -144,6 +154,7 @@ public class FavorecidoController {
         ResultadoTabela rt = new ResultadoTabela();
         rt.setTitulo(titulo);
         rt.setDados(query.programasFavorecidoMeses(favorecido, ano1, ano2, funcao, subfuncao));
+        rt.setUnidades(unidades(rt.getDados()));
         return rt;
     }
 
@@ -154,14 +165,14 @@ public class FavorecidoController {
         ResultadoTabela rt = new ResultadoTabela();
         rt.setTitulo(titulo);
         rt.setDados(query.acoesFavorecidoMeses(favorecido, ano1, ano2, funcao, subfuncao, programa));
+        rt.setUnidades(unidades(rt.getDados()));
         return rt;
 
     }
 
-    /*
-    private List<String> categorias(List<Object[]> lista) {
-        List<String> categorias = new ArrayList<>();
-        lista.forEach(d -> categorias.add(d[0].toString()));
-        return categorias;
-    }*/
+    private List<String> unidades(List<Tabela> lista) {
+        List<String> unidades = new ArrayList<>();
+        lista.forEach(t -> unidades.add(t.getUnidadeGestora()));
+        return unidades;
+    }
 }

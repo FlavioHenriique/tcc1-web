@@ -1,8 +1,7 @@
 <html>
     <head>
-        <title>Favorecidos</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Unidades gestoras</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="bulma-0.7.1/css/bulma.min.css" />
         <link rel="stylesheet" href="css/app.css" />
         <link rel="icon" href="img/icon.png">
@@ -10,7 +9,7 @@
     <body>
         <div class="container has-text-centered ">
             <br>
-            <h2 class="title is-2">Verificar gastos por favorecido</h2>
+            <h2 class="title is-2">Verificar gastos por unidades gestoras</h2>
             <h3 class="title is-5">Selecione o intervalo de tempo desejado:</h3>            
             <br>
             <div class="columns">
@@ -33,28 +32,6 @@
 
 
         <!-- MODAIS -->
-        <div class="modal is-fullwidth" id="modalFavorecido">
-            <div class="modal-background"></div>
-            <div class="modal-card">
-                <header class="modal-card-head">
-                    <p class="modal-card-title">Favorecidos encontrados</p>
-                    <button class="delete" aria-label="close" onclick="fecharmodal(getElementById('modalFavorecido'))"></button>
-                </header>
-                <section class="modal-card-body">
-                    <table class="table" id="valoresFavorecidos">
-                        <thead>
-                            <tr> 
-                                <th>Nome do favorecido</th>
-                                <th>Verificar</th>
-                            </tr>    
-                        </thead>
-                    </table>
-                </section>
-                <footer class="modal-card-foot">
-                </footer>
-            </div>
-        </div>
-
         <div class="modal" id="modalAno">
             <div class="modal-background"></div>
             <div class="modal-card">
@@ -78,10 +55,7 @@
                             </select>
                         </div>
                         <br><br>
-                        <label class="label">Nome ou CNPJ do favorecido</label>
-                        <input type="text" class="input" id="nomeCNPJAno">
-                        <br><br>
-                        <button class="button is-success is-fullwidth" onclick="buscaAnos()">BUSCAR FAVORECIDO</button>
+                        <button class="button is-success is-fullwidth" onclick="buscaUnidadesAnos()">GERAR GRÁFICO</button>
                     </div>
                 </section>
                 <footer class="modal-card-foot">
@@ -124,12 +98,9 @@
                             <option selected disabled="disabled" value="">Selecione o ano</option>
                         </select>
                     </div>
+                    <br><br>
 
-                    <br><br>
-                    <label class="label">Nome ou CNPJ do favorecido</label>
-                    <input type="text" class="input" id="nomeCNPJMeses">
-                    <br><br>
-                    <button class="button is-success is-fullwidth" onclick="buscaMeses()">BUSCAR FAVORECIDO</button>
+                    <button class="button is-success is-fullwidth" onclick="buscaUnidadesMeses()">GERAR GRÁFICO</button>
                 </section>
                 <footer class="modal-card-foot">
 
@@ -160,48 +131,37 @@
                         </select>
                     </div>
                     <br><br>
-                    <label class="label">Nome ou CNPJ do favorecido</label>
-                    <input type="text" class="input" id="nomeCNPJSemestre">
-                    <br><br>
-
-
-                    <button onclick="buscaSemestre()" class="button is-success is-fullwidth">BUSCAR FAVORECIDO</button>
+                    <button onclick="buscaUnidadesSemestres()" class="button is-success is-fullwidth">GERAR GRÁFICO</button>
                 </section>
                 <footer class="modal-card-foot">
-
                 </footer>
             </div>
         </div>
-
-        <br>
-        <label class="label">Ordenar por:</label>
-        <div class="select is-fullwidth">
-            <select onchange="ordenarDados();" id="ordenacao">
-                <option selected disabled="disabled">Selecione como deseja ordenar o resultado...</option>                        
-                <option value="1">Unidade gestora</option>                        
-                <option value="2">Unidade gestora</option>                        
-                <option></option>                        
-            </select>
+        
+        <h3 class="title is-5 has-text-centered">Selecione o tipo de gráfico desejado:</h3>
+        <div class="tabs is-centered is-medium is-toggle-rounded is-toggle">
+            <ul>
+                <li><a onclick="mudarTipo('bar')">Barra</a></li>
+                <li><a onclick="mudarTipo('pie')">Pizza</a></li>
+                <li><a onclick="mudarTipo('line')">Linha</a></li>
+            </ul>
         </div>
-
-        <div id="container"  class="box has-text-centered">
+        <br>
+        <div id="container"  class="box has-text-centered" style="height:80%;">
             <h3 class="title is-5" id="titulo"></h3>            
         </div>
-        <br><br>
 
         <script src="js/url.js"></script>
         <script src="js/modal.js"></script>
-        <script src="js/jquery.min.js"></script>
         <script src="code/highcharts.js"></script>
         <script src="code/highcharts-3d.js"></script>
         <script src="code/modules/exporting.js"></script>
         <script src="code/modules/export-data.js"></script>
         <script src="js/graficos.js"></script>
         <script src="js/swal.js"></script>
-        <script src="js/buscas/intervalos.js"></script>
-        <script src="js/buscas/niveis.js"></script>
-        <script src="js/buscas/favorecidos.js"></script>
+        <script src="js/buscas/niveisUnidade.js"></script>
         <script src="js/buscas/areaAtuacao.js"></script>
         <script src="js/buscas/valores.js"></script>
+        <script src="js/buscas/unidades.js"></script>
     </body>
 </html>
