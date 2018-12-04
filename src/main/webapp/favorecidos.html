@@ -173,18 +173,33 @@
             </div>
         </div>
 
-        <br>
-        <label class="label">Ordenar por:</label>
-        <div class="select is-fullwidth">
-            <select onchange="ordenarDados();" id="ordenacao">
-                <option selected disabled="disabled">Selecione como deseja ordenar o resultado...</option>                        
-                <option value="1">Valor total</option>                        
-                <option value="2">Unidade gestora</option>                        
-                <option></option>                        
-            </select>
+        <div class="columns">
+            <div class="column">
+                <label class="label">Ordenar por:</label>
+                <div class="select is-fullwidth">
+                    <select onchange="ordenarDados();" id="ordenacao">
+                        <option selected disabled="disabled">Selecione como deseja ordenar o resultado...</option>                        
+                        <option value="1">Valor total</option>                        
+                        <option value="2">Unidade gestora</option>                        
+                        <option></option>                        
+                    </select>
+                </div>
+            </div>
+            <div class="column">
+                <label class="label">Filtrar por unidade gestora:</label>
+                <nav class="level">
+                    <div class="level-item">
+
+                        <input type="text" class="input" id="nomeUnidade">        
+                        <button class="button is-success" onclick="filtrarDados(nomeUnidade.value)">Filtrar</button>
+                    </div>
+                </nav>
+            </div>
         </div>
         <br>
         <br>
+
+        <br><br>
 
         <div id="container"  class="box has-text-centered">
             <h3 class="title is-5" id="titulo"></h3>            

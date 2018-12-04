@@ -160,3 +160,12 @@ function ordenarDados() {
     }
 }
 
+function filtrarDados(unidade) {
+    let regex = '\\b' + unidade + '\\b';
+    let novoJson = jsonFavorecido.dados.filter(function (value) {
+        return value.unidadeGestora.match(new RegExp(regex, 'gi')) !== null;
+    });
+    jsonFavorecido.dados = novoJson;
+    geraTabela(jsonFavorecido);
+}
+
