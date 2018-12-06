@@ -1,4 +1,4 @@
-package br.edu.ifpb.tcc1.web.graficos;
+package br.edu.ifpb.tcc1.web.model;
 
 import java.util.List;
 

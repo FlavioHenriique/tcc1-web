@@ -1,8 +1,8 @@
 package br.edu.ifpb.tcc1.web.controller;
 
-import br.edu.ifpb.tcc1.web.graficos.ResultadoTabela;
-import br.edu.ifpb.tcc1.web.graficos.ResultadoTabela;
-import br.edu.ifpb.tcc1.web.graficos.Tabela;
+import br.edu.ifpb.tcc1.web.model.ResultadoTabela;
+import br.edu.ifpb.tcc1.web.model.ResultadoTabela;
+import br.edu.ifpb.tcc1.web.model.Tabela;
 import br.edu.ifpb.tcc1.web.query.QueryFavorecidos;
 import java.util.ArrayList;
 import java.util.List;

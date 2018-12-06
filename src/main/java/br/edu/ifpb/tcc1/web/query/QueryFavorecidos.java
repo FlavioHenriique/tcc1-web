@@ -1,6 +1,6 @@
 package br.edu.ifpb.tcc1.web.query;
 
-import br.edu.ifpb.tcc1.web.graficos.Tabela;
+import br.edu.ifpb.tcc1.web.model.Tabela;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

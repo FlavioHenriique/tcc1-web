@@ -1,7 +1,7 @@
 package br.edu.ifpb.tcc1.web.resources;
 
 import br.edu.ifpb.tcc1.web.controller.IntervaloController;
-import br.edu.ifpb.tcc1.web.graficos.Grafico;
+import br.edu.ifpb.tcc1.web.model.Grafico;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.GET;

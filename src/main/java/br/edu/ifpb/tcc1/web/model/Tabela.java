@@ -1,4 +1,4 @@
-package br.edu.ifpb.tcc1.web.graficos;
+package br.edu.ifpb.tcc1.web.model;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -12,7 +12,17 @@ public class Tabela {
     private String detalhamento;
     private String titulo;
 
+    private String hierarquia;
+
     public Tabela() {
+    }
+
+    public String getHierarquia() {
+        return hierarquia;
+    }
+
+    public void setHierarquia(String hierarquia) {
+        this.hierarquia = hierarquia;
     }
 
     public String getTitulo() {

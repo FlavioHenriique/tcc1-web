@@ -2,6 +2,7 @@ var urlFavorecido = 'http://localhost:8080/tcc1-web/api/favorecidos/';
 var urlBuscaFavorecido = '';
 var estado = 0;
 var jsonFavorecido = null;
+var hierarquia = 0;
 
 $("#botoesIntervalo").load("trechos/botoesIntervalos.html");
 
@@ -87,6 +88,7 @@ function favorecidoSelecionado(favorecido) {
             icon: "error",
         });
     }
+    hierarquia = 1;
 }
 
 function geraTabela(json) {
@@ -94,24 +96,27 @@ function geraTabela(json) {
     estado++;
     $("#titulo").html(json.titulo);
     let $teste = $("<table class='table' style='width: 100%;' id='tabelaDados'>");
-    $teste.append("<tr id='tr'>"
+    let strTituloAppend = "<tr id='tr'>"
             + '<th>Área de atuação</th>'
             + '<th>Ano</th>'
             + '<th>Mês</th>'
-            + '<th>Unidade gestora</th>'
             + '<th>Valor</th>'
-            + '<th>Nível de detalhamento</th>'
-            + '</tr>');
+            + '<th>Unidade Gestora</th>';
+    if (hierarquia < 3) {
+        strTituloAppend = strTituloAppend + '<th>Nível de detalhamento</th>';
+    }
+    $teste.append(strTituloAppend + '</tr>');
 
     for (k = 0; k < json.dados.length; k++) {
-        $teste.append(
-                '<tr><td>' + json.dados[k].detalhamento + '</td>' +
+        let strAppend = '<tr><td>' + json.dados[k].detalhamento + '</td>' +
                 '<td>' + json.dados[k].ano + '</td>' +
                 '<td>' + json.dados[k].mes + '</td>' +
                 '<td>' + json.dados[k].unidadeGestora + '</td>' +
-                '<td>' + 'R$ ' + json.dados[k].total + '</td>' +
-                '<td><button class="button is-success" onclick="descerNivel(\'' + json.dados[k].detalhamento + '\')">Detalhar</button></td></tr>')
-                .attr('id', 'valoresFavorecidos');
+                '<td>' + 'R$ ' + json.dados[k].total + '</td>';
+        if (hierarquia < 3) {
+            strAppend = strAppend + '<td><button class="button is-success" onclick="descerNivel(\'' + json.dados[k].detalhamento + '\')">Detalhar</button></td></tr>';
+        }
+        $teste.append(strAppend + '</tr>').attr('id', 'valoresFavorecidos');
     }
     $teste.append("</table>");
     $teste.appendTo("#container");
@@ -131,6 +136,8 @@ function descerNivel(detalhamento) {
             icon: "error",
         });
     }
+    hierarquia++;
+    console.log(hierarquia);
 }
 
 function ordenarDados() {

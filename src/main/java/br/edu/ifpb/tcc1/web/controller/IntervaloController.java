@@ -1,7 +1,7 @@
 package br.edu.ifpb.tcc1.web.controller;
 
 import br.edu.ifpb.tcc1.web.query.QueryIntervalos;
-import br.edu.ifpb.tcc1.web.graficos.GraficoIntervalos;
+import br.edu.ifpb.tcc1.web.model.GraficoIntervalos;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;

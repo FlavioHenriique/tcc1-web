@@ -1,6 +1,8 @@
 var urlUnidades = 'http://localhost:8080/tcc1-web/api/unidade';
 var urlBuscaUnidades = '';
 var jsonUnidades = null;
+var hierarquia = 0;
+
 
 function buscaUnidadesAnos() {
 
@@ -42,24 +44,30 @@ function buscaDados(url, funcao) {
             icon: "error",
         });
     }
+    hierarquia = 1;
 }
 
 function geraTabela(json) {
+    console.log(hierarquia);
     $("#container table").remove();
     $("#titulo").html(json.title);
     let $teste = $("<table class='table' style='width: 100%;' id='tabelaDados'>");
-    $teste.append("<tr id='tr'>"
+    let strTituloAppend = "<tr id='tr'>"
             + '<th>Área de atuação</th>'
-            + '<th>Valor</th>'
-            + '<th>Nível de detalhamento</th>'
-            + '</tr>');
+            + '<th>Valor</th>';
+    if (hierarquia < 2) {
+        strTituloAppend = strTituloAppend + '<th>Nível de detalhamento</th>';
+    }
+    $teste.append(strTituloAppend + '</tr>');
 
     for (k = 0; k < json.data.length; k++) {
-        $teste.append(
-                '<tr><td>' + json.data[k][0] + '</td>' +
-                '<td>' + 'R$ ' + json.data[k][1] + '</td>' +
-                '<td><button class="button is-success" onclick="descerNivel(\'' + json.data[0][0] + '\')">Detalhar</button></td></tr>')
-                .attr('id', 'valoresFavorecidos');
+        let strAppend = '<tr><td>' + json.data[k][0] + '</td>' +
+                '<td>' + 'R$ ' + json.data[k][1] + '</td>';
+        if (hierarquia < 2) {
+            strAppend = strAppend + '<td><button class="button is-success" onclick="descerNivel(\'' + json.data[0][0] + '\')">Detalhar</button></td>';
+        }
+        strAppend = strAppend + '</tr>';
+        $teste.append(strAppend).attr('id', 'valoresFavorecidos');
     }
     $teste.append("</table>");
     $teste.appendTo("#container");
@@ -79,6 +87,7 @@ function descerNivel(detalhamento) {
             icon: "error",
         });
     }
+    hierarquia++;
 }
 
 function ordenarDados() {

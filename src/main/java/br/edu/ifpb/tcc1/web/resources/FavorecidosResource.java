@@ -1,7 +1,7 @@
 package br.edu.ifpb.tcc1.web.resources;
 
 import br.edu.ifpb.tcc1.web.controller.FavorecidoController;
-import br.edu.ifpb.tcc1.web.graficos.ResultadoTabela;
+import br.edu.ifpb.tcc1.web.model.ResultadoTabela;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
