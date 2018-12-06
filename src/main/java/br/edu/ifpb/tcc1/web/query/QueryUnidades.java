@@ -27,7 +27,6 @@ public class QueryUnidades {
         String sql = inicioSQL(campo)
                 + "AND d.ano BETWEEN ? AND ? "
                 + fimSQL(campo);
-        System.out.println(sql);
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, ano1);
@@ -45,7 +44,7 @@ public class QueryUnidades {
                 + "AND d.ano BETWEEN ? AND ? "
                 + "AND u.nomeorgaosuperior = ? "
                 + fimSQL(campo);
-        System.out.println(sql);
+
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, ano1);
@@ -84,7 +83,7 @@ public class QueryUnidades {
         String sql = inicioSQL(campo)
                 + "AND d.semestre = ? "
                 + fimSQL(campo);
-        System.out.println(sql);
+
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, semestre);
@@ -139,7 +138,7 @@ public class QueryUnidades {
         String sql = inicioSQL(campo)
                 + "AND d.codigo BETWEEN ? AND ? "
                 + fimSQL(campo);
-        
+
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, mes1);
@@ -193,7 +192,7 @@ public class QueryUnidades {
     }
 
     public String inicioSQL(String campo) {
-        return "SELECT   sum(e.valor) as total, u." + campo + " "
+        return "SELECT   CAST(CAST(sum(e.valor) AS NUMERIC(20,2)) AS varchar(20)) as total, u." + campo + " "
                 + "FROM unidadegestora u, empenho e, data d  "
                 + "WHERE e.codunidadegestora = u.codigounidadegestora "
                 + "AND d.codigo = e.coddata ";
@@ -208,7 +207,7 @@ public class QueryUnidades {
         List<Object[]> lista = new ArrayList<>();
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
-            lista.add(new Object[]{rs.getString(campo), rs.getBigDecimal("total")});
+            lista.add(new Object[]{rs.getString(campo), rs.getString("total")});
         }
         return lista;
     }

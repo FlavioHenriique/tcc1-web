@@ -115,7 +115,6 @@ function geraTabela(json) {
     }
     $teste.append("</table>");
     $teste.appendTo("#container");
-
 }
 
 function descerNivel(detalhamento) {
