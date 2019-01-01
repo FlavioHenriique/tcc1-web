@@ -18,7 +18,9 @@ function PreencherAreas() {
 }
 
 function anos() {
+    console.log(urlValores + 'anos');
     client.open('GET', urlValores + 'anos', false);
+
     client.send(null);
     if (client.status == 200) {
         let json = JSON.parse(client.responseText);
@@ -29,9 +31,16 @@ function anos() {
             anoMes1.options[anoMes1.options.length] = new Option(array[i], array[i]);
             anoMes2.options[anoMes2.options.length] = new Option(array[i], array[i]);
             anoSemestre.options[anoSemestre.options.length] = new Option(array[i], array[i]);
+                if (document.getElementById('anoSemestre1') != null) {
+                anoSemestre1.options[anoSemestre1.options.length] = new Option(array[i], array[i]);
+            }
         }
+
     }
 }
+
+
+
 function meses() {
     client.open('GET', urlValores + 'meses', false);
     client.send(null);
@@ -39,7 +48,7 @@ function meses() {
         let json = JSON.parse(client.responseText);
         let array = json.valores;
         for (i = 0; i <= array.length; i++) {
-            if (i+1 < 10) {
+            if (i + 1 < 10) {
                 mes1.options[mes1.options.length] = new Option(array[i], '0' + i);
                 mes2.options[mes2.options.length] = new Option(array[i], '0' + i);
             } else {
@@ -49,6 +58,7 @@ function meses() {
         }
     }
 }
+
 PreencherAreas();
 anos();
 meses();

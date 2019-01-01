@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="bulma-0.7.1/css/bulma.min.css"/>
+        <link rel="stylesheet" href="css/app.css"/>
+        <link rel="icon" href="img/icon.png">
+        <title>Diferença dos gastos</title>
+    </head>
+    <body>
+
+        <div class="container has-text-centered ">
+            <br>
+            <h2 class="title is-2">Verificar a diferença entre os gastos realizados</h2>
+
+            <h3 class="title is-5">Selecione os intervalos de tempo desejado:</h3>
+            <div class="columns">
+                <div class="column"></div>
+                <div class="column"></div>
+                <div class="column">
+                    <button class="button is-success is-large" onclick="abrirmodal(getElementById('modalAno'))">Anos</button>
+                </div>
+                <div class="column">
+                    <button class="button is-success is-large" onclick="abrirmodal(getElementById('modalSemestre'))">Semestres</button>
+                </div>
+                <div class="column">
+                    <button class="button is-success is-large" onclick="abrirmodal(getElementById('modalMes'))">Meses</button>
+                </div>
+                <div class="column"></div>
+                <div class="column"></div>
+            </div>
+            <br>
+        </div>
+        <br>
+        <div class="modal" id="modalAno">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Gastos entre anos</p>
+                    <button class="delete" aria-label="close" onclick="fecharmodal(getElementById('modalAno'))"> </button>
+                </header>
+                <section class="modal-card-body">
+                    <div class="field">
+                        <label class="label">Primeiro ano</label>
+                        <div class="select is-fullwidth">
+
+                            <select id="ano1">
+                                <option selected="true" disabled="disabled">Selecione um ano</option>
+                            </select>
+                        </div>
+                        <br><br>
+                        <label class="label">Segundo ano</label>
+                        <div class="select is-fullwidth">
+                            <select id="ano2">
+                                <option selected="true" disabled="disabled">Selecione um ano</option>
+                            </select>
+                        </div>
+                        <br><br>
+
+                        <button id="btAnos" class="button is-success is-fullwidth">GERAR GRÁFICO</button>
+                    </div>
+                </section>
+                <footer class="modal-card-foot">
+
+                </footer>
+            </div>
+        </div>
+
+        <div class="modal" id="modalMes">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Gastos entre meses</p>
+                    <button class="delete" aria-label="close" onclick="fecharmodal(getElementById('modalMes'))"> </button>
+                </header>
+                <section class="modal-card-body">
+                    <label class="label">Primeiro mês</label>
+                    <div class="select is-fullwidth">
+                        <select id="mes1">
+                            <option selected disabled="disabled" value="">Selecione o mês</option>
+                        </select>
+                    </div>
+                    <br><br>
+                    <label class="label">Primeiro ano</label>
+                    <div select class="is-fullwidth select">
+                        <select id="anoMes1">
+                            <option selected disabled="disabled" value="">Selecione o ano</option>
+                        </select>
+                    </div>
+                    <br><br>
+                    <label class="label">Segundo mês</label>
+                    <div class="select is-fullwidth">
+                        <select id="mes2">
+                            <option selected disabled="disabled" value="">Selecione o mês</option>
+                        </select>
+                    </div>
+                    <br><br>
+                    <label class="label">Segundo ano</label>
+                    <div select class="select is-fullwidth">
+                        <select id="anoMes2">
+                            <option selected disabled="disabled" value="">Selecione o ano</option>
+                        </select>
+                    </div>
+                    <br><br>
+
+                    <button class="button is-success is-fullwidth" id="btMeses">GERAR GRÁFICO</button>
+                </section>
+                <footer class="modal-card-foot">
+
+                </footer>
+            </div>
+        </div>
+        <div class="modal" id="modalSemestre">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Gastos entre semestres</p>
+                    <button class="delete" aria-label="close" onclick="fecharmodal(getElementById('modalSemestre'))"> </button>
+                </header>
+                <section class="modal-card-body">
+                    <label class="label"> Primeiro Ano</label>
+                    <div class="select is-fullwidth">
+                        <select id="anoSemestre1">
+                            <option selected disabled="disabled">Selecione um ano</option>
+                        </select>
+                    </div>
+                    <br><br>
+                    <label class="label">Semestre</label>
+                    <div class="select is-fullwidth">
+                        <select id="semestre">
+                            <option selected disabled="disabled" value="">Selecione o semestre</option>
+                            <option value="1">1º</option>
+                            <option value="2">2º</option>
+                        </select>
+                    </div>
+                    <br><br>
+                    <label class="label">Segundo Ano</label>
+                    <div class="select is-fullwidth">
+                        <select id="anoSemestre">
+                            <option selected disabled="disabled">Selecione um ano</option>
+                        </select>
+                    </div>
+                    <br><br>
+                    <label class="label">Semestre</label>
+                    <div class="select is-fullwidth">
+                        <select id="semestre">
+                            <option selected disabled="disabled" value="">Selecione o semestre</option>
+                            <option value="1">1º</option>
+                            <option value="2">2º</option>
+                        </select>
+                    </div>
+                    <br><br>
+                    <button id="btSemestre" class="button is-success is-fullwidth">GERAR GRÁFICO</button>
+                </section>
+                <footer class="modal-card-foot">
+
+                </footer>
+            </div>
+        </div>
+        <h3 class="title is-5 has-text-centered">Selecione o tipo de gráfico desejado:</h3>
+        <div class="tabs is-centered is-medium is-toggle-rounded is-toggle">
+            <ul>
+                <li><a onclick="mudarTipo('bar')">Barra</a></li>
+                <li><a onclick="mudarTipo('pie')">Pizza</a></li>
+                <li><a onclick="mudarTipo('line')">Linha</a></li>
+            </ul>
+        </div>
+
+        <script src="js/url.js"></script>
+        <script src="js/modal.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="code/highcharts.js"></script>
+        <script src="code/highcharts-3d.js"></script>
+        <script src="code/modules/exporting.js"></script>
+        <script src="code/modules/export-data.js"></script>
+        <script src="js/graficos.js"></script>
+        <script src="js/swal.js"></script>
+        <script src="js/buscas/intervalos.js"></script>
+        <script src="js/buscas/niveis.js"></script>
+        <script src="js/buscas/diferenca.js"></script>
+        <script src="js/buscas/areaAtuacao.js"></script>
+        <script src="js/buscas/valores.js"></script>
+    </body>
+</html>
