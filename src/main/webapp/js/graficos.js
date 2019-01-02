@@ -51,7 +51,7 @@ function mudarTipo(tipo) {
     });
 }
 
-function mudarDados(json, clique){
+function mudarDados(json, clique) {
     console.log("atualizar");
     chart.update({
         title: {
@@ -63,6 +63,40 @@ function mudarDados(json, clique){
         series: [{
                 name: json.name,
                 data: json.data,
+                point: clique
+            }]
+    });
+}
+
+
+function diferencas(json, clique) {
+    chart = Highcharts.chart('container', {
+        title: {
+            text: json.title
+        },
+        chart: {
+            type: json.type
+        },
+        tooltip: {
+            pointFormat: 'Valor: <b>R$ {point.y},00</b>'
+        },
+        xAxis: {
+            categories: json.categorias
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+                name: json.primeiroIntervalo,
+                data: json.valoresPrimeiroIntervalo,
+                point: clique
+
+            }, {
+                name: json.segundoIntervalo,
+                data: json.valoresSegundoIntervalo,
                 point: clique
             }]
     });

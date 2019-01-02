@@ -30,16 +30,19 @@ function anos() {
             ano2.options[ano2.options.length] = new Option(array[i], array[i]);
             anoMes1.options[anoMes1.options.length] = new Option(array[i], array[i]);
             anoMes2.options[anoMes2.options.length] = new Option(array[i], array[i]);
-            anoSemestre.options[anoSemestre.options.length] = new Option(array[i], array[i]);
-                if (document.getElementById('anoSemestre1') != null) {
+            if (document.getElementById('anoSemestre') != null) {
+                anoSemestre.options[anoSemestre.options.length] = new Option(array[i], array[i]);
+            }
+            if (document.getElementById('anoSemestre1') != null) {
                 anoSemestre1.options[anoSemestre1.options.length] = new Option(array[i], array[i]);
+            }
+            if (document.getElementById('anoSemestre2') != null) {
+                anoSemestre2.options[anoSemestre2.options.length] = new Option(array[i], array[i]);
             }
         }
 
     }
 }
-
-
 
 function meses() {
     client.open('GET', urlValores + 'meses', false);

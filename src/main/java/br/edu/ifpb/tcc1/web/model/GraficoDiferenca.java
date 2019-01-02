@@ -4,14 +4,50 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class GraficoDiferenca {
-    
+
     private List<BigDecimal> valoresPrimeiroIntervalo;
     private List<BigDecimal> valoresSegundoIntervalo;
     private String primeiroIntervalo;
     private String segundoIntervalo;
-    
-    public GraficoDiferenca(){
-        
+    private String title;
+    private List<String> categorias;
+    private String type;
+    private String name;
+
+    public GraficoDiferenca() {
+
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public List<String> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<String> categorias) {
+        this.categorias = categorias;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public List<BigDecimal> getValoresPrimeiroIntervalo() {
@@ -45,6 +81,5 @@ public class GraficoDiferenca {
     public void setSegundoIntervalo(String segundoIntervalo) {
         this.segundoIntervalo = segundoIntervalo;
     }
-    
-    
+
 }

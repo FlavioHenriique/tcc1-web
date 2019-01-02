@@ -57,8 +57,7 @@
                             </select>
                         </div>
                         <br><br>
-
-                        <button id="btAnos" class="button is-success is-fullwidth">GERAR GRÁFICO</button>
+                        <button id="btAnos" class="button is-success is-fullwidth" onclick="buscaAnos()">GERAR GRÁFICO</button>
                     </div>
                 </section>
                 <footer class="modal-card-foot">
@@ -104,7 +103,7 @@
                     </div>
                     <br><br>
 
-                    <button class="button is-success is-fullwidth" id="btMeses">GERAR GRÁFICO</button>
+                    <button class="button is-success is-fullwidth" id="btMeses" onclick="buscaMeses()">GERAR GRÁFICO</button>
                 </section>
                 <footer class="modal-card-foot">
 
@@ -128,7 +127,7 @@
                     <br><br>
                     <label class="label">Semestre</label>
                     <div class="select is-fullwidth">
-                        <select id="semestre">
+                        <select id="semestre1">
                             <option selected disabled="disabled" value="">Selecione o semestre</option>
                             <option value="1">1º</option>
                             <option value="2">2º</option>
@@ -137,21 +136,21 @@
                     <br><br>
                     <label class="label">Segundo Ano</label>
                     <div class="select is-fullwidth">
-                        <select id="anoSemestre">
+                        <select id="anoSemestre2">
                             <option selected disabled="disabled">Selecione um ano</option>
                         </select>
                     </div>
                     <br><br>
                     <label class="label">Semestre</label>
                     <div class="select is-fullwidth">
-                        <select id="semestre">
+                        <select id="semestre2">
                             <option selected disabled="disabled" value="">Selecione o semestre</option>
                             <option value="1">1º</option>
                             <option value="2">2º</option>
                         </select>
                     </div>
                     <br><br>
-                    <button id="btSemestre" class="button is-success is-fullwidth">GERAR GRÁFICO</button>
+                    <button id="btSemestre" class="button is-success is-fullwidth" onclick="buscaSemestres()">GERAR GRÁFICO</button>
                 </section>
                 <footer class="modal-card-foot">
 
@@ -161,11 +160,11 @@
         <h3 class="title is-5 has-text-centered">Selecione o tipo de gráfico desejado:</h3>
         <div class="tabs is-centered is-medium is-toggle-rounded is-toggle">
             <ul>
-                <li><a onclick="mudarTipo('bar')">Barra</a></li>
-                <li><a onclick="mudarTipo('pie')">Pizza</a></li>
+                <li><a onclick="mudarTipo('column')">Coluna</a></li>
                 <li><a onclick="mudarTipo('line')">Linha</a></li>
             </ul>
         </div>
+        <div id="container" style="height: 550px" class="box"></div>
 
         <script src="js/url.js"></script>
         <script src="js/modal.js"></script>
@@ -176,7 +175,6 @@
         <script src="code/modules/export-data.js"></script>
         <script src="js/graficos.js"></script>
         <script src="js/swal.js"></script>
-        <script src="js/buscas/intervalos.js"></script>
         <script src="js/buscas/niveis.js"></script>
         <script src="js/buscas/diferenca.js"></script>
         <script src="js/buscas/areaAtuacao.js"></script>
