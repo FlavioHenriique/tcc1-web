@@ -207,7 +207,7 @@ public class QueryUnidades {
         List<Object[]> lista = new ArrayList<>();
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
-            lista.add(new Object[]{rs.getString(campo), rs.getString("total")});
+            lista.add(new Object[]{rs.getString(campo), rs.getString("total").replace(".", ",")});
         }
         return lista;
     }

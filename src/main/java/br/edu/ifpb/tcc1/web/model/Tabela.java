@@ -7,7 +7,7 @@ public class Tabela {
 
     private int ano;
     private String mes;
-    private BigDecimal total;
+    private String total;
     private String unidadeGestora;
     private String detalhamento;
     private String titulo;
@@ -33,11 +33,11 @@ public class Tabela {
         this.titulo = titulo;
     }
 
-    public BigDecimal getTotal() {
+    public String getTotal() {
         return total;
     }
 
-    public void setTotal(BigDecimal total) {
+    public void setTotal(String total) {
         this.total = total;
     }
 

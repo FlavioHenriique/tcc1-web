@@ -100,8 +100,8 @@ function geraTabela(json) {
             + '<th>Área de atuação</th>'
             + '<th>Ano</th>'
             + '<th>Mês</th>'
-            + '<th>Valor</th>'
-            + '<th>Unidade Gestora</th>';
+            + '<th>Unidade Gestora</th>'
+            + '<th>Valor</th>';
     if (hierarquia < 3) {
         strTituloAppend = strTituloAppend + '<th>Nível de detalhamento</th>';
     }

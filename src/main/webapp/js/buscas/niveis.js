@@ -37,6 +37,7 @@ function subfuncao(urlInicial) {
 }
 
 function programa(urlinicial) {
+    console.log("executando programa");
     return cliquePrograma = {
         events: {
             click: function (event) {

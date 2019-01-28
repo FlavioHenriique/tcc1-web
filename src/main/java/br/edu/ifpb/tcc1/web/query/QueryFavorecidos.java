@@ -315,7 +315,8 @@ public class QueryFavorecidos {
     }
 
     private String inicioSQL(String campo) {
-        return "SELECT SUM(e.valor) as total, d.ano, d.nome_mes, u.nomeunidadegestora, a." + campo
+        return "select  CAST(CAST(sum(e.valor) AS NUMERIC(20,2)) AS varchar(20)) as total,"
+                + " d.ano, d.nome_mes, u.nomeunidadegestora, a." + campo
                 + " FROM Acao a, Empenho e, Favorecido f, Data d, unidadegestora u "
                 + "WHERE e.codacao = a.codigoacao "
                 + "AND e.coddata = d.codigo "
@@ -337,7 +338,7 @@ public class QueryFavorecidos {
             t.setAno(rs.getInt("ano"));
             t.setDetalhamento(rs.getString(campo));
             t.setMes(rs.getString("nome_mes"));
-            t.setTotal(rs.getBigDecimal("total"));
+            t.setTotal(rs.getString("total").replace(".", ","));
             t.setUnidadeGestora(rs.getString("nomeunidadegestora"));
             lista.add(t);
         }

@@ -1,6 +1,5 @@
 var chart;
 function intervalos(json, clique) {
-    console.log("grafico");
     chart = Highcharts.chart('container', {
         title: {
             text: json.title
@@ -52,7 +51,6 @@ function mudarTipo(tipo) {
 }
 
 function mudarDados(json, clique) {
-    console.log("atualizar");
     chart.update({
         title: {
             text: json.title
@@ -86,7 +84,15 @@ function diferencas(json, clique) {
         plotOptions: {
             column: {
                 pointPadding: 0.2,
-                borderWidth: 0
+                borderWidth: 0,
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                showInLegend: true,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}'
+                },
             }
         },
         series: [{
