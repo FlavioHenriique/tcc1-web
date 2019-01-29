@@ -107,3 +107,55 @@ function diferencas(json, clique) {
             }]
     });
 }
+
+function evolucao(json, clique) {
+
+    Highcharts.chart('container', {
+
+        title: {
+            text: json.title
+        },
+
+        yAxis: {
+            title: {
+                text: json.name
+            }
+        },
+        xAxis: {
+            categories: json.categorias
+        },
+        plotOptions: {
+            series: {
+                pointStart: 0,
+                pointInterval: 1
+            }
+        },
+
+        tooltip: {
+            pointFormat: 'Valor: <b>R$ {point.y},00</b>'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+
+        series: json.series,
+
+        responsive: {
+            rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+        }
+
+    });
+}
