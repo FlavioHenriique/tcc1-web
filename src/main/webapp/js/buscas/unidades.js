@@ -5,7 +5,6 @@ var hierarquia = 0;
 
 
 function buscaUnidadesAnos() {
-
     fecharmodal(document.getElementById("modalAno"));
     let url = urlUnidades + '/ano/' + ano1.value + "/" + ano2.value + '/';
     urlBuscaUnidades = url;
@@ -30,6 +29,8 @@ function buscaUnidadesMeses() {
 }
 
 function buscaDados(url, funcao) {
+    hierarquia = 0;
+    fecharmodal(document.getElementById("modalAno"));
     client.open('GET', url, false);
     client.send(null);
     if (client.status == 200) {
@@ -48,7 +49,7 @@ function buscaDados(url, funcao) {
 }
 
 function geraTabela(json) {
-    console.log(hierarquia);
+    
     $("#container table").remove();
     $("#titulo").html(json.title);
     let $teste = $("<table class='table' style='width: 100%;' id='tabelaDados'>");
@@ -64,7 +65,8 @@ function geraTabela(json) {
         let strAppend = '<tr><td>' + json.data[k][0] + '</td>' +
                 '<td>' + 'R$ ' + json.data[k][1] + '</td>';
         if (hierarquia < 2) {
-            strAppend = strAppend + '<td><button class="button is-success" onclick="descerNivel(\'' + json.data[0][0] + '\')">Detalhar</button></td>';
+            strAppend = strAppend + '<td><button class="button is-success" onclick="descerNivel(\'' 
+                    + json.data[k][0] + '\')">Detalhar</button></td>';
         }
         strAppend = strAppend + '</tr>';
         $teste.append(strAppend).attr('id', 'valoresFavorecidos');
@@ -78,6 +80,7 @@ function descerNivel(detalhamento) {
     client.open('GET', urlBuscaUnidades, false);
     client.send(null);
     if (client.status == 200) {
+        console.log(urlBuscaUnidades);
         jsonUnidades = JSON.parse(client.responseText);
         geraTabela(jsonUnidades);
     } else {

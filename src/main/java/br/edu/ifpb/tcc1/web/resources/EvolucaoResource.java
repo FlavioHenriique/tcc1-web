@@ -18,27 +18,27 @@ public class EvolucaoResource {
     @GET
     @Path("/anos/{ano1}/{ano2}")
     public Response anos(@PathParam("ano1") int ano1, @PathParam("ano2") int ano2) {
-        return Response.ok().entity(controller.anos2(ano1, ano2, "")).build();
+        return Response.ok().entity(controller.anos(ano1, ano2, "")).build();
     }
 
     @GET
     @Path("/anos/{ano1}/{ano2}/{funcao}")
     public Response anos(@PathParam("ano1") int ano1, @PathParam("ano2") int ano2,
             @PathParam("funcao") String funcao) {
-        return Response.ok().entity(controller.anos2(ano1, ano2, funcao)).build();
+        return Response.ok().entity(controller.anos(ano1, ano2, funcao)).build();
     }
 
     @GET
     @Path("/semestres/{semestre1}/{semestre2}/{funcao}")
     public Response semestres(@PathParam("semestre1") int semestre1, @PathParam("semestre2") int semestre2,
             @PathParam("funcao") String funcao) {
-        return Response.ok().entity(controller.semestres2(semestre1, semestre2, funcao)).build();
+        return Response.ok().entity(controller.semestres(semestre1, semestre2, funcao)).build();
     }
 
     @GET
     @Path("/semestres/{semestre1}/{semestre2}/")
     public Response semestres(@PathParam("semestre1") int semestre1, @PathParam("semestre2") int semestre2) {
-        return Response.ok().entity(controller.semestres2(semestre1, semestre2, "")).build();
+        return Response.ok().entity(controller.semestres(semestre1, semestre2, "")).build();
     }
 
     @GET

@@ -58,7 +58,7 @@ function buscaSemestres() {
             diferencas(json, funcao(urlArea));
         }
     }
-    
+
 }
 
 function buscaMeses() {

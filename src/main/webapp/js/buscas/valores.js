@@ -18,9 +18,7 @@ function PreencherAreas() {
 }
 
 function anos() {
-    console.log(urlValores + 'anos');
     client.open('GET', urlValores + 'anos', false);
-
     client.send(null);
     if (client.status == 200) {
         let json = JSON.parse(client.responseText);
@@ -50,9 +48,9 @@ function meses() {
     if (client.status == 200) {
         let json = JSON.parse(client.responseText);
         let array = json.valores;
-        console.log(array);
-        for (i = 0; i <= array.length -1 ; i++) {
-            
+
+        for (i = 0; i <= array.length - 1; i++) {
+
             if (i + 1 < 10) {
                 mes1.options[mes1.options.length] = new Option(array[i], '0' + (i + 1));
                 mes2.options[mes2.options.length] = new Option(array[i], '0' + (i + 1));

@@ -44,8 +44,8 @@ public class EvolucaoController {
         grafico.setCategorias(categorias(grafico.getData()));
         return grafico;
     }
-    
-        public GraficoIntervalos meses2(int mes1, int mes2, String funcao) {
+
+    public GraficoIntervalos meses2(int mes1, int mes2, String funcao) {
 
         GraficoIntervalos grafico = new GraficoIntervalos("Evolução dos gastos "
                 + "entre os meses selecionados");
@@ -59,11 +59,28 @@ public class EvolucaoController {
         return grafico;
     }
 
-    public GraficoEvolucao anos(int ano1, int ano2) {
+    public GraficoEvolucao anos(int ano1, int ano2, String funcao) {
 
         GraficoEvolucao grafico = new GraficoEvolucao("Evolução dos gastos "
                 + "entre os anos " + ano1 + " e " + ano2);
-        grafico.setSeries(query.anos(ano1, ano2));
+        if (!funcao.equals("")) {
+            grafico.setTitle(grafico.getTitle() + " na função " + funcao);
+        }
+        grafico.setSeries(query.anos(ano1, ano2, funcao));
+        grafico.setName("Evolução dos gastos");
+        grafico.setType("line");
+        //grafico.setCategorias(categorias());
+        return grafico;
+    }
+    
+        public GraficoEvolucao semestres(int semestre1, int semestre2, String funcao) {
+
+        GraficoEvolucao grafico = new GraficoEvolucao("Evolução dos gastos "
+                + "entre os semestres selecionados");
+        if (!funcao.equals("")) {
+            grafico.setTitle(grafico.getTitle() + " na função " + funcao);
+        }
+        grafico.setSeries(query.anos(semestre1, semestre2, funcao));
         grafico.setName("Evolução dos gastos");
         grafico.setType("line");
         //grafico.setCategorias(categorias());

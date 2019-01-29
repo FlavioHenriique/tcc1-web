@@ -1,6 +1,6 @@
 var chart;
 function intervalos(json, clique) {
-    
+
     console.log(json);
     chart = Highcharts.chart('container', {
         title: {
@@ -13,7 +13,9 @@ function intervalos(json, clique) {
             categories: json.categorias
         },
         plotOptions: {
-
+            series: {
+                color: '#50B432'
+            },
             pie: {
                 allowPointSelect: true,
                 colorByPoint: true,
@@ -70,7 +72,7 @@ function mudarDados(json, clique) {
 
 
 function diferencas(json, clique) {
-    
+
     chart = Highcharts.chart('container', {
         title: {
             text: json.title
@@ -125,8 +127,8 @@ function evolucao(json, clique) {
             }
         },
         /*xAxis: {
-            categories: json.categorias
-        },*/
+         categories: json.categorias
+         },*/
         plotOptions: {
             area: {
                 stacking: 'normal',
@@ -139,7 +141,8 @@ function evolucao(json, clique) {
             },
             series: {
                 pointStart: 0,
-                pointInterval: 1
+                pointInterval: 1,
+                color: '#F28F43'
             }
         },
 

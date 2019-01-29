@@ -21,19 +21,25 @@ public class QueryEvolucao {
         conn = Conexao.getConnection();
     }
 
-    public List<Series> anos(int ano1, int ano2) {
+    public List<Series> anos(int ano1, int ano2, String funcao) {
 
         String sql = "select d.ano, d.nome_mes,  sum(e.valor) as total\n"
                 + "from empenho e join acao a on a.codigoacao = e.codacao\n"
-                + "join data d on e.coddata = d.codigo\n"
-                + "where d.ano between ? and ? \n"
-                + "group by d.ano, d.nome_mes, d.numero_mes\n"
+                + "join data d on e.coddata = d.codigo \n"
+                + "where d.ano between ? and ? \n";
+        if (!funcao.equals("")) {
+            sql += "and a.nomefuncao = ? \n";
+        }
+        sql += "group by d.ano, d.nome_mes, d.numero_mes\n"
                 + "order by d.ano, d.numero_mes \n";
 
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, ano1);
             stmt.setInt(2, ano2);
+            if (!funcao.equals("")) {
+                stmt.setString(3, funcao);
+            }
             ResultSet rs = stmt.executeQuery();
             return dados(rs);
         } catch (SQLException ex) {
@@ -42,6 +48,34 @@ public class QueryEvolucao {
         return null;
     }
 
+    public List<Series> semestres(int semestre1, int semestre2, String funcao) {
+
+        StringBuilder sql = new StringBuilder();
+        sql.append("select d.ano, d.nome_mes,  sum(e.valor) as total\n"
+                + "from empenho e join acao a on a.codigoacao = e.codacao\n"
+                + "join data d on e.coddata = d.codigo \n"
+                + "where d.semestre in (?, ?)  \n");
+        if (!funcao.equals("")) {
+            sql.append("and a.nomefuncao = ? \n");
+        }
+        sql.append("group by d.ano, d.nome_mes, d.numero_mes\n"
+                + "order by d.ano, d.numero_mes \n");
+
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql.toString());
+            stmt.setInt(1, semestre1);
+            stmt.setInt(2, semestre2);
+            if (!funcao.equals("")) {
+                stmt.setString(3, funcao);
+            }
+            ResultSet rs = stmt.executeQuery();
+            return dados(rs);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
     public List<Object[]> anos2(int ano1, int ano2, String funcao) {
 
         String sql = "select d.ano, d.nome_mes,  sum(e.valor) as total\n"
