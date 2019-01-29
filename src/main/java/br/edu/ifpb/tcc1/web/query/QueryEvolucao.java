@@ -7,13 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 
 @Stateless
 public class QueryEvolucao {
@@ -33,7 +29,7 @@ public class QueryEvolucao {
                 + "where d.ano between ? and ? \n"
                 + "group by d.ano, d.nome_mes, d.numero_mes\n"
                 + "order by d.ano, d.numero_mes \n";
-        System.out.println(sql);
+
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, ano1);
@@ -46,13 +42,96 @@ public class QueryEvolucao {
         return null;
     }
 
+    public List<Object[]> anos2(int ano1, int ano2, String funcao) {
+
+        String sql = "select d.ano, d.nome_mes,  sum(e.valor) as total\n"
+                + "from empenho e join acao a on a.codigoacao = e.codacao\n"
+                + "join data d on e.coddata = d.codigo \n"
+                + "where d.ano between ? and ? \n";
+        if (!funcao.equals("")) {
+            sql += "and a.nomefuncao = ? \n";
+        }
+        sql += "group by d.ano, d.nome_mes, d.numero_mes\n"
+                + "order by d.ano, d.numero_mes \n";
+
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, ano1);
+            stmt.setInt(2, ano2);
+            if (!funcao.equals("")) {
+                stmt.setString(3, funcao);
+            }
+            ResultSet rs = stmt.executeQuery();
+            return dados2(rs);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Object[]> semestres2(int semestre1, int semestre2, String funcao) {
+
+        StringBuilder sql = new StringBuilder();
+        sql.append("select d.ano, d.nome_mes,  sum(e.valor) as total\n"
+                + "from empenho e join acao a on a.codigoacao = e.codacao\n"
+                + "join data d on e.coddata = d.codigo \n"
+                + "where d.semestre in (?, ?)  \n");
+        if (!funcao.equals("")) {
+            sql.append("and a.nomefuncao = ? \n");
+        }
+        sql.append("group by d.ano, d.nome_mes, d.numero_mes\n"
+                + "order by d.ano, d.numero_mes \n");
+
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql.toString());
+            stmt.setInt(1, semestre1);
+            stmt.setInt(2, semestre2);
+            if (!funcao.equals("")) {
+                stmt.setString(3, funcao);
+            }
+            ResultSet rs = stmt.executeQuery();
+            return dados2(rs);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Object[]> meses2(int mes1, int mes2, String funcao) {
+
+        StringBuilder sql = new StringBuilder();
+        sql.append("select d.ano, d.nome_mes,  sum(e.valor) as total\n"
+                + "from empenho e join acao a on a.codigoacao = e.codacao\n"
+                + "join data d on e.coddata = d.codigo \n"
+                + "where d.codigo between ? and ? \n");
+        if (!funcao.equals("")) {
+            sql.append("and a.nomefuncao = ? \n");
+        }
+        sql.append("group by d.ano, d.nome_mes, d.numero_mes\n"
+                + "order by d.ano, d.numero_mes \n");
+
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql.toString());
+            stmt.setInt(1, mes1);
+            stmt.setInt(2, mes2);
+            if (!funcao.equals("")) {
+                stmt.setString(3, funcao);
+            }
+            ResultSet rs = stmt.executeQuery();
+            return dados2(rs);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     public List<Series> dados(ResultSet rs) throws SQLException {
         List<Series> lista = new ArrayList<>();
         List<BigDecimal> valores = new ArrayList<>();
         List<Integer> anos = new ArrayList<>();
 
         while (rs.next()) {
-            
+
             int anoAtual = rs.getInt("ano");
 
             if (anos.isEmpty()) {
@@ -74,5 +153,16 @@ public class QueryEvolucao {
         lista.add(series);
         valores = new ArrayList<>();
         return lista;
+    }
+
+    public List<Object[]> dados2(ResultSet rs) throws SQLException {
+
+        List<Object[]> valores = new ArrayList<>();
+
+        while (rs.next()) {
+            valores.add(new Object[]{rs.getString("nome_mes") + " "
+                + rs.getString("ano"), rs.getBigDecimal("total"),});
+        }
+        return valores;
     }
 }

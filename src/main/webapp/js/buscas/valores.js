@@ -50,13 +50,15 @@ function meses() {
     if (client.status == 200) {
         let json = JSON.parse(client.responseText);
         let array = json.valores;
-        for (i = 0; i <= array.length; i++) {
+        console.log(array);
+        for (i = 0; i <= array.length -1 ; i++) {
+            
             if (i + 1 < 10) {
-                mes1.options[mes1.options.length] = new Option(array[i], '0' + i);
-                mes2.options[mes2.options.length] = new Option(array[i], '0' + i);
+                mes1.options[mes1.options.length] = new Option(array[i], '0' + (i + 1));
+                mes2.options[mes2.options.length] = new Option(array[i], '0' + (i + 1));
             } else {
-                mes1.options[mes1.options.length] = new Option(array[i], i);
-                mes2.options[mes2.options.length] = new Option(array[i], i);
+                mes1.options[mes1.options.length] = new Option(array[i], i + 1);
+                mes2.options[mes2.options.length] = new Option(array[i], i + 1);
             }
         }
     }

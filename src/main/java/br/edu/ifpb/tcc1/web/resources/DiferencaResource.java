@@ -51,10 +51,10 @@ public class DiferencaResource {
     }
 
     @GET
-    @Path("/meses/{mes1}/{mes2}/{semestre}")
+    @Path("/meses/{mes1}/{mes2}/{funcao}")
     public Response funcoesMeses(@PathParam("mes1") int mes1, @PathParam("mes2") int mes2,
-            @PathParam("semestre") String semestre) {
-        return verificaConteudo(controller.funcoesMeses(mes1, mes2, semestre));
+            @PathParam("funcao") String funcao) {
+        return verificaConteudo(controller.funcoesMeses(mes1, mes2, funcao));
     }
 
     private Response verificaConteudo(GraficoDiferenca grafico) {

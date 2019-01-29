@@ -21,8 +21,8 @@ public class DiferencaController {
         grafico.setType("column");
         grafico.setPrimeiroIntervalo("" + ano1);
         grafico.setSegundoIntervalo("" + ano2);
-        grafico.setCategorias(Arrays.asList(new String[]{grafico.getPrimeiroIntervalo()
-            + " a " + grafico.getSegundoIntervalo()}));
+        grafico.setCategorias(Arrays.asList(new String[]{grafico.getPrimeiroIntervalo(),
+             grafico.getSegundoIntervalo()}));
         return grafico;
     }
 
@@ -33,13 +33,13 @@ public class DiferencaController {
         grafico.setPrimeiroIntervalo("" + ano1);
         grafico.setSegundoIntervalo("" + ano2);
         grafico.setCategorias(Arrays.asList(new String[]{grafico.getPrimeiroIntervalo()
-            + " a " + grafico.getSegundoIntervalo()}));
+            , grafico.getSegundoIntervalo()}));
         return grafico;
     }
 
     public GraficoDiferenca funcoesSemestres(int semestre1, int semestre2, String funcao) {
         GraficoDiferenca grafico = query.funcoesSemestre(semestre1, semestre2, funcao);
-        if (!funcao.equals("")) {
+        if (funcao.equals("")) {
             grafico.setTitle("Diferença entre os gastos nos semestres selecionados");
         } else {
             grafico.setTitle("Diferença entre os gastos nos semestres selecionados na área de atuação " + funcao);
@@ -48,13 +48,13 @@ public class DiferencaController {
         grafico.setPrimeiroIntervalo("" + semestre1);
         grafico.setSegundoIntervalo("" + semestre2);
         grafico.setCategorias(Arrays.asList(new String[]{grafico.getPrimeiroIntervalo()
-            + " a " + grafico.getSegundoIntervalo()}));
+            , grafico.getSegundoIntervalo()}));
         return grafico;
     }
 
     public GraficoDiferenca funcoesMeses(int mes1, int mes2, String funcao) {
         GraficoDiferenca grafico = query.funcoesMeses(mes1, mes2, funcao);
-        if (!funcao.equals("")) {
+        if (funcao.equals("")) {
             grafico.setTitle("Diferença entre os gastos nos meses selecionados");
         } else {
             grafico.setTitle("Diferença entre os gastos nos meses selecionados na área de atuação " + funcao);
@@ -63,7 +63,7 @@ public class DiferencaController {
         grafico.setPrimeiroIntervalo("" + mes1);
         grafico.setSegundoIntervalo("" + mes2);
         grafico.setCategorias(Arrays.asList(new String[]{grafico.getPrimeiroIntervalo()
-            + " a " + grafico.getSegundoIntervalo()}));
+            , grafico.getSegundoIntervalo()}));
         return grafico;
     }
 }

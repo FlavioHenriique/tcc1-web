@@ -34,7 +34,7 @@ function buscaSemestres() {
     fecharmodal(document.getElementById('modalSemestre'));
     urlBuscaDiferenca = urlDiferenca + 'semestres/' + semestre1.value
             + anoSemestre1.value + '/' + semestre2.value + anoSemestre2.value + '/';
-    let area = areasAnos.options[areasAnos.selectedIndex].text;
+    let area = areasSemestres.options[areasSemestres.selectedIndex].text;
     if (verificarAreaAtuacao(area)) {
         console.log(urlBuscaDiferenca);
         client.open('GET', urlBuscaDiferenca, false);
@@ -65,7 +65,7 @@ function buscaMeses() {
     fecharmodal(document.getElementById('modalMes'));
     let valormes1 = '' + anoMes1.value + mes1.value;
     let valormes2 = '' + anoMes2.value + mes2.value;
-    let area = areasAnos.options[areasAnos.selectedIndex].text;
+    let area = areasMeses.options[areasMeses.selectedIndex].text;
     urlBuscaDiferenca = urlDiferenca + 'meses/' + valormes1 + '/' + valormes2 + '/';
     if (verificarAreaAtuacao(area)) {
         console.log(urlBuscaDiferenca);
@@ -94,5 +94,6 @@ function buscaMeses() {
 
 
 function verificarAreaAtuacao(area) {
-    return !area != "Selecione uma área de atuação";
+    console.log(area);
+    return area == "Selecione uma área de atuação";
 }

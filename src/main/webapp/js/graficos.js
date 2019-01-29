@@ -1,11 +1,13 @@
 var chart;
 function intervalos(json, clique) {
+    
+    console.log(json);
     chart = Highcharts.chart('container', {
         title: {
             text: json.title
         },
         tooltip: {
-            pointFormat: 'Valor: <b>R$ {point.y}</b>'
+            pointFormat: 'Valor: <b>R$ {point.y},00</b>'
         },
         xAxis: {
             categories: json.categorias
@@ -68,6 +70,7 @@ function mudarDados(json, clique) {
 
 
 function diferencas(json, clique) {
+    
     chart = Highcharts.chart('container', {
         title: {
             text: json.title
@@ -110,7 +113,7 @@ function diferencas(json, clique) {
 
 function evolucao(json, clique) {
 
-    Highcharts.chart('container', {
+    chart = Highcharts.chart('container', {
 
         title: {
             text: json.title
@@ -121,10 +124,19 @@ function evolucao(json, clique) {
                 text: json.name
             }
         },
-        xAxis: {
+        /*xAxis: {
             categories: json.categorias
-        },
+        },*/
         plotOptions: {
+            area: {
+                stacking: 'normal',
+                lineColor: '#666666',
+                lineWidth: 1,
+                marker: {
+                    lineWidth: 1,
+                    lineColor: '#666666'
+                }
+            },
             series: {
                 pointStart: 0,
                 pointInterval: 1
