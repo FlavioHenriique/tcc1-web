@@ -72,8 +72,8 @@ public class EvolucaoController {
         //grafico.setCategorias(categorias());
         return grafico;
     }
-    
-        public GraficoEvolucao semestres(int semestre1, int semestre2, String funcao) {
+
+    public GraficoEvolucao semestres(int semestre1, int semestre2, String funcao) {
 
         GraficoEvolucao grafico = new GraficoEvolucao("Evolução dos gastos "
                 + "entre os semestres selecionados");

@@ -44,13 +44,30 @@ function buscaMeses() {
 
 
 function favorecidoPorNome(nome) {
-    let url = urlFavorecido + 'nome/' + nome;
-    buscarFavorecidos(url);
+    if (nome != "") {
+        let url = urlFavorecido + 'nome/' + nome;
+        buscarFavorecidos(url);
+    } else {
+        swal({
+            title: "Opa!",
+            text: "Informe um nome ou um CNPJ para o favorecido!",
+            icon: "error",
+        });
+    }
+
 }
 
 function favorecidoPorCNPJ(cnpj) {
-    let url = urlFavorecido + 'cnpj/' + cnpj;
-    buscarFavorecidos(url);
+    if (cnpj != "") {
+        let url = urlFavorecido + 'cnpj/' + cnpj;
+        buscarFavorecidos(url);
+    } else {
+        swal({
+            title: "Opa!",
+            text: "Informe um nome ou um CNPJ para o favorecido!",
+            icon: "error",
+        });
+    }
 }
 
 function buscarFavorecidos(url) {

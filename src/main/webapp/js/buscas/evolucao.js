@@ -11,8 +11,8 @@ function buscaAnos() {
         client.send(null);
         if (client.status == 200) {
             let json = JSON.parse(client.responseText);
-            evolucao(json, funcao(urlBuscaEvolucao));
-            //intervalos(json, funcao(urlBuscaEvolucao));
+            //evolucao(json, funcao(urlBuscaEvolucao));
+            intervalos(json, funcao(urlBuscaEvolucao));
         } else {
             swal({
                 title: "Erro!",
@@ -26,8 +26,8 @@ function buscaAnos() {
         client.send(null);
         if (client.status == 200) {
             let json = JSON.parse(client.responseText);
-            evolucao(json, funcao(urlArea));
-            //intervalos(json, funcao(urlBuscaEvolucao));
+            //evolucao(json, funcao(urlArea));
+            intervalos(json, funcao(urlBuscaEvolucao));
         }
     }
 
@@ -44,8 +44,8 @@ function buscaSemestres() {
         client.send(null);
         if (client.status == 200) {
             let json = JSON.parse(client.responseText);
-            //intervalos(json, funcao(urlBuscaEvolucao));
-            evolucao(json, funcao(urlBuscaEvolucao));
+            intervalos(json, funcao(urlBuscaEvolucao));
+            //evolucao(json, funcao(urlBuscaEvolucao));
         } else {
             swal({
                 title: "Erro!",
@@ -59,8 +59,8 @@ function buscaSemestres() {
         client.send(null);
         if (client.status == 200) {
             let json = JSON.parse(client.responseText);
-            //intervalos(json, funcao(urlArea));
-            evolucao(json, funcao(urlBuscaEvolucao));
+            intervalos(json, funcao(urlArea));
+            //evolucao(json, funcao(urlBuscaEvolucao));
         }
     }
 }

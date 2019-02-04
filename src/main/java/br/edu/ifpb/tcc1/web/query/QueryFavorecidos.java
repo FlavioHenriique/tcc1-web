@@ -22,7 +22,7 @@ public class QueryFavorecidos {
 
     public List<String> favorecidosPorNome(String nome) {
         List<String> lista = new ArrayList<>();
-        String sql = "SELECT DISTINCT Nome FROM Favorecido WHERE Nome ilike ?";
+        String sql = "SELECT DISTINCT Nome FROM Favorecido WHERE Nome ilike ? ORDER BY nome";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, nome + "%");
@@ -38,7 +38,7 @@ public class QueryFavorecidos {
 
     public List<String> favorecidosPorCNPJ(String cnpj) {
         List<String> lista = new ArrayList<>();
-        String sql = "SELECT DISTINCT Nome FROM Favorecido WHERE codigo ilike ?";
+        String sql = "SELECT DISTINCT Nome FROM Favorecido WHERE codigo ilike ? ORDER BY nome";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, cnpj);

@@ -49,7 +49,7 @@ function buscaDados(url, funcao) {
 }
 
 function geraTabela(json) {
-    
+
     $("#container table").remove();
     $("#titulo").html(json.title);
     let $teste = $("<table class='table' style='width: 100%;' id='tabelaDados'>");
@@ -65,7 +65,7 @@ function geraTabela(json) {
         let strAppend = '<tr><td>' + json.data[k][0] + '</td>' +
                 '<td>' + 'R$ ' + json.data[k][1] + '</td>';
         if (hierarquia < 2) {
-            strAppend = strAppend + '<td><button class="button is-success" onclick="descerNivel(\'' 
+            strAppend = strAppend + '<td><button class="button is-success" onclick="descerNivel(\''
                     + json.data[k][0] + '\')">Detalhar</button></td>';
         }
         strAppend = strAppend + '</tr>';

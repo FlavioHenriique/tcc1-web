@@ -13,9 +13,7 @@ function intervalos(json, clique) {
             categories: json.categorias
         },
         plotOptions: {
-            series: {
-                color: '#50B432'
-            },
+            
             pie: {
                 allowPointSelect: true,
                 colorByPoint: true,
