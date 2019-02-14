@@ -144,6 +144,7 @@ function descerNivel(detalhamento) {
     client.open('GET', urlBuscaFavorecido, false);
     client.send(null);
     if (client.status == 200) {
+        console.log(urlBuscaFavorecido);//
         jsonFavorecido = JSON.parse(client.responseText);
         geraTabela(jsonFavorecido);
     } else {
