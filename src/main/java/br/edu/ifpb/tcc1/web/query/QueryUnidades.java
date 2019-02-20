@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -192,7 +193,7 @@ public class QueryUnidades {
     }
 
     public String inicioSQL(String campo) {
-        return "SELECT   CAST(CAST(sum(e.valor) AS NUMERIC(20,2)) AS varchar(20)) as total, u." + campo + " "
+        return "SELECT sum(e.valor) as total, u." + campo + " "
                 + "FROM unidadegestora u, empenho e, data d  "
                 + "WHERE e.codunidadegestora = u.codigounidadegestora "
                 + "AND d.codigo = e.coddata ";
@@ -207,9 +208,13 @@ public class QueryUnidades {
         List<Object[]> lista = new ArrayList<>();
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
-            lista.add(new Object[]{rs.getString(campo), rs.getString("total").replace(".", ",")});
+            lista.add(new Object[]{rs.getString(campo), rs.getString("total") + "00"});
         }
         return lista;
+    }
+
+    private String formataNumero(String numero){
+        return String.format("%. d",numero);
     }
 
 }

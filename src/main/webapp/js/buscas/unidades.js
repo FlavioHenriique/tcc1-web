@@ -3,7 +3,6 @@ var urlBuscaUnidades = '';
 var jsonUnidades = null;
 var hierarquia = 0;
 
-
 function buscaUnidadesAnos() {
     fecharmodal(document.getElementById("modalAno"));
     let url = urlUnidades + '/ano/' + ano1.value + "/" + ano2.value + '/';
@@ -50,6 +49,7 @@ function buscaDados(url, funcao) {
 
 function geraTabela(json) {
 
+
     $("#container table").remove();
     $("#titulo").html(json.title);
     let $teste = $("<table class='table' style='width: 100%;' id='tabelaDados'>");
@@ -63,7 +63,8 @@ function geraTabela(json) {
 
     for (k = 0; k < json.data.length; k++) {
         let strAppend = '<tr><td>' + json.data[k][0] + '</td>' +
-                '<td>' + 'R$ ' + json.data[k][1] + '</td>';
+                '<td><label class="valor">' + 'R$ ' + json.data[k][1] + '</label></td>';
+
         if (hierarquia < 2) {
             strAppend = strAppend + '<td><button class="button is-success" onclick="descerNivel(\''
                     + json.data[k][0] + '\')">Detalhar</button></td>';
@@ -124,7 +125,8 @@ function filtrarDados(unidade) {
     let novoJson = jsonUnidades.data.filter(function (value) {
         return value[0].match(new RegExp(regex, 'gi')) !== null;
     });
-    jsonUnidades.data = novoJson;
-    geraTabela(jsonUnidades);
+    let novo = jsonUnidades;
+    novo.data = novoJson;
+    geraTabela(novo);
 }
 
